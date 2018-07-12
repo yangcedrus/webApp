@@ -5,13 +5,12 @@ package com.web.store.entity;
  */
 public class Store {
     private Long storeid;   //卖家ID
-    private String login_name;  //卖家用户名
+    private String name;  //卖家用户名
     private String psw;     //卖家密码
-    private Long collectnum;    //店铺收藏数
-    private Long itemnum;   //店铺商品数
+    private Integer sex;    //商家性别 0男 1女
     private String phone;   //商家电话
-    private String info;    //商家描述
-    private String address; //商家地址
+    private String description;    //商家描述
+    private String state; //商家状态
 
     public Long getStoreid() {
         return storeid;
@@ -21,12 +20,12 @@ public class Store {
         this.storeid = storeid;
     }
 
-    public String getLogin_name() {
-        return login_name;
+    public String getName() {
+        return name;
     }
 
-    public void setLogin_name(String login_name) {
-        this.login_name = login_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPsw() {
@@ -37,20 +36,12 @@ public class Store {
         this.psw = psw;
     }
 
-    public Long getCollectnum() {
-        return collectnum;
+    public Integer getSex() {
+        return sex;
     }
 
-    public void setCollectnum(Long collectnum) {
-        this.collectnum = collectnum;
-    }
-
-    public Long getItemnum() {
-        return itemnum;
-    }
-
-    public void setItemnum(Long itemnum) {
-        this.itemnum = itemnum;
+    public void setSex(Integer sex) {
+        this.sex = sex;
     }
 
     public String getPhone() {
@@ -61,19 +52,19 @@ public class Store {
         this.phone = phone;
     }
 
-    public String getInfo() {
-        return info;
+    public String getDescription() {
+        return description;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getAddress() {
-        return address;
+    public String getState() {
+        return state;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setState(String state) {
+        this.state = state;
     }
 }

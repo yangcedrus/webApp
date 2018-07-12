@@ -7,7 +7,6 @@ public class Administer {
     private Long admiid;    //管理员ID
     private String name;    //管理员用户名
     private String psw;     //管理员密码
-    private String phone;   //管理员电话
 
     public Long getAdmiid() {
         return admiid;
@@ -31,13 +30,5 @@ public class Administer {
 
     public void setPsw(String psw) {
         this.psw = psw;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 }

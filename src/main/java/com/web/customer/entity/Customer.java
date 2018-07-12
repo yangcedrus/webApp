@@ -11,7 +11,7 @@ public class Customer {
     private String psw;     //买家密码
     private Long sex;       //买家性别
     private String phone;   //买家手机号
-    private Date birth;     //买家生日
+    private Integer state;  //买家状态默认1，删除后为0,账号无效
 
     public Long getCustomerid() {
         return customerid;
@@ -53,11 +53,11 @@ public class Customer {
         this.phone = phone;
     }
 
-    public java.sql.Date getBirth() {
-        return birth;
+    public Integer getState() {
+        return state;
     }
 
-    public void setBirth(java.sql.Date birth) {
-        this.birth = birth;
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

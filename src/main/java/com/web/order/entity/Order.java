@@ -4,14 +4,15 @@ package com.web.order.entity;
  * 订单实体类
  */
 public class Order {
-    private Long orderid;   //订单号
-    private Long customer_id;   //买家ID
+    private Long orderid;   //订单id
+    private String ordernumber;   //订单号
+    private Long customerid;   //买家ID
     private Long itemid;    //商品ID
     private Long num;       //购买数量
     private String startt;  //订单开始时间
     private String endt;    //订单截至时间
-    private Long state; //订单状态
-    private Double total_price; //订单总价格
+    private Long state; //订单状态0 未付款 1 未发货 2 未收货 3已完成
+    private Double total; //订单总价格
 
     public Long getOrderid() {
         return orderid;
@@ -21,12 +22,20 @@ public class Order {
         this.orderid = orderid;
     }
 
-    public Long getCustomer_id() {
-        return customer_id;
+    public String getOrdernumber() {
+        return ordernumber;
     }
 
-    public void setCustomer_id(Long customer_id) {
-        this.customer_id = customer_id;
+    public void setOrdernumber(String ordernumber) {
+        this.ordernumber = ordernumber;
+    }
+
+    public Long getCustomerid() {
+        return customerid;
+    }
+
+    public void setCustomerid(Long customerid) {
+        this.customerid = customerid;
     }
 
     public Long getItemid() {
@@ -69,11 +78,11 @@ public class Order {
         this.state = state;
     }
 
-    public Double getTotal_price() {
-        return total_price;
+    public Double getTotal() {
+        return total;
     }
 
-    public void setTotal_price(Double total_price) {
-        this.total_price = total_price;
+    public void setTotal(Double total) {
+        this.total = total;
     }
 }
