@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Login ::
+    <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Single ::
         w3layouts</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </head>
 <body>
-<!--header-->
 <div class="header">
 
     <div class="container">
@@ -102,66 +101,77 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </nav>
             <div class="clearfix"></div>
         </div>
-
     </div>
 </div>
 <!---->
 <!--banner-->
 <div class="banner-top">
     <div class="container">
-        <h3>管理员</h3>
-        <h4><a href="index.html">主页</a><label>/</label>管理员个人中心</h4>
+        <h3>审核商品-详情</h3>
+        <h4><a href="admin_delete_item.html">商品审核</a><label>/</label>审核商品-详情</h4>
         <div class="clearfix"></div>
     </div>
 </div>
-
-<!--me-->
 <div class="faq-w3 main-grid-border">
     <div class="container">
-        <div class="spec ">
-            <h3>业务列表</h3>
-            <div class="ser-t">
-                <b></b>
-                <span><i></i></span>
-                <b class="line"></b>
-            </div>
-        </div>
-        <div class="panel-group" id="accordion">
-            <!--显示可操作信息-->
-            <!--用户管理-->
-            <div class="col-md-3 m-wthree">
-                <div class="col-m">
-                <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
-                    <img src="images/of.png" class="img-responsive" alt="">
-                </a>
-                <div class="mid-1">
-                    <div class="add">
-                        <h2 class="t-button">
-                            <a href="admin_user_management.html"><button class="label label-warning">用户管理</button></a>
-                        </h2>
+        <div class="single1">
+            <div class="col-md-5 single-top">
+                <div class="single-w3agile">
+
+                    <div id="picture-frame">
+                        <img src="images/si.jpg" data-src="images/si-1.jpg" alt="" class="img-responsive" id="big_img" style="height: 300px;width: 300px;object-fit: cover;"/>
                     </div>
+
+                </div>
+                <div style="width: 445px;height: auto">
+
+                    <div style="height: auto;width: 435px;margin-left: 10px;margin-right: 10px">
+                        <a class="left-arrow"></a>
+                        <img class="img-small" src="images/si-1.jpg" id="1" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of11.png" id="2" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of12.png" id="3" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of13.png" id="4" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of13.png" id="5" onclick="getbig(this)" style="display: none"/>
+                        <a class="right-arrow" ></a>
+                    </div>
+
+
                 </div>
             </div>
-            </div>
-            <!--违规商品管理-->
-            <div class="col-md-3 m-wthree">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
-                        <img src="images/of.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="add">
-                            <h2 class="t-button">
-                                <a href="admin_delete_item.html"><button class="label label-warning">违规商品管理</button></a>
-                            </h2>
+            <div class="col-md-7 single-top-left ">
+                <div class="single-right" style="margin-top: 30px">
+                    <h3>商品名称：Wheat</h3>
+
+
+                    <div class="pr-single">
+                        <p class="reduced ">
+                            <span style="color: #5b5b5b">价格：</span><del>$10.00</del>
+                            $5.00
+                        </p>
+
+                    </div>
+                    <p>库存容量：200</p>
+                    <p class="in-pa"> <span style="color: #999999">详细介绍：</span>There are many variations of passages of Lorem Ipsum available, but the majority
+                        have suffered alteration in some form, by injected humour, or randomised words which don't look
+                        even slightly believable. </p>
+                    <div class="add add-3">
+                        <input type="submit" class="btn123" value="审核通过" style="margin-right: 10px">
+
+                        <input type="submit" class="btn123" value="审核不通过" onclick="show_reason()">
+                        <div id="reason" style="display: none">
+                        <p>理由：</p>
+                        <textarea rows="4" cols="60" style="margin-top: 5px"></textarea>
                         </div>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
+            <div class="clearfix"></div>
         </div>
+
+
     </div>
 </div>
-
 <!--footer-->
 <div class="footer">
     <div class="container">
@@ -190,6 +200,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!-- //footer-->
+
 <!-- smooth scrolling -->
 <script type="text/javascript">
     $(document).ready(function () {
@@ -227,7 +238,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             }, 500, "linear", function () {
                 $image.remove();
             });
-        }
+        };
 
         $('.my-cart-btn').myCart({
             classCartIcon: 'my-cart-icon',
@@ -251,7 +262,62 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
 
     });
+    function getbig(target) {
+        var id=$(target)[0].getAttribute("id");
+        var src=document.getElementById(id).getAttribute("src");
+        var img=document.getElementById("big_img");
+        img.setAttribute("src",src);
+    }
+    function show_reason() {
+        var div=document.getElementById("reason");
+        div.style.display="block";
+    }
 </script>
+<style>
+    .left-arrow{
+        width: 0;
+        height: 0;
+        border-bottom: 5px solid transparent; /* left arrow slant */
+        border-top: 5px solid transparent; /* right arrow slant */
+        border-right: 5px solid #2f2f2f; /* bottom, add background color here */
+        font-size: 0;
+        line-height: 0;
+        margin-right: 5px;
+    }
+    .img-small{
+        width: 92.5px;
+        height: 92.5px;
+        margin-top: 5px;
+        margin-left: 2.5px;
+        margin-right: 2.5px;
+        object-fit: cover;
+        border: 1px solid #999999;
+        padding: 5px;
+    }
+    .right-arrow{
+        width: 0;
+        height: 0;
+        border-bottom: 5px solid transparent; /* left arrow slant */
+        border-top: 5px solid transparent; /* right arrow slant */
+        border-left: 5px solid #2f2f2f; /* bottom, add background color here */
+        font-size: 0;
+        line-height: 0;
+    }
+    .btn123 {
+        background: #fdb515;
+        color: #FFFFFF;
+        text-align: center;
+        padding: 10px 5px;
+        border: none;
+        font-size: 0.8em;
+        outline: none;
+        cursor: pointer;
+        width: 70px;
+        height: 35px;
+        margin-bottom: 10px;
+        margin-top: 5px;
+    }
 
+</style>
 </body>
 </html>

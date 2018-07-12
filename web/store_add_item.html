@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Register ::
+    <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Single ::
         w3layouts</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -81,8 +81,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="head-t">
             <ul class="card">
-                <li><a href="login.html"><i class="fa fa-user" aria-hidden="true"></i>登 录</a></li>
-                <li><a href="register.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>注 册</a></li>
+                <li><a href="login.html"><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
+                <li><a href="register.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
             </ul>
         </div>
 
@@ -101,73 +101,82 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </nav>
             <div class="clearfix"></div>
         </div>
-
     </div>
 </div>
 <!---->
-
 <!--banner-->
 <div class="banner-top">
     <div class="container">
-        <h3>注册</h3>
-        <h4><a href="index.html">首页</a><label>/</label>注册</h4>
+        <h3>商品上架</h3>
+        <h4><a href="store_me.html">我的店铺</a><label>/</label>商品上架</h4>
         <div class="clearfix"></div>
     </div>
 </div>
+<div class="faq-w3 main-grid-border">
+    <div class="container">
+        <div class="single">
+            <div class="col-md-5 single-top">
+                <div class="single-w3agile">
 
-<!--login-->
+                    <div id="picture-frame">
+                        <img src="images/si.jpg" data-src="images/si-1.jpg" alt="" class="img-responsive"/>
+                    </div>
 
-<div class="login">
-    <div class="main-agileits">
-        <div class="form-w3agile form1">
-            <h3>注册</h3>
-            <form action="index.html" method="post">
-                <div class="key">
-                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <script src="js/jquery.zoomtoo.js"></script>
+                    <script>
+                        $(function () {
+                            $("#picture-frame").zoomToo({
+                                magnify: 1
+                            });
+                        });
+                    </script>
 
-                    <input type="text" value="用户名.." name="Username" onfocus="this.value = '';"
-                           onblur="if (this.value == '') {this.value = '用户名..';}" required="">
+
+                </div>
+                <div class="add add-3">
+                    <button class="btn btn-danger my-cart-btn my-cart-b fileinput-button" style="margin-top: 15px">
+                        <span>添加图片</span>
+                        <input type="file">
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-7 single-top-left ">
+                <div class="single-right">
+                    <h3>商品名称：<input type="text" value="wheat" id="item_name"></h3>
+
+
+                    <div class="pr-single">
+                        <p class="reduced ">
+                            价格：<input type="text" value="100.00" id="item_price">
+                            <!--<del>$10.00</del>-->
+                            <!--$5.00-->
+                        </p>
+                    </div>
+                    <div class="pr-single">
+                        <p class="reduced " style="color: #999999">
+                            件数：<input type="text" value="200" id="item_num">
+                            <!--<del>$10.00</del>-->
+                            <!--$5.00-->
+                        </p>
+                    </div>
+
+                    <p class="in-pa">详细介绍：<textarea rows="5" cols="80" id="item_info">    There are many variations of passages of Lorem Ipsum available, but the majorityhave suffered alteration in some form, by injected humour, or randomised words which don't lookeven slightly believable. </textarea>
+                    </p>
+                    <div class="add add-3">
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="save()">
+                            保存
+                        </button>
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="back()" style="margin-left: 30px">
+                            退出
+                        </button>
+                    </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="key1" style="background: #fff;margin-bottom: 2em;">
-                    <!--<i class="fa fa-envelope" aria-hidden="true"></i>-->
-                    <input type="radio" value="male" name="sex" checked style="margin-right: 15px;margin-left: 100px"> 男
-                    <input type="radio" value="female" name="sex" style="margin-right: 15px;margin-left: 80px"> 女
-                    <div class="clearfix"></div>
-                </div>
-                <div class="key1"
-                     style="background: #fff;margin-bottom: 2em;border-color: #999;border-style: solid;border-top-width: 0px;border-right-width: 0px;border-bottom-width: 1px;border-left-width: 0px;">
-                </div>
-                <div class="key1" style="background: #fff;margin-bottom: 2em;">
-                    <!--<i class="fa fa-envelope" aria-hidden="true"></i>-->
-                    <input type="radio" value="customer" name="type" checked
-                           style="margin-right: 15px;margin-left: 100px"> 顾客
-                    <input type="radio" value="store" name="type" style="margin-right: 15px;margin-left: 67px"> 商家
-                    <div class="clearfix"></div>
-                </div>
-                <div class="key">
-                    <i class="fa fa-phone" aria-hidden="true"></i>
-                    <input type="text" value="手机号.." name="Phone" onfocus="this.value = '';"
-                           onblur="if (this.value == '') {this.value = '手机号..';}" required="">
-                    <div class="clearfix"></div>
-                </div>
-                <div class="key">
-                    <i class="fa fa-lock" aria-hidden="true"></i>
-                    <input type="password" value="请输入密码" name="Password" onfocus="this.value = '';"
-                           onblur="if (this.value == '') {this.value = '';}" required="">
-                    <div class="clearfix"></div>
-                </div>
-                <div class="key">
-                    <i class="fa fa-lock" aria-hidden="true"></i>
-                    <input type="password" value="请确认密码" name="Confirm Password" onfocus="this.value = '';"
-                           onblur="if (this.value == '') {this.value = '';}" required="">
-                    <div class="clearfix"></div>
-                </div>
-                <input type="submit" value="立即注册">
-                <a href="login.html"
-                   style="float: right;text-align: center;padding: 10px 0;border: none;font-size: 1em;outline: none;width: 32%;cursor: pointer;margin-bottom:30px;">已有账号？登录</a>
-            </form>
+            </div>
+            <div class="clearfix"></div>
         </div>
+
+
     </div>
 </div>
 <!--footer-->
@@ -175,7 +184,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="clearfix"></div>
         <div class="footer-bottom">
-            <h2><a href="index.html">四次元口袋<span>Dimensional Pockets</span></a></h2>
+            <h2><a href="index.html">四次元口袋<span>The Best Supermarket</span></a></h2>
             <div class=" address">
                 <div class="col-md-4 fo-grid1">
                     <p><i class="fa fa-home" aria-hidden="true"></i>12K Street , 45 Building Road Canada.</p>
@@ -192,12 +201,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
         <div class="copy-right">
-            <p> &copy; 2016 Big store. All Rights Reserved | Design by W3layouts</p>
+            <p> &copy; 2016 Big store. All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts</a>
+            </p>
         </div>
     </div>
 </div>
 <!-- //footer-->
-<!-- smooth scrolling //回到顶部操作-->
+
+<!-- smooth scrolling -->
 <script type="text/javascript">
     $(document).ready(function () {
         /*
@@ -215,7 +226,73 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //smooth scrolling -->
 <!-- for bootstrap working -->
 <script src="js/bootstrap.js"></script>
+<!-- //for bootstrap working -->
+<script type='text/javascript' src="js/jquery.mycart.js"></script>
+<script type="text/javascript">
+    $(function () {
 
+        var goToCartIcon = function ($addTocartBtn) {
+            var $cartIcon = $(".my-cart-icon");
+            var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({
+                "position": "fixed",
+                "z-index": "999"
+            });
+            $addTocartBtn.prepend($image);
+            var position = $cartIcon.position();
+            $image.animate({
+                top: position.top,
+                left: position.left
+            }, 500, "linear", function () {
+                $image.remove();
+            });
+        }
+
+        $('.my-cart-btn').myCart({
+            classCartIcon: 'my-cart-icon',
+            classCartBadge: 'my-cart-badge',
+            affixCartIcon: true,
+            checkoutCart: function (products) {
+                $.each(products, function () {
+                    console.log(this);
+                });
+            },
+            clickOnAddToCart: function ($addTocart) {
+                goToCartIcon($addTocart);
+            },
+            getDiscountPrice: function (products) {
+                var total = 0;
+                $.each(products, function () {
+                    total += this.quantity * this.price;
+                });
+                return total * 1;
+            }
+        });
+
+    });
+
+    function save() {
+        window.history.go(-1);
+    }
+
+    function back() {
+        window.history.go(-1);
+    }
+</script>
+
+<style>
+    .fileinput-button {
+        display: inline-block;
+        overflow: hidden;
+    }
+
+    .fileinput-button input {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        opacity: 0;
+        -ms-filter: 'alpha(opacity=0)';
+        font-size: 200px;
+    }
+</style>
 
 </body>
-</html>

@@ -1,13 +1,7 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Register :: w3layouts</title>
+    <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | offer :: w3layouts</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -33,43 +27,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
             });
         });
-        //生日选择器
-        $(document).ready(function(){
-            var date=new Date();//创建日期对象
-            var year=date.getFullYear();//获取当前年份
-            for(var i=year-100;i<=year;i++){//在id为year的selector附加option选项
-                $("#year").append("<option value=\""+i+"\">"+i+"</option>");//append函数附加html到元素结尾处
-            }
-            for(var j=1;j<=12;j++){
-                $("#month").append("<option value=\""+j+"\">"+j+"</option>");//为Id为month的selector附加option选项
-            }
-            getDays($("#month").val(),$("#year").val());//执行函数getDays()，传参year和month，初始化day selector
-        });
-        function getDaysInMonth(month,year){//年月对应的日数算法
-            var days;
-            if (month===1 || month===3 || month===5 || month===7 || month===8 || month===10 || month===12) {
-                days=31;//固定31
-            }else if (month===4 || month===6 || month===9 || month===11){
-                days=30;//固定30
-            }else{
-                if ((year%4 === 0 && year%100 !== 0) || (year%400 === 0)) {     //排除百年，每四年一闰；每四百年一闰；
-                    days=29; //闰年29
-                }else {
-                    days=28; //平年28
-                }
-            }
-            return days;//返回该年月的日数
-        }
-        function getDays(){
-            var year = $("#year").val();//year selector onchange="getDays()"动态获取用户选择的year值
-            var month = $("#month").val();//month selector onchange="getDays()"动态获取用户选择的month值
-            var days = getDaysInMonth(month,year);//调用算法函数计算对应年月的日数
-            $("#day").empty();//调用empty()函数清空day selector options，然后再append函数往day selector添加options
-            for(var i=1;i<=days;i++){
-                $("#day").append("<option value=\""+i+"\">"+i+"</option>");
-            }
-        }
-
     </script>
     <!-- start-smoth-scrolling -->
     <link href="css/font-awesome.css" rel="stylesheet">
@@ -121,13 +78,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <nav class="navbar navbar-default">
 
                 <div class="navbar-header nav_2">
-                    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse"
-                            data-target="#bs-megadropdown-tabs">
+                    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+
+
                 </div>
             </nav>
             <div class="clearfix"></div>
@@ -135,45 +93,86 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     </div>
 </div>
-<!---->
 
 <!--banner-->
 <div class="banner-top">
     <div class="container">
-        <h3 >个人信息</h3>
-        <h4><a href="index.html">首页</a><label>/</label><a href="store_me.html">个人主页</a><label>/</label>个人信息</h4>
+        <h3 >商品管理</h3>
+        <h4><a href="index.html">主页</a><label>/</label><a href="store_me.html">卖家个人中心</a><label>/</label>商品管理</h4>
         <div class="clearfix"> </div>
     </div>
 </div>
 
-<!--login-->
-
-<div class="login">
-    <div class="main-agileits">
-        <div class="bs-docs-example">
-            <table width="300000px" height="100px" class="table">
+<!--content-->
+<div class="content-top offer-w3agile">
+    <div class="container ">
+        <div class="spec ">
+            <h3>商品管理</h3>
+            <div class="ser-t">
+                <b></b>
+                <span><i></i></span>
+                <b class="line"></b>
+            </div>
+        </div>
+        <div class="table table-striped">
+            <button class="btn btn-danger my-cart-b" onclick="add()">上架</button>
+            <table class="table" id="store_item_management_table">
                 <thead>
                 <tr>
-                    <th width="400px">用户名</th>
-                    <th width="800px">姓名</th>
-                    <th width="800px">性别</th>
-                    <th width="100px">电话</th>
-                    <th width="1600px">地址</th>
+                    <th>序号</th>
+                    <th>商品名称</th>
+                    <th>商品描述</th>
+                    <th>库存容量</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td width="400px">GokouRuriMYLF</td>
-                    <td width="800px">京介</td>
-                    <td width="800px">男</td>
-                    <td width="100px">15215885236</td>
-                    <td width="1600px">秋叶原</td>
+                    <td>1</td>
+                    <td>Moong</td>
+                    <td>quick overview</td>
+                    <td>100</td>
+                    <td>
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情</button>
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">修改</button>
+                        <button class="btn btn-danger my-cart-btn my-cart-b">下架</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Sunflower Oil</td>
+                    <td>quick overview</td>
+                    <td>100</td>
+                    <td>
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情</button>
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">修改</button>
+                        <button class="btn btn-danger my-cart-btn my-cart-b">下架</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Kabuli Chana</td>
+                    <td>quick overview</td>
+                    <td>100</td>
+                    <td>
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情</button>
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">修改</button>
+                        <button class="btn btn-danger my-cart-btn my-cart-b">下架</button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
+        <hr class="bs-docs-separator">
+        <div class=" con-w3l wthree-of">
+            <div class="clearfix"></div>
+        </div>
     </div>
 </div>
+
+
+
 <!--footer-->
 <div class="footer">
     <div class="container">
@@ -200,8 +199,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!-- //footer-->
-<!-- smooth scrolling //回到顶部操作-->
+
+<!-- smooth scrolling -->
 <script type="text/javascript">
+    $(document).ready(function() {
+        $("#store_item_management_table tr").click(function() {
+
+//change the background color to red before removing
+            $(this).fadeOut(400, function(){
+                $(this).remove();
+            });
+        });
+    });
     $(document).ready(function() {
         /*
             var defaults = {
@@ -216,9 +225,61 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script>
 <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 <!-- //smooth scrolling -->
+<!--button跳转-->
+<script>
+    function details(){
+        window.open("item_details.html","_blank");
+    }
+    function modify(){
+        window.location.href='store_modi_item.html';
+    }
+    function add() {
+        window.location.href='store_add_item.html';
+    }
+</script>
+
 <!-- for bootstrap working -->
 <script src="js/bootstrap.js"></script>
+<!-- //for bootstrap working -->
+<script type='text/javascript' src="js/jquery.mycart.js"></script>
+<script type="text/javascript">
+    $(function () {
 
+        var goToCartIcon = function($addTocartBtn){
+            var $cartIcon = $(".my-cart-icon");
+            var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
+            $addTocartBtn.prepend($image);
+            var position = $cartIcon.position();
+            $image.animate({
+                top: position.top,
+                left: position.left
+            }, 500 , "linear", function() {
+                $image.remove();
+            });
+        }
 
+        $('.my-cart-btn').myCart({
+            classCartIcon: 'my-cart-icon',
+            classCartBadge: 'my-cart-badge',
+            affixCartIcon: true,
+            checkoutCart: function(products) {
+                $.each(products, function(){
+                    console.log(this);
+                });
+            },
+            clickOnAddToCart: function($addTocart){
+                goToCartIcon($addTocart);
+            },
+            getDiscountPrice: function(products) {
+                var total = 0;
+                $.each(products, function(){
+                    total += this.quantity * this.price;
+                });
+                return total * 1;
+            }
+        });
+
+    });
+</script>
 </body>
 </html>

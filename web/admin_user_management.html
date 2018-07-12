@@ -121,7 +121,6 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 					<b class="line"></b>
 				</div>
 			</div>
-			<button class="btn btn-danger my-cart-b">添加用户</button>
 			<div class="table table-striped">
 				<table class="table">
 					<thead>
@@ -138,7 +137,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 						<td>Mark</td>
 						<td>买方</td>
 						<td>
-							<button class="btn btn-danger my-cart-btn my-cart-b">
+							<button class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">
 								修改
 							</button>
 							<button class="btn btn-danger my-cart-btn my-cart-b">
@@ -151,12 +150,10 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 						<td>Jacob</td>
 						<td>卖方</td>
 						<td>
-							<button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="Wheat"
-									data-summary="summary 1" data-price="6.00" data-quantity="1" data-image="images/si.jpg">
+							<button class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">
 								修改
 							</button>
-							<button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="Wheat"
-									data-summary="summary 1" data-price="6.00" data-quantity="1" data-image="images/si.jpg">
+							<button class="btn btn-danger my-cart-btn my-cart-b">
 								删除
 							</button>
 						</td>
@@ -166,18 +163,25 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 						<td>Larry</td>
 						<td>管理员</td>
 						<td>
-							<button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="Wheat"
-									data-summary="summary 1" data-price="6.00" data-quantity="1" data-image="images/si.jpg">
+							<button class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">
 								修改
 							</button>
-							<button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="Wheat"
-									data-summary="summary 1" data-price="6.00" data-quantity="1" data-image="images/si.jpg">
+							<button class="btn btn-danger my-cart-btn my-cart-b">
 								删除
 							</button>
 						</td>
 					</tr>
 					</tbody>
 				</table>
+				<ul class="pagination pagination-lg">
+					<li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -243,7 +247,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
       }, 500 , "linear", function() {
         $image.remove();
       });
-    }
+    };
 
     $('.my-cart-btn').myCart({
       classCartIcon: 'my-cart-icon',
@@ -265,8 +269,10 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
         return total * 0.5;
       }
     });
-
   });
+  function modify() {
+      window.location.href='admin_modi_user.html'
+  }
   </script>
 </body>
 </html>

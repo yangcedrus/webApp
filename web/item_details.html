@@ -112,29 +112,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="clearfix"></div>
     </div>
 </div>
-<div class="single">
+<div class="faq-w3 main-grid-border">
     <div class="container">
         <div class="single">
             <div class="col-md-5 single-top">
                 <div class="single-w3agile">
 
                     <div id="picture-frame">
-                        <img src="images/si.jpg" data-src="images/si-1.jpg" alt="" class="img-responsive"/>
+                        <img src="images/si.jpg" data-src="images/si-1.jpg" alt="" class="img-responsive" id="big_img" style="height: 300px;width: 300px;object-fit: cover;"/>
                     </div>
-                    <script src="js/jquery.zoomtoo.js"></script>
-                    <script>
-                        $(function () {
-                            $("#picture-frame").zoomToo({
-                                magnify: 1
-                            });
-                        });
-                    </script>
+
+                </div>
+                <div style="width: 445px;height: auto">
+
+                    <div style="height: auto;width: 435px;margin-left: 10px;margin-right: 10px">
+                        <a class="left-arrow"></a>
+                        <img class="img-small" src="images/si-1.jpg" id="1" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of11.png" id="2" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of12.png" id="3" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of13.png" id="4" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of13.png" id="5" onclick="getbig(this)" style="display: none"/>
+                        <a class="right-arrow" ></a>
+                    </div>
 
 
                 </div>
             </div>
             <div class="col-md-7 single-top-left ">
-                <div class="single-right">
+                <div class="single-right" style="margin-top: 30px">
                     <h3>Wheat</h3>
 
 
@@ -150,10 +155,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <p class="in-pa"> There are many variations of passages of Lorem Ipsum available, but the majority
                         have suffered alteration in some form, by injected humour, or randomised words which don't look
                         even slightly believable. </p>
+                    <div style="margin-bottom: 20px">
+                    <input class="min" name="" type="button" value="-" style="width: 25px" onclick="minnum()"/>
+                    <input class="text_box" id="itemnum" type="text" value="1" style="width:40px;text-align: center" />
+                    <input class="add" name="" type="button" value="+" style="width: 25px" onclick="addnum()"/>
+                    <span id="msg"></span>
+                    </div>
                     <div class="add add-3">
-                        <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="Wheat"
-                                data-summary="summary 1" data-price="6.00" data-quantity="1" data-image="images/si.jpg">
-                            Add to Cart
+                        <button class="btn btn-danger my-cart-btn my-cart-b">
+                            添加到购物车
                         </button>
                     </div>
                     <div class="clearfix"></div>
@@ -231,7 +241,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             }, 500, "linear", function () {
                 $image.remove();
             });
-        }
+        };
 
         $('.my-cart-btn').myCart({
             classCartIcon: 'my-cart-icon',
@@ -255,452 +265,62 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
 
     });
+    function getbig(target) {
+        var id=$(target)[0].getAttribute("id");
+        var src=document.getElementById(id).getAttribute("src");
+        var img=document.getElementById("big_img");
+        img.setAttribute("src",src);
+    }
+    function minnum() {
+        var num=document.getElementById("itemnum").value;
+        num--;
+        if(num<=0){
+            document.getElementById("msg").innerText="不能再减少了";
+        }
+        else{
+            document.getElementById("itemnum").value=num;
+        }
+    }
+    function addnum() {
+        var num=document.getElementById("itemnum").value;
+        num++;
+        if(num>0){
+            document.getElementById("msg").innerText="";
+        }
+        document.getElementById("itemnum").value=num;
+    }
 </script>
+<style>
+    .left-arrow{
+        width: 0;
+        height: 0;
+        border-bottom: 5px solid transparent; /* left arrow slant */
+        border-top: 5px solid transparent; /* right arrow slant */
+        border-right: 5px solid #2f2f2f; /* bottom, add background color here */
+        font-size: 0;
+        line-height: 0;
+        margin-right: 5px;
+    }
+    .img-small{
+        width: 92.5px;
+        height: 92.5px;
+        margin-top: 5px;
+        margin-left: 2.5px;
+        margin-right: 2.5px;
+        object-fit: cover;
+        border: 1px solid #999999;
+        padding: 5px;
+    }
+    .right-arrow{
+        width: 0;
+        height: 0;
+        border-bottom: 5px solid transparent; /* left arrow slant */
+        border-top: 5px solid transparent; /* right arrow slant */
+        border-left: 5px solid #2f2f2f; /* bottom, add background color here */
+        font-size: 0;
+        line-height: 0;
+    }
 
-
-<!-- product -->
-<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modal-info">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body modal-spa">
-                <div class="col-md-5 span-2">
-                    <div class="item">
-                        <img src="images/of4.png" class="img-responsive" alt="">
-                    </div>
-                </div>
-                <div class="col-md-7 span-1 ">
-                    <h3>Lays(100 g)</h3>
-                    <p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-                    <div class="price_single">
-                        <span class="reducedfrom "><del>$1.00</del>$0.70</span>
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4 class="quick">Quick Overview:</h4>
-                    <p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                        doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-                    <div class="add-to">
-                        <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="5" data-name="Lays"
-                                data-summary="summary 5" data-price="0.70" data-quantity="1"
-                                data-image="images/of4.png">Add to Cart
-                        </button>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- product -->
-<div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modal-info">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body modal-spa">
-                <div class="col-md-5 span-2">
-                    <div class="item">
-                        <img src="images/of5.png" class="img-responsive" alt="">
-                    </div>
-                </div>
-                <div class="col-md-7 span-1 ">
-                    <h3>Kurkure(100 g)</h3>
-                    <p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-                    <div class="price_single">
-                        <span class="reducedfrom "><del>$1.00</del>$0.70</span>
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4 class="quick">Quick Overview:</h4>
-                    <p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                        doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-                    <div class="add-to">
-                        <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="6" data-name="Kurkure"
-                                data-summary="summary 6" data-price="0.70" data-quantity="1"
-                                data-image="images/of5.png">Add to Cart
-                        </button>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- product -->
-<div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modal-info">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body modal-spa">
-                <div class="col-md-5 span-2">
-                    <div class="item">
-                        <img src="images/of6.png" class="img-responsive" alt="">
-                    </div>
-                </div>
-                <div class="col-md-7 span-1 ">
-                    <h3>Popcorn(250 g)</h3>
-                    <p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-                    <div class="price_single">
-                        <span class="reducedfrom "><del>$2.00</del>$1.00</span>
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4 class="quick">Quick Overview:</h4>
-                    <p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                        doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-                    <div class="add-to">
-                        <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="7" data-name="Popcorn"
-                                data-summary="summary 7" data-price="1.00" data-quantity="1"
-                                data-image="images/of6.png">Add to Cart
-                        </button>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- product -->
-<div class="modal fade" id="myModal8" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modal-info">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body modal-spa">
-                <div class="col-md-5 span-2">
-                    <div class="item">
-                        <img src="images/of7.png" class="img-responsive" alt="">
-                    </div>
-                </div>
-                <div class="col-md-7 span-1 ">
-                    <h3>Nuts(250 g)</h3>
-                    <p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-                    <div class="price_single">
-                        <span class="reducedfrom "><del>$4.00</del>$3.50</span>
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4 class="quick">Quick Overview:</h4>
-                    <p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                        doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-                    <div class="add-to">
-                        <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="8" data-name="Nuts"
-                                data-summary="summary 8" data-price="3.50" data-quantity="1"
-                                data-image="images/of7.png">Add to Cart
-                        </button>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- product -->
-<div class="modal fade" id="myModal9" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modal-info">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body modal-spa">
-                <div class="col-md-5 span-2">
-                    <div class="item">
-                        <img src="images/of8.png" class="img-responsive" alt="">
-                    </div>
-                </div>
-                <div class="col-md-7 span-1 ">
-                    <h3>Banana(6 pcs)</h3>
-                    <p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-                    <div class="price_single">
-                        <span class="reducedfrom "><del>$2.00</del>$1.50</span>
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4 class="quick">Quick Overview:</h4>
-                    <p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                        doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-                    <div class="add-to">
-                        <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="9" data-name="Banana"
-                                data-summary="summary 9" data-price="1.50" data-quantity="1"
-                                data-image="images/of8.png">Add to Cart
-                        </button>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- product -->
-<div class="modal fade" id="myModal10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modal-info">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body modal-spa">
-                <div class="col-md-5 span-2">
-                    <div class="item">
-                        <img src="images/of9.png" class="img-responsive" alt="">
-                    </div>
-                </div>
-                <div class="col-md-7 span-1 ">
-                    <h3>Onion(1 kg)</h3>
-                    <p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-                    <div class="price_single">
-                        <span class="reducedfrom "><del>$1.00</del>$0.70</span>
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4 class="quick">Quick Overview:</h4>
-                    <p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                        doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-                    <div class="add-to">
-                        <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="10" data-name="Onion"
-                                data-summary="summary 10" data-price="0.70" data-quantity="1"
-                                data-image="images/of9.png">Add to Cart
-                        </button>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- product -->
-<div class="modal fade" id="myModal11" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modal-info">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body modal-spa">
-                <div class="col-md-5 span-2">
-                    <div class="item">
-                        <img src="images/of10.png" class="img-responsive" alt="">
-                    </div>
-                </div>
-                <div class="col-md-7 span-1 ">
-                    <h3>Bitter Gourd(1 kg)</h3>
-                    <p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-                    <div class="price_single">
-                        <span class="reducedfrom "><del>$2.00</del>$1.00</span>
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4 class="quick">Quick Overview:</h4>
-                    <p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                        doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-                    <div class="add-to">
-                        <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="11" data-name="Bitter Gourd"
-                                data-summary="summary 11" data-price="1.00" data-quantity="1"
-                                data-image="images/of10.png">Add to Cart
-                        </button>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- product -->
-<div class="modal fade" id="myModal12" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modal-info">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body modal-spa">
-                <div class="col-md-5 span-2">
-                    <div class="item">
-                        <img src="images/of11.png" class="img-responsive" alt="">
-                    </div>
-                </div>
-                <div class="col-md-7 span-1 ">
-                    <h3>Apples(1 kg)</h3>
-                    <p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-                    <div class="price_single">
-                        <span class="reducedfrom "><del>$4.00</del>$3.50</span>
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4 class="quick">Quick Overview:</h4>
-                    <p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                        doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-                    <div class="add-to">
-                        <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="12" data-name="Apples"
-                                data-summary="summary 12" data-price="3.50" data-quantity="1"
-                                data-image="images/of11.png">Add to Cart
-                        </button>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- product -->
-<div class="modal fade" id="myModal13" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modal-info">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body modal-spa">
-                <div class="col-md-5 span-2">
-                    <div class="item">
-                        <img src="images/of12.png" class="img-responsive" alt="">
-                    </div>
-                </div>
-                <div class="col-md-7 span-1 ">
-                    <h3>Honey(500 g)</h3>
-                    <p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-                    <div class="price_single">
-                        <span class="reducedfrom "><del>$7.00</del>$6.00</span>
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4 class="quick">Quick Overview:</h4>
-                    <p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                        doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-                    <div class="add-to">
-                        <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="13" data-name="Honey"
-                                data-summary="summary 13" data-price="6.00" data-quantity="1"
-                                data-image="images/of12.png">Add to Cart
-                        </button>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- product -->
-<div class="modal fade" id="myModal14" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modal-info">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body modal-spa">
-                <div class="col-md-5 span-2">
-                    <div class="item">
-                        <img src="images/of13.png" class="img-responsive" alt="">
-                    </div>
-                </div>
-                <div class="col-md-7 span-1 ">
-                    <h3>Chocos(250 g)</h3>
-                    <p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-                    <div class="price_single">
-                        <span class="reducedfrom "><del>$5.00</del>$4.50</span>
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4 class="quick">Quick Overview:</h4>
-                    <p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                        doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-                    <div class="add-to">
-                        <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="14" data-name="Chocos"
-                                data-summary="summary 14" data-price="4.50" data-quantity="1"
-                                data-image="images/of13.png">Add to Cart
-                        </button>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- product -->
-<div class="modal fade" id="myModal15" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modal-info">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body modal-spa">
-                <div class="col-md-5 span-2">
-                    <div class="item">
-                        <img src="images/of14.png" class="img-responsive" alt="">
-                    </div>
-                </div>
-                <div class="col-md-7 span-1 ">
-                    <h3>Oats(1 kg)</h3>
-                    <p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-                    <div class="price_single">
-                        <span class="reducedfrom "><del>$4.00</del>$3.50</span>
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4 class="quick">Quick Overview:</h4>
-                    <p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                        doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-                    <div class="add-to">
-                        <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="15" data-name="Oats"
-                                data-summary="summary 15" data-price="3.50" data-quantity="1"
-                                data-image="images/of14.png">Add to Cart
-                        </button>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- product -->
-<div class="modal fade" id="myModal16" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modal-info">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body modal-spa">
-                <div class="col-md-5 span-2">
-                    <div class="item">
-                        <img src="images/of15.png" class="img-responsive" alt="">
-                    </div>
-                </div>
-                <div class="col-md-7 span-1 ">
-                    <h3>Bread(500 g)</h3>
-                    <p class="in-para"> There are many variations of passages of Lorem Ipsum.</p>
-                    <div class="price_single">
-                        <span class="reducedfrom "><del>$1.00</del>$0.80</span>
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4 class="quick">Quick Overview:</h4>
-                    <p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-                        doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
-                    <div class="add-to">
-                        <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="16" data-name="Bread"
-                                data-summary="summary 16" data-price="0.80" data-quantity="1"
-                                data-image="images/of15.png">Add to Cart
-                        </button>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
+</style>
 </body>
 </html>

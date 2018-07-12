@@ -2817,349 +2817,447 @@ a.at-in {
     padding: 3em 0 0;
 }
 }
-@media(max-width:414px){
-.cart {
-    width: 27%;
-}
-nav.navbar.navbar-default {
-    width: 73%;
-}
-.m-wthree {
-    width: 50%;
-    float: left;
-    margin-bottom: 1em;
-    padding: 0 3px;
-}
-.mid-1 {
-    padding: 2em 0 0;
-}
-.col-m {
-    padding: 0.5em;
-}
-.mid-1 h6 {
-    font-size: 0.85em;
-}
-.mid-2 p {
-    float: none;
-}
-.block {
-    float: none;
-}
-.my-cart-b {
-    font-size: 0.9em;
-    padding: 0.3em 1em;
-}
-.m-w3ls, .m-w3ls1 {
-    width: 100%;
-}
-.big-sale {
+@media(max-width:414px) {
+    .cart {
+        width: 27%;
+    }
+
+    nav.navbar.navbar-default {
+        width: 73%;
+    }
+
+    .m-wthree {
+        width: 50%;
+        float: left;
+        margin-bottom: 1em;
+        padding: 0 3px;
+    }
+
+    .mid-1 {
+        padding: 2em 0 0;
+    }
+
+    .col-m {
+        padding: 0.5em;
+    }
+
+    .mid-1 h6 {
+        font-size: 0.85em;
+    }
+
+    .mid-2 p {
+        float: none;
+    }
+
+    .block {
+        float: none;
+    }
+
+    .my-cart-b {
+        font-size: 0.9em;
+        padding: 0.3em 1em;
+    }
+
+    .m-w3ls, .m-w3ls1 {
+        width: 100%;
+    }
+
+    .big-sale {
         top: 39px;
-    left: 15.1%;
-    width: 184px;
-    height: 184px;
-}
-.big-sale h3, .big-sa h3, .big-sale2 h3, .big-sale3 h3 {
-    font-size: 2.2em;
-}
-.pro-1 {
-    padding: 0 5px;
-}
-.banner-info {
-    margin: 2em 0;
-}
-img.img-head {
-    width: 19%;
-}
-.logo h1 {
-    font-size: 2.2em;
-}
-.logo h1 span {
-    font-size: 11px;
-    letter-spacing: 1px;
-}
-.logo h1 b {
-    font-size: 7px;
-    padding: 2px;
-    top: 6px;
-    left: -8px;
-    line-height: 6.5px;
-}
-.card li a {
-    font-size: 0.85em;
-    margin: 0 0.3em;
-}
-.banner-info h3 {
-    font-size: 1.4em;
-}
-.search-form input[type='submit'] {
-    width: 35px;
-    height: 35px;
-    background: url(../images/can.png) no-repeat 4px 3px #FCCD1E;
-}
-.search-form input[type='text'] {
-    width: 85%;
-    padding: 7px 10px;
-    font-size: 0.9em;
-}
-.search-form {
-    width: 95%;
-}
-.spec h3 {
-    font-size: 1.7em;
-}
-.ser-t {
-    width: 64%;
-}
-.ser-t span i {
-    width: 18px;
-    height: 18px;
-}
-.ser-t span {
-    width: 36px;
-    height: 36px;
-    left: 38%;
-}
-.ser-t {
-    width: 64%;
-}
-.tabs li a {
-    padding: 8px 9px !important;
-	font-size: 0.9em;
-}
-.offer {
-    right: -8px;
-}
-.container {
-    padding-right: 5px;
-    padding-left: 5px;
-}
-.product {
-    padding: 3em 0 0em;
-}
-.footer-bottom h2 {
-    font-size: 2.5em;
-}
-.footer-bottom h2 span {
-    letter-spacing: 2px;
-    font-size: 11px;
-}
-.footer-bottom h2 b {
-    font-size: 7px;
-    padding: 2px;
-    line-height: 7px;
-    top: 7px;
-    left: -7px;
-}
-.footer-grid h3 {
-    font-size: 1.5em;
-    margin-bottom: 0.5em;
-}
-.pro-1 {
-    margin-bottom: 1em;
-}
-.big-sale p, .big-sa p, .big-sale2 p, .big-sale3 p {
-    font-size: 0.9em;
-    line-height: 1.7em;
-}
-.big-sale2, .big-sale3 {
-    margin-top: 2.5em;
-}
-.kic h3 {
-    font-size: 1.8em;
-}
-.kic-top {
-    padding: 4em 0 0;
-}
-.carousel-indicators li {
+        left: 15.1%;
+        width: 184px;
+        height: 184px;
+    }
 
-    margin: 0 3px;
-}
-.carousel-indicators {
-    left: 41%;
-    bottom: -26px;
-}
-.resp-tab-content {
-    padding: 1em;
-}
-.contact-left input[type="text"], .contact-left input[type="email"] {
-    width: 100%;
-    margin: 0 0% 5% 0%;
-}
-.contact-left input[type="submit"] {
-    width: 33%;
-    font-size: 0.9em;
-}
-.contact {
-    padding: 3em 0 2em;
-}
-.main-agileits {
-    width: 90%;
-    padding: 1em;
-}
-.key input[type="text"], .key input[type="password"] {
-    width: 84%;
-    padding: 8px 10px;
-}
-.key i {
-    padding: 10px 0px 10px 10px;
-}
-.form-w3agile input[type="submit"] {
-    padding: 7px 0;
-    margin-bottom: 25px;
-}
-.login {
-    padding: 2em 0;
-}
-.form-w3agile h3{
-    margin-bottom: 0.8em;
-}
-.panel-title {
-    line-height: 1.8em;
-}
-.panel-heading {
-    padding: 6px 0px;
-}
-.faq-w3 {
-    padding: 3em 0 1em;
-}
-.spec {
-    margin-bottom: 2em;
-}
-.terms h6 {
-    font-size: 1.2em;
-}
-.terms p {
-    font-size: 0.9em;
-    margin-top: 10px;
-    padding-left: 18px;
-}
-ol {
-    margin-bottom: 17px;
-}
-.terms {
-    padding: 4em 0 2em;
-}
-.work-info span {
-    left: 7em;
-}
-.banner-top h3 {
-    font-size: 1.7em;
-}
-.banner-top h4 {
-    margin-top: 0.5em;
-}
-.banner-top {
-    height: 76px;
-    padding: 2em 0.5em;
-}
-.check-out {
-    padding: 2em 0 1em;
-}
-th.t-head {
-    font-size: 0.7em !important;
-}
-td.t-data {
-    font-size: 0.8em !important;
-}
-.ring-in {
-    width: 27%;
-}
-.t-w3l {
-    width: 30%;
-}
-a.at-in {
-    width: 75%;
-}
-.close1 i, .close2 i, .close3 i {
-    width: 20px;
-    height: 20px;
-    line-height: 1.7em;
-}
-.close1, .close2, .close3 {
-    left: 73%;
-    top: 6px;
-}
-.work-w3, .work-w31 {
-    padding: 1.5em;
-}
-.advantages-left h3 {
-    font-size: 1.8em;
-}
-.ad-left p {
-    font-size: 1.2em;
-    width: 43px;
-    height: 43px;
-    line-height: 2.5em;
-}
-.ad-right {
-    width: 80%;
-}
-.ad-left {
-    width: 17%;
-}
-.ad-right h4, .advn-two h4 {
-    font-size: 1.1em;
-    line-height: 1.6em;
-}
-.advn-two {
-    margin-top: 1em;
-}
-.contact-left h4 {
-    font-size: 1.7em;
-    margin-bottom: 0.5em;
-}
-.contact-left {
-    margin-top: 1em;
-}
-.single-top {
-    width: 100%;
-}
-.single-w3agile {
-    padding: 1em;
-}
-.wthree-of {
-    margin-top: 1em;
-}
-.offer-w3agile {
-    padding:2em 0;
-}
-.single {
-    padding: 2em 0 0;
-}
-.modal-dialog {
-    width: 290px;
-}
-input.my-product-quantity {
-    width: 40px !important;
-}
-.big-sa {
-    margin-top: 5em;
-}
-/*--typo--*/
-.bars {
-    font-size: 1.5em;
-}
-h1.t-button {
-    font-size: 25px;
-}
- h2.t-button{
-    font-size: 22px;
-}
- h3.t-button {
-    font-size: 20px;
-}
- h4.t-button {
-    font-size: 18px;
-}
- h5.t-button {
-    font-size:15px;
-}
-.pagination-lg > li > a, .pagination-lg > li > span {
-    padding: 10px 11px;
-    font-size: 18px;
-}
+    .big-sale h3, .big-sa h3, .big-sale2 h3, .big-sale3 h3 {
+        font-size: 2.2em;
+    }
 
-.grid_3 p, .page-header p {
-    font-size: 13px;
-}
+    .pro-1 {
+        padding: 0 5px;
+    }
+
+    .banner-info {
+        margin: 2em 0;
+    }
+
+    img.img-head {
+        width: 19%;
+    }
+
+    .logo h1 {
+        font-size: 2.2em;
+    }
+
+    .logo h1 span {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+
+    .logo h1 b {
+        font-size: 7px;
+        padding: 2px;
+        top: 6px;
+        left: -8px;
+        line-height: 6.5px;
+    }
+
+    .card li a {
+        font-size: 0.85em;
+        margin: 0 0.3em;
+    }
+
+    .banner-info h3 {
+        font-size: 1.4em;
+    }
+
+    .search-form input[type='submit'] {
+        width: 35px;
+        height: 35px;
+        background: url(../images/can.png) no-repeat 4px 3px #FCCD1E;
+    }
+
+    .search-form input[type='text'] {
+        width: 85%;
+        padding: 7px 10px;
+        font-size: 0.9em;
+    }
+
+    .search-form {
+        width: 95%;
+    }
+
+    .spec h3 {
+        font-size: 1.7em;
+    }
+
+    .ser-t {
+        width: 64%;
+    }
+
+    .ser-t span i {
+        width: 18px;
+        height: 18px;
+    }
+
+    .ser-t span {
+        width: 36px;
+        height: 36px;
+        left: 38%;
+    }
+
+    .ser-t {
+        width: 64%;
+    }
+
+    .tabs li a {
+        padding: 8px 9px !important;
+        font-size: 0.9em;
+    }
+
+    .offer {
+        right: -8px;
+    }
+
+    .container {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    .product {
+        padding: 3em 0 0em;
+    }
+
+    .footer-bottom h2 {
+        font-size: 2.5em;
+    }
+
+    .footer-bottom h2 span {
+        letter-spacing: 2px;
+        font-size: 11px;
+    }
+
+    .footer-bottom h2 b {
+        font-size: 7px;
+        padding: 2px;
+        line-height: 7px;
+        top: 7px;
+        left: -7px;
+    }
+
+    .footer-grid h3 {
+        font-size: 1.5em;
+        margin-bottom: 0.5em;
+    }
+
+    .pro-1 {
+        margin-bottom: 1em;
+    }
+
+    .big-sale p, .big-sa p, .big-sale2 p, .big-sale3 p {
+        font-size: 0.9em;
+        line-height: 1.7em;
+    }
+
+    .big-sale2, .big-sale3 {
+        margin-top: 2.5em;
+    }
+
+    .kic h3 {
+        font-size: 1.8em;
+    }
+
+    .kic-top {
+        padding: 4em 0 0;
+    }
+
+    .carousel-indicators li {
+
+        margin: 0 3px;
+    }
+
+    .carousel-indicators {
+        left: 41%;
+        bottom: -26px;
+    }
+
+    .resp-tab-content {
+        padding: 1em;
+    }
+
+    .contact-left input[type="text"], .contact-left input[type="email"] {
+        width: 100%;
+        margin: 0 0% 5% 0%;
+    }
+
+    .contact-left input[type="submit"] {
+        width: 33%;
+        font-size: 0.9em;
+    }
+
+    .contact {
+        padding: 3em 0 2em;
+    }
+
+    .main-agileits {
+        width: 90%;
+        padding: 1em;
+    }
+
+    .key input[type="text"], .key input[type="password"] {
+        width: 84%;
+        padding: 8px 10px;
+    }
+
+    .key i {
+        padding: 10px 0px 10px 10px;
+    }
+
+    .form-w3agile input[type="submit"] {
+        padding: 7px 0;
+        margin-bottom: 25px;
+    }
+
+    .login {
+        padding: 2em 0;
+    }
+
+    .form-w3agile h3 {
+        margin-bottom: 0.8em;
+    }
+
+    .panel-title {
+        line-height: 1.8em;
+    }
+
+    .panel-heading {
+        padding: 6px 0px;
+    }
+
+    .faq-w3 {
+        padding: 3em 0 1em;
+    }
+
+    .spec {
+        margin-bottom: 2em;
+    }
+
+    .terms h6 {
+        font-size: 1.2em;
+    }
+
+    .terms p {
+        font-size: 0.9em;
+        margin-top: 10px;
+        padding-left: 18px;
+    }
+
+    ol {
+        margin-bottom: 17px;
+    }
+
+    .terms {
+        padding: 4em 0 2em;
+    }
+
+    .work-info span {
+        left: 7em;
+    }
+
+    .banner-top h3 {
+        font-size: 1.7em;
+    }
+
+    .banner-top h4 {
+        margin-top: 0.5em;
+    }
+
+    .banner-top {
+        height: 76px;
+        padding: 2em 0.5em;
+    }
+
+    .check-out {
+        padding: 2em 0 1em;
+    }
+
+    th.t-head {
+        font-size: 0.7em !important;
+    }
+
+    td.t-data {
+        font-size: 0.8em !important;
+    }
+
+    .ring-in {
+        width: 27%;
+    }
+
+    .t-w3l {
+        width: 30%;
+    }
+
+    a.at-in {
+        width: 75%;
+    }
+
+    .close1 i, .close2 i, .close3 i {
+        width: 20px;
+        height: 20px;
+        line-height: 1.7em;
+    }
+
+    .close1, .close2, .close3 {
+        left: 73%;
+        top: 6px;
+    }
+
+    .work-w3, .work-w31 {
+        padding: 1.5em;
+    }
+
+    .advantages-left h3 {
+        font-size: 1.8em;
+    }
+
+    .ad-left p {
+        font-size: 1.2em;
+        width: 43px;
+        height: 43px;
+        line-height: 2.5em;
+    }
+
+    .ad-right {
+        width: 80%;
+    }
+
+    .ad-left {
+        width: 17%;
+    }
+
+    .ad-right h4, .advn-two h4 {
+        font-size: 1.1em;
+        line-height: 1.6em;
+    }
+
+    .advn-two {
+        margin-top: 1em;
+    }
+
+    .contact-left h4 {
+        font-size: 1.7em;
+        margin-bottom: 0.5em;
+    }
+
+    .contact-left {
+        margin-top: 1em;
+    }
+
+    .single-top {
+        width: 100%;
+    }
+
+    .single-w3agile {
+        padding: 1em;
+    }
+
+    .wthree-of {
+        margin-top: 1em;
+    }
+
+    .offer-w3agile {
+        padding: 2em 0;
+    }
+
+    .single {
+        padding: 2em 0 0;
+    }
+
+    .modal-dialog {
+        width: 290px;
+    }
+
+    input.my-product-quantity {
+        width: 40px !important;
+    }
+
+    .big-sa {
+        margin-top: 5em;
+    }
+
+    /*--typo--*/
+    .bars {
+        font-size: 1.5em;
+    }
+
+    h1.t-button {
+        font-size: 25px;
+    }
+
+    h2.t-button {
+        font-size: 22px;
+    }
+
+    h3.t-button {
+        font-size: 20px;
+    }
+
+    h4.t-button {
+        font-size: 18px;
+    }
+
+    h5.t-button {
+        font-size: 15px;
+    }
+
+    .pagination-lg > li > a, .pagination-lg > li > span {
+        padding: 10px 11px;
+        font-size: 18px;
+    }
+
+    .grid_3 p, .page-header p {
+        font-size: 13px;
+    }
+
+
 }
