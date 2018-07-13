@@ -18,9 +18,7 @@ public class Order {
         return orderid;
     }
 
-    public void setOrderid(Integer orderid) {
-        this.orderid = orderid;
-    }
+    public void setOrderid(Integer orderid) { this.orderid = orderid; }
 
     public String getOrdernumber() {
         return ordernumber;
