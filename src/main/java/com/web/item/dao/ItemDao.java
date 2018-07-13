@@ -31,8 +31,8 @@ public interface ItemDao {
 
     /**
      * 上架商品
-     * @param item
+     * @param item 上架的商品信息
      * @return
      */
-    public boolean addItem(Item item);
+    public int addItem(Item item);
 }
