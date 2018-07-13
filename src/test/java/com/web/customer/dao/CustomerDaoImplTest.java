@@ -1,7 +1,10 @@
 package com.web.customer.dao;
 
+import com.web.administer.utils.BaseDao;
 import com.web.customer.entity.Customer;
 import org.junit.jupiter.api.Test;
+
+import java.sql.SQLException;
 
 class CustomerDaoImplTest {
     private CustomerDao customerDao;

@@ -1,7 +1,5 @@
 package com.web.customer.entity;
 
-import java.sql.Date;
-
 /**
  * 顾客的实体类
  */

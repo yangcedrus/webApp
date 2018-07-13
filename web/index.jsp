@@ -1,10 +1,12 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: 22278
+  Date: 2018/7/13
+  Time: 16:42
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
     <title>四次元口袋在线购物网站</title>
@@ -76,11 +78,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
 
         <div class="logo">
-            <h1><a href="index.html">四次元口袋<span>Dimensional Pockets</span></a></h1>
+            <h1><a href="index,jsp">四次元口袋<span>Dimensional Pockets</span></a></h1>
         </div>
         <div class="head-t">
             <ul class="card">
-                <li><a href="login.html"><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
+                <li><a href="login.jsp"><i class="fa fa-user" aria-hidden="true"></i>
+                    <%
+                        String username=(String)request.getSession().getAttribute("info");
+                        if(username==null){
+                            out.print("登录");
+                        }else{
+                            out.print("您好,"+username);
+                        }
+                    %>
+                </a></li>
                 <li><a href="register.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
                 <li><a href="customer_me.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>买家个人</a></li>
                 <li><a href="store_me.html"><i class="fa fa-ship" aria-hidden="true"></i>卖家个人</a></li>
@@ -151,7 +162,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="clearfix"></div>
                         </div>
                         <div class="add add-2">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-image="images/of16.png">添加到购物车</button>
+                            <button class="btn btn-danger my-cart-btn my-cart-b" data-image="images/of16.png">添加到购物车
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -347,7 +359,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="clearfix"></div>
                         </div>
                         <div class="add add-2">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-image="images/of16.png">添加到购物车</button>
+                            <button class="btn btn-danger my-cart-btn my-cart-b" data-image="images/of16.png">添加到购物车
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -549,7 +562,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="clearfix"></div>
         <div class="footer-bottom">
-            <h2><a href="index.html">四次元口袋<span>The Best Supermarket</span></a></h2>
+            <h2><a href="index,jsp">四次元口袋<span>The Best Supermarket</span></a></h2>
             <div class=" address">
                 <div class="col-md-4 fo-grid1">
                     <p><i class="fa fa-home" aria-hidden="true"></i>12K Street , 45 Building Road Canada.</p>
