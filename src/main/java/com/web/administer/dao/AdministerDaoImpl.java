@@ -22,7 +22,7 @@ public class AdministerDaoImpl implements AdministerDao{
             //连接数据库
             con= BaseDao.getCon();
             //书写sql语句
-            String sql="select * from administer where name=? and psw=?";
+            String sql="select * from admin where name=? and psw=?";
             ps=con.prepareStatement(sql);
             //设置参数
             ps.setString(1,name);
@@ -32,9 +32,12 @@ public class AdministerDaoImpl implements AdministerDao{
             if(rs.next()){
                 administer=new Administer();
                 //数据库数据对应到实体中
-                administer.setAdmiid(rs.getInt("admiid"));
+                administer.setAdmiid(rs.getInt("adminid"));
                 administer.setName(name);
                 administer.setPsw(psw);
+            }
+            else {
+                System.out.println("用户名不存在或密码错误，请重新输入");
             }
         }catch (SQLException e){
             e.printStackTrace();
