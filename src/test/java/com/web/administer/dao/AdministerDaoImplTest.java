@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class AdministerDaoImplTest {
     AdministerDaoImpl administerDao;
     @Test
-    void login() {
-        String name="管理员";
-        String psw="123123";
+    void login(){
+        String name="管理员1";
+        String psw="123456";
         Administer administer;
         administerDao=new AdministerDaoImpl();
         administer=administerDao.login(name,psw);
