@@ -1,10 +1,11 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: 22278
+  Date: 2018/7/13
+  Time: 16:42
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Single ::
@@ -82,7 +83,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="head-t">
             <ul class="card">
                 <li><a href="login,jsp"><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
+                <li><a href="register.jsp"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
             </ul>
         </div>
 
@@ -107,8 +108,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--banner-->
 <div class="banner-top">
     <div class="container">
-        <h3>商品上架</h3>
-        <h4><a href="store_me.html">我的店铺</a><label>/</label>商品上架</h4>
+        <h3>商品详情</h3>
+        <h4><a href="index,jsp">首页</a><label>/</label>商品详情</h4>
         <div class="clearfix"></div>
     </div>
 </div>
@@ -119,55 +120,51 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="single-w3agile">
 
                     <div id="picture-frame">
-                        <img src="images/si.jpg" data-src="images/si-1.jpg" alt="" class="img-responsive"/>
+                        <img src="images/si.jpg" data-src="images/si-1.jpg" alt="" class="img-responsive" id="big_img" style="height: 300px;width: 300px;object-fit: cover;"/>
                     </div>
 
-                    <script src="js/jquery.zoomtoo.js"></script>
-                    <script>
-                        $(function () {
-                            $("#picture-frame").zoomToo({
-                                magnify: 1
-                            });
-                        });
-                    </script>
-
-
                 </div>
-                <div class="add add-3">
-                    <button class="btn btn-danger my-cart-btn my-cart-b fileinput-button" style="margin-top: 15px">
-                        <span>添加图片</span>
-                        <input type="file">
-                    </button>
+                <div style="width: 445px;height: auto">
+
+                    <div style="height: auto;width: 435px;margin-left: 10px;margin-right: 10px">
+                        <a class="left-arrow"></a>
+                        <img class="img-small" src="images/si-1.jpg" id="1" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of11.png" id="2" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of12.png" id="3" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of13.png" id="4" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of13.png" id="5" onclick="getbig(this)" style="display: none"/>
+                        <a class="right-arrow" ></a>
+                    </div>
+
+
                 </div>
             </div>
             <div class="col-md-7 single-top-left ">
-                <div class="single-right">
-                    <h3>商品名称：<input type="text" value="wheat" id="item_name"></h3>
+                <div class="single-right" style="margin-top: 30px">
+                    <h3>Wheat</h3>
 
 
                     <div class="pr-single">
                         <p class="reduced ">
-                            价格：<input type="text" value="100.00" id="item_price">
-                            <!--<del>$10.00</del>-->
-                            <!--$5.00-->
+                            <del>$10.00</del>
+                            $5.00
                         </p>
                     </div>
-                    <div class="pr-single">
-                        <p class="reduced " style="color: #999999">
-                            件数：<input type="text" value="200" id="item_num">
-                            <!--<del>$10.00</del>-->
-                            <!--$5.00-->
-                        </p>
+                    <div class="block block-w3">
+                        <div class="starbox small ghosting"></div>
                     </div>
-
-                    <p class="in-pa">详细介绍：<textarea rows="5" cols="80" id="item_info">    There are many variations of passages of Lorem Ipsum available, but the majorityhave suffered alteration in some form, by injected humour, or randomised words which don't lookeven slightly believable. </textarea>
-                    </p>
+                    <p class="in-pa"> There are many variations of passages of Lorem Ipsum available, but the majority
+                        have suffered alteration in some form, by injected humour, or randomised words which don't look
+                        even slightly believable. </p>
+                    <div style="margin-bottom: 20px">
+                    <input class="min" name="" type="button" value="-" style="width: 25px" onclick="minnum()"/>
+                    <input class="text_box" id="itemnum" type="text" value="1" style="width:40px;text-align: center" />
+                    <input class="add" name="" type="button" value="+" style="width: 25px" onclick="addnum()"/>
+                    <span id="msg"></span>
+                    </div>
                     <div class="add add-3">
-                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="save()">
-                            保存
-                        </button>
-                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="back()" style="margin-left: 30px">
-                            退出
+                        <button class="btn btn-danger my-cart-btn my-cart-b">
+                            添加到购物车
                         </button>
                     </div>
                     <div class="clearfix"></div>
@@ -245,7 +242,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             }, 500, "linear", function () {
                 $image.remove();
             });
-        }
+        };
 
         $('.my-cart-btn').myCart({
             classCartIcon: 'my-cart-icon',
@@ -269,30 +266,62 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
 
     });
-
-    function save() {
-        window.history.go(-1);
+    function getbig(target) {
+        var id=$(target)[0].getAttribute("id");
+        var src=document.getElementById(id).getAttribute("src");
+        var img=document.getElementById("big_img");
+        img.setAttribute("src",src);
     }
-
-    function back() {
-        window.history.go(-1);
+    function minnum() {
+        var num=document.getElementById("itemnum").value;
+        num--;
+        if(num<=0){
+            document.getElementById("msg").innerText="不能再减少了";
+        }
+        else{
+            document.getElementById("itemnum").value=num;
+        }
+    }
+    function addnum() {
+        var num=document.getElementById("itemnum").value;
+        num++;
+        if(num>0){
+            document.getElementById("msg").innerText="";
+        }
+        document.getElementById("itemnum").value=num;
     }
 </script>
-
 <style>
-    .fileinput-button {
-        display: inline-block;
-        overflow: hidden;
+    .left-arrow{
+        width: 0;
+        height: 0;
+        border-bottom: 5px solid transparent; /* left arrow slant */
+        border-top: 5px solid transparent; /* right arrow slant */
+        border-right: 5px solid #2f2f2f; /* bottom, add background color here */
+        font-size: 0;
+        line-height: 0;
+        margin-right: 5px;
+    }
+    .img-small{
+        width: 92.5px;
+        height: 92.5px;
+        margin-top: 5px;
+        margin-left: 2.5px;
+        margin-right: 2.5px;
+        object-fit: cover;
+        border: 1px solid #999999;
+        padding: 5px;
+    }
+    .right-arrow{
+        width: 0;
+        height: 0;
+        border-bottom: 5px solid transparent; /* left arrow slant */
+        border-top: 5px solid transparent; /* right arrow slant */
+        border-left: 5px solid #2f2f2f; /* bottom, add background color here */
+        font-size: 0;
+        line-height: 0;
     }
 
-    .fileinput-button input {
-        position: absolute;
-        right: 0px;
-        top: 0px;
-        opacity: 0;
-        -ms-filter: 'alpha(opacity=0)';
-        font-size: 200px;
-    }
 </style>
-
 </body>
+</html>

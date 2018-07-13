@@ -1,13 +1,14 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE html>
+<%--
+Created by IntelliJ IDEA.
+User: 22278
+Date: 2018/7/13
+Time: 16:42
+To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Login ::
+    <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Single ::
         w3layouts</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +73,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </head>
 <body>
-<!--header-->
 <div class="header">
 
     <div class="container">
@@ -83,7 +83,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="head-t">
             <ul class="card">
                 <li><a href="login,jsp"><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
+                <li><a href="register.jsp"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
             </ul>
         </div>
 
@@ -102,66 +102,84 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </nav>
             <div class="clearfix"></div>
         </div>
-
     </div>
 </div>
 <!---->
 <!--banner-->
 <div class="banner-top">
     <div class="container">
-        <h3>管理员</h3>
-        <h4><a href="index,jsp">主页</a><label>/</label>管理员个人中心</h4>
+        <h3>修改商品</h3>
+        <h4><a href="store_me.jsp">我的店铺</a><label>/</label>修改商品</h4>
         <div class="clearfix"></div>
     </div>
 </div>
-
-<!--me-->
 <div class="faq-w3 main-grid-border">
     <div class="container">
-        <div class="spec ">
-            <h3>业务列表</h3>
-            <div class="ser-t">
-                <b></b>
-                <span><i></i></span>
-                <b class="line"></b>
-            </div>
-        </div>
-        <div class="panel-group" id="accordion">
-            <!--显示可操作信息-->
-            <!--用户管理-->
-            <div class="col-md-3 m-wthree">
-                <div class="col-m">
-                <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
-                    <img src="images/of.png" class="img-responsive" alt="">
-                </a>
-                <div class="mid-1">
-                    <div class="add">
-                        <h2 class="t-button">
-                            <a href="admin_user_management.html"><button class="label label-warning">用户管理</button></a>
-                        </h2>
+        <div class="single">
+            <div class="col-md-5 single-top">
+                <div class="single-w3agile">
+
+                    <div id="picture-frame">
+                        <img src="images/si.jpg" data-src="images/si-1.jpg" alt="" class="img-responsive"/>
                     </div>
+
+                    <script src="js/jquery.zoomtoo.js"></script>
+                    <script>
+                        $(function () {
+                            $("#picture-frame").zoomToo({
+                                magnify: 1
+                            });
+                        });
+                    </script>
+
+
+                </div>
+                <div class="add add-3">
+                    <button class="btn btn-danger my-cart-btn my-cart-b fileinput-button" style="margin-top: 15px">
+                        <span>修改图片</span>
+                        <input type="file">
+                    </button>
                 </div>
             </div>
-            </div>
-            <!--违规商品管理-->
-            <div class="col-md-3 m-wthree">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
-                        <img src="images/of.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="add">
-                            <h2 class="t-button">
-                                <a href="admin_delete_item.html"><button class="label label-warning">违规商品管理</button></a>
-                            </h2>
-                        </div>
+            <div class="col-md-7 single-top-left ">
+                <div class="single-right">
+                    <h3>商品名称：<input type="text" disabled="disabled" value="wheat" id="item_name"></h3>
+
+
+                    <div class="pr-single">
+                        <p class="reduced ">
+                            价格：<input type="text" disabled="disabled" value="¥100.00" id="item_price">
+                            <!--<del>$10.00</del>-->
+                            <!--$5.00-->
+                        </p>
                     </div>
+                    <div class="pr-single">
+                        <p class="reduced " style="color: #999999">
+                            件数：<input type="text" disabled value="200" id="item_num">
+                            <!--<del>$10.00</del>-->
+                            <!--$5.00-->
+                        </p>
+                    </div>
+
+                    <p class="in-pa">详细介绍：<textarea rows="5" cols="80" disabled id="item_info">    There are many variations of passages of Lorem Ipsum available, but the majorityhave suffered alteration in some form, by injected humour, or randomised words which don't lookeven slightly believable. </textarea>
+                    </p>
+                    <div class="add add-3">
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">
+                            修改
+                        </button>
+                        <button class="btn btn-danger my-cart-btn my-cart-b" style="margin-left: 30px">
+                            保存
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
+            <div class="clearfix"></div>
         </div>
+
+
     </div>
 </div>
-
 <!--footer-->
 <div class="footer">
     <div class="container">
@@ -190,6 +208,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!-- //footer-->
+
 <!-- smooth scrolling -->
 <script type="text/javascript">
     $(document).ready(function () {
@@ -251,7 +270,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
 
     });
+
+    function modify() {
+        document.getElementById("item_name").disabled = "";
+        document.getElementById("item_price").disabled = "";
+        document.getElementById("item_num").disabled = "";
+        document.getElementById("item_info").disabled = "";
+    }
 </script>
 
+<style>
+    .fileinput-button {
+        display: inline-block;
+        overflow: hidden;
+    }
+
+    .fileinput-button input {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        opacity: 0;
+        -ms-filter: 'alpha(opacity=0)';
+        font-size: 200px;
+    }
+</style>
 </body>
-</html>

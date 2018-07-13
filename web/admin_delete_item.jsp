@@ -1,13 +1,14 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: 22278
+  Date: 2018/7/13
+  Time: 16:42
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Login :: w3layouts</title>
+    <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | offer :: w3layouts</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -38,48 +39,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
-    <!--- start-rate---->
-    <script src="js/jstarbox.js"></script>
-    <link rel="stylesheet" href="css/jstarbox.css" type="text/css" media="screen" charset="utf-8" />
-    <script type="text/javascript">
-        jQuery(function() {
-            jQuery('.starbox').each(function() {
-                var starbox = jQuery(this);
-                starbox.starbox({
-                    average: starbox.attr('data-start-value'),
-                    changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
-                    ghosting: starbox.hasClass('ghosting'),
-                    autoUpdateAverage: starbox.hasClass('autoupdate'),
-                    buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
-                    stars: starbox.attr('data-star-count') || 5
-                }).bind('starbox-value-changed', function(event, value) {
-                    if(starbox.hasClass('random')) {
-                        var val = Math.random();
-                        starbox.next().text(' '+val);
-                        return val;
-                    }
-                })
-            });
-        });
-    </script>
-    <!---//End-rate---->
 
 </head>
 <body>
-<!--header-->
 <div class="header">
-
     <div class="container">
-
         <div class="logo">
             <h1 ><a href="index,jsp">四次元口袋<span>Dimensional Pockets</span></a></h1>
         </div>
         <div class="head-t">
             <ul class="card">
                 <li><a href="login,jsp" ><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.html" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
-                <li><a href="customer_me.html" ><i class="fa fa-file-text-o" aria-hidden="true"></i>买家个人</a></li>
-                <li><a href="store_me.html" ><i class="fa fa-ship" aria-hidden="true"></i>卖家个人</a></li>
+                <li><a href="register.jsp" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
+                <li><a href="admin_me.jsp"><i class="fa fa-user-md" aria-hidden="true"></i>管理员个人</a></li>
             </ul>
         </div>
 
@@ -93,6 +65,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+
                 </div>
             </nav>
             <div class="clearfix"></div>
@@ -100,101 +73,85 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     </div>
 </div>
-<!---->
+
 <!--banner-->
 <div class="banner-top">
     <div class="container">
-        <h3 >个人中心</h3>
-        <h4><a href="index,jsp">主页</a><label>/</label>卖家个人中心</h4>
-        <div class="clearfix"> </div>
+        <h3>商品审核</h3>
+        <h4><a href="index,jsp">主页</a><label>/</label><a href="admin_me.jsp">管理员个人中心</a><label>/</label>商品审核</h4>
+        <div class="clearfix"></div>
     </div>
 </div>
 
-<!--me-->
-<div class="faq-w3 main-grid-border">
-    <div class="container">
+<!--content-->
+<div class="content-top offer-w3agile">
+    <div class="container ">
         <div class="spec ">
-            <h3>个人信息</h3>
+            <h3>待审核商品</h3>
             <div class="ser-t">
                 <b></b>
                 <span><i></i></span>
                 <b class="line"></b>
             </div>
         </div>
-        <div class="panel-group" id="accordion">
-            <!--显示可操作信息-->
-            <!--设置个人信息-->
-            <div class="col-md-3 m-wthree">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
-                        <img src="images/of.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="add">
-                            <h2 class="t-button">
-                                <a href="set_my_info.html"><button class="label label-warning">设置个人信息</button></a>
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--我的购物车-->
-            <div class="col-md-3 m-wthree">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
-                        <img src="images/of.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="add">
-                            <h2 class="t-button">
-                                <a href="store_my_items.html"><button class="label label-warning">我的店铺</button></a>
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--我的订单-->
-            <div class="col-md-3 m-wthree">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
-                        <img src="images/of.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="add">
-                            <h2 class="t-button">
-                                <a href="my_orders.html"><button class="label label-warning">我的订单</button></a>
-                            </h2>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--商品管理-->
-            <div class="col-md-3 m-wthree">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
-                        <img src="images/of.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="add">
-                            <h2 class="t-button">
-                                <a href="store_item_management.html"><button class="label label-warning">商品管理</button></a>
-                            </h2>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+        <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+        <script src="js/jquery.vide.min.js"></script>
+        <!--search END-->
+
+        <div class="table table-striped">
+            <table class="table" >
+                <thead >
+                <tr>
+                    <th style="text-align: center">序号</th>
+                    <th style="text-align: center">商品名称</th>
+                    <th style="text-align: center">商品价格</th>
+                    <th style="text-align: center">库存容量</th>
+                    <th style="text-align: center">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr style="text-align: center;border-bottom: 1px solid #999999">
+                    <td>1</td>
+                    <td>Moong</td>
+                    <td>¥100</td>
+                    <td>100</td>
+                    <td><button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情审核</button>
+                </tr>
+                <tr style="text-align: center;border-bottom: 1px solid #999999">
+                    <td>2</td>
+                    <td>Sunflower Oil</td>
+                    <td>¥99</td>
+                    <td>100</td>
+                    <td><button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情审核</button>
+                    </td>
+                </tr>
+                <tr style="text-align: center;border-bottom: 1px solid #999999">
+                    <td>3</td>
+                    <td>Kabuli Chana</td>
+                    <td>¥88.88</td>
+                    <td>100</td>
+                    <td><button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情审核</button>
+
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
+<!--跳转-->
+<script>
+    function details(){
+        window.location.href='item_details_check.jsp';
+    }
+</script>
 <!--footer-->
 <div class="footer">
     <div class="container">
         <div class="clearfix"></div>
         <div class="footer-bottom">
-            <h2 ><a href="index,jsp">四次元口袋<span>The Best Supermarket</span></a></h2>
+            <h2 ><a href="index,jsp">四次元口袋<span>Dimensional Pockets</span></a></h2>
             <div class=" address">
                 <div class="col-md-4 fo-grid1">
                     <p><i class="fa fa-home" aria-hidden="true"></i>12K Street , 45 Building Road Canada.</p>
@@ -210,11 +167,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
         <div class="copy-right">
-            <p> &copy; 2016 Big store. All Rights Reserved | Design by  <a href="http://w3layouts.com/"> W3layouts</a></p>
+            <p> &copy; 2016 Big store. All Rights Reserved | Design by  W3layouts</p>
         </div>
     </div>
 </div>
 <!-- //footer-->
+
 <!-- smooth scrolling -->
 <script type="text/javascript">
     $(document).ready(function() {

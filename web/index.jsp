@@ -92,10 +92,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         }
                     %>
                 </a></li>
-                <li><a href="register.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
-                <li><a href="customer_me.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>买家个人</a></li>
-                <li><a href="store_me.html"><i class="fa fa-ship" aria-hidden="true"></i>卖家个人</a></li>
-                <li><a href="admin_me.html"><i class="fa fa-ship" aria-hidden="true"></i>管理员个人</a></li>
+                <li><a href="register.jsp"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
+                <li><a href="customer_me.jsp"><i class="fa fa-file-text-o" aria-hidden="true"></i>买家个人</a></li>
+                <li><a href="store_me.jsp"><i class="fa fa-ship" aria-hidden="true"></i>卖家个人</a></li>
+                <li><a href="admin_me.jsp"><i class="fa fa-ship" aria-hidden="true"></i>管理员个人</a></li>
             </ul>
         </div>
 
@@ -123,7 +123,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="banner-info">
             <h3> 做你生活中的四次元口袋 </h3>
             <div class="search-form">
-                <form action="search.html" method="post">
+                <form action="search.jsp" method="post">
                     <input type="text" placeholder="搜索..." name="Search...">
                     <input type="submit" value=" ">
                 </form>
@@ -150,12 +150,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <!--四个推荐商品-->
             <div class="col-md-3 pro-1">
                 <div class="col-m">
-                    <a href="item_details.html" target="_blank" class="offer-img">
+                    <a href="item_details.jsp" target="_blank" class="offer-img">
                         <img src="images/of16.png" class="img-responsive" alt="">
                     </a>
                     <div class="mid-1">
                         <div class="women">
-                            <h6><a href="item_details.html" target="_blank">Moisturiser</a>(500 g)</h6>
+                            <h6><a href="item_details.jsp" target="_blank">Moisturiser</a>(500 g)</h6>
                         </div>
                         <div class="mid-2">
                             <p><label>$7.00</label><em class="item_price">$6.00</em></p>
@@ -347,12 +347,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
             <div class="col-md-3 pro-1">
                 <div class="col-m">
-                    <a href="item_details.html" target="_blank" class="offer-img">
+                    <a href="item_details.jsp" target="_blank" class="offer-img">
                         <img src="images/of16.png" class="img-responsive" alt="">
                     </a>
                     <div class="mid-1">
                         <div class="women">
-                            <h6><a href="item_details.html" target="_blank">Moisturiser</a>(500 g)</h6>
+                            <h6><a href="item_details.jsp" target="_blank">Moisturiser</a>(500 g)</h6>
                         </div>
                         <div class="mid-2">
                             <p><label>$7.00</label><em class="item_price">$6.00</em></p>

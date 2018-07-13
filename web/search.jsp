@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: 22278
+  Date: 2018/7/13
+  Time: 16:42
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | offer ::
@@ -76,7 +83,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="head-t">
             <ul class="card">
                 <li><a href="login,jsp"><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
+                <li><a href="register.jsp"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
             </ul>
         </div>
 
@@ -106,7 +113,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="banner-info">
             <h3 style="user-select:none;color: #00000000">四次元口袋</h3>
             <div class="search-form">
-                <form action="search.html" method="post">
+                <form action="search.jsp" method="post">
                     <input type="text" placeholder="Search..." name="Search...">
                     <input type="submit" value=" ">
                 </form>
@@ -130,7 +137,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="con-w3l wthree-of">
             <div class="col-md-3 pro-1">
                 <div class="col-m">
-                    <a href="item_details.html" target="_blank" class="offer-img">
+                    <a href="item_details.jsp" target="_blank" class="offer-img">
                         <img src="images/of.png" class="img-responsive" alt="">
                     </a>
                     <div class="mid-1">

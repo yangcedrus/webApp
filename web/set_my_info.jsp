@@ -1,10 +1,11 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: 22278
+  Date: 2018/7/13
+  Time: 16:42
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Register ::
@@ -121,7 +122,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="head-t">
             <ul class="card">
                 <li><a href="login,jsp"><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
+                <li><a href="register.jsp"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
             </ul>
         </div>
 
@@ -149,7 +150,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="banner-top">
     <div class="container">
         <h3>个人信息</h3>
-        <h4><a href="index,jsp">首页</a><label>/</label><a href="store_me.html">个人主页</a><label>/</label>个人信息</h4>
+        <h4><a href="index,jsp">首页</a><label>/</label><a href="store_me.jsp">个人主页</a><label>/</label>个人信息</h4>
         <div class="clearfix"></div>
     </div>
 </div>

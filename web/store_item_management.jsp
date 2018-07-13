@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: 22278
+  Date: 2018/7/13
+  Time: 16:42
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | offer :: w3layouts</title>
@@ -32,19 +39,45 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+    <!--- start-rate---->
+    <script src="js/jstarbox.js"></script>
+    <link rel="stylesheet" href="css/jstarbox.css" type="text/css" media="screen" charset="utf-8" />
+    <script type="text/javascript">
+        jQuery(function() {
+            jQuery('.starbox').each(function() {
+                var starbox = jQuery(this);
+                starbox.starbox({
+                    average: starbox.attr('data-start-value'),
+                    changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
+                    ghosting: starbox.hasClass('ghosting'),
+                    autoUpdateAverage: starbox.hasClass('autoupdate'),
+                    buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
+                    stars: starbox.attr('data-star-count') || 5
+                }).bind('starbox-value-changed', function(event, value) {
+                    if(starbox.hasClass('random')) {
+                        var val = Math.random();
+                        starbox.next().text(' '+val);
+                        return val;
+                    }
+                })
+            });
+        });
+    </script>
+    <!---//End-rate---->
 
 </head>
 <body>
 <div class="header">
+
     <div class="container">
+
         <div class="logo">
             <h1 ><a href="index,jsp">四次元口袋<span>Dimensional Pockets</span></a></h1>
         </div>
         <div class="head-t">
             <ul class="card">
                 <li><a href="login,jsp" ><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.html" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
-                <li><a href="admin_me.html"><i class="fa fa-user-md" aria-hidden="true"></i>管理员个人</a></li>
+                <li><a href="register.jsp" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
             </ul>
         </div>
 
@@ -59,6 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span class="icon-bar"></span>
                     </button>
 
+
                 </div>
             </nav>
             <div class="clearfix"></div>
@@ -70,9 +104,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--banner-->
 <div class="banner-top">
     <div class="container">
-        <h3>商品审核</h3>
-        <h4><a href="index,jsp">主页</a><label>/</label><a href="admin_me.html">管理员个人中心</a><label>/</label>商品审核</h4>
-        <div class="clearfix"></div>
+        <h3 >商品管理</h3>
+        <h4><a href="index,jsp">主页</a><label>/</label><a href="store_me.jsp">卖家个人中心</a><label>/</label>商品管理</h4>
+        <div class="clearfix"> </div>
     </div>
 </div>
 
@@ -80,65 +114,72 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="content-top offer-w3agile">
     <div class="container ">
         <div class="spec ">
-            <h3>待审核商品</h3>
+            <h3>商品管理</h3>
             <div class="ser-t">
                 <b></b>
                 <span><i></i></span>
                 <b class="line"></b>
             </div>
         </div>
-
-        <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
-        <script src="js/jquery.vide.min.js"></script>
-        <!--search END-->
-
         <div class="table table-striped">
-            <table class="table" >
-                <thead >
+            <button class="btn btn-danger my-cart-b" onclick="add()">上架</button>
+            <table class="table" id="store_item_management_table">
+                <thead>
                 <tr>
-                    <th style="text-align: center">序号</th>
-                    <th style="text-align: center">商品名称</th>
-                    <th style="text-align: center">商品价格</th>
-                    <th style="text-align: center">库存容量</th>
-                    <th style="text-align: center">操作</th>
+                    <th>序号</th>
+                    <th>商品名称</th>
+                    <th>商品描述</th>
+                    <th>库存容量</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr style="text-align: center;border-bottom: 1px solid #999999">
+                <tr>
                     <td>1</td>
                     <td>Moong</td>
-                    <td>¥100</td>
+                    <td>quick overview</td>
                     <td>100</td>
-                    <td><button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情审核</button>
-                </tr>
-                <tr style="text-align: center;border-bottom: 1px solid #999999">
-                    <td>2</td>
-                    <td>Sunflower Oil</td>
-                    <td>¥99</td>
-                    <td>100</td>
-                    <td><button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情审核</button>
+                    <td>
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情</button>
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">修改</button>
+                        <button class="btn btn-danger my-cart-btn my-cart-b">下架</button>
                     </td>
                 </tr>
-                <tr style="text-align: center;border-bottom: 1px solid #999999">
+                <tr>
+                    <td>2</td>
+                    <td>Sunflower Oil</td>
+                    <td>quick overview</td>
+                    <td>100</td>
+                    <td>
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情</button>
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">修改</button>
+                        <button class="btn btn-danger my-cart-btn my-cart-b">下架</button>
+                    </td>
+                </tr>
+                <tr>
                     <td>3</td>
                     <td>Kabuli Chana</td>
-                    <td>¥88.88</td>
+                    <td>quick overview</td>
                     <td>100</td>
-                    <td><button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情审核</button>
-
+                    <td>
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情</button>
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">修改</button>
+                        <button class="btn btn-danger my-cart-btn my-cart-b">下架</button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
+        <hr class="bs-docs-separator">
+        <div class=" con-w3l wthree-of">
+            <div class="clearfix"></div>
+        </div>
     </div>
 </div>
 
-<!--跳转-->
-<script>
-    function details(){
-        window.location.href='item_details_check.html';
-    }
-</script>
+
+
 <!--footer-->
 <div class="footer">
     <div class="container">
@@ -169,6 +210,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- smooth scrolling -->
 <script type="text/javascript">
     $(document).ready(function() {
+        $("#store_item_management_table tr").click(function() {
+
+//change the background color to red before removing
+            $(this).fadeOut(400, function(){
+                $(this).remove();
+            });
+        });
+    });
+    $(document).ready(function() {
         /*
             var defaults = {
             containerID: 'toTop', // fading element id
@@ -182,6 +232,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script>
 <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 <!-- //smooth scrolling -->
+<!--button跳转-->
+<script>
+    function details(){
+        window.open("item_details.jsp","_blank");
+    }
+    function modify(){
+        window.location.href='store_modi_item.jsp';
+    }
+    function add() {
+        window.location.href='store_add_item.jsp';
+    }
+</script>
+
 <!-- for bootstrap working -->
 <script src="js/bootstrap.js"></script>
 <!-- //for bootstrap working -->
@@ -225,6 +288,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     });
 </script>
-
 </body>
 </html>

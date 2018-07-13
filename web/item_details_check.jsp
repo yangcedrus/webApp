@@ -1,13 +1,15 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE html>
+<%--
+Created by IntelliJ IDEA.
+User: 22278
+Date: 2018/7/13
+Time: 16:42
+To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>四次元口袋||DimensionalPockets</title>
+    <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Single ::
+        w3layouts</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -71,7 +73,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </head>
 <body>
-
 <div class="header">
 
     <div class="container">
@@ -82,7 +83,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="head-t">
             <ul class="card">
                 <li><a href="login,jsp"><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
+                <li><a href="register.jsp"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
             </ul>
         </div>
 
@@ -101,190 +102,77 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </nav>
             <div class="clearfix"></div>
         </div>
-
     </div>
 </div>
 <!---->
-
 <!--banner-->
 <div class="banner-top">
     <div class="container">
-        <h3>购物车</h3>
-        <h4><a href="index,jsp">首页</a><label>/</label><a href="customer_me.html">买家个人中心</a><label>/</label>购物车</h4>
+        <h3>审核商品-详情</h3>
+        <h4><a href="admin_delete_item.jsp">商品审核</a><label>/</label>审核商品-详情</h4>
         <div class="clearfix"></div>
     </div>
 </div>
-
-<!-- contact -->
-<div class="check-out">
+<div class="faq-w3 main-grid-border">
     <div class="container">
-        <div class="spec ">
-            <h3>购物车</h3>
-            <div class="ser-t">
-                <b></b>
-                <span><i></i></span>
-                <b class="line"></b>
+        <div class="single1">
+            <div class="col-md-5 single-top">
+                <div class="single-w3agile">
+
+                    <div id="picture-frame">
+                        <img src="images/si.jpg" data-src="images/si-1.jpg" alt="" class="img-responsive" id="big_img" style="height: 300px;width: 300px;object-fit: cover;"/>
+                    </div>
+
+                </div>
+                <div style="width: 445px;height: auto">
+
+                    <div style="height: auto;width: 435px;margin-left: 10px;margin-right: 10px">
+                        <a class="left-arrow"></a>
+                        <img class="img-small" src="images/si-1.jpg" id="1" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of11.png" id="2" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of12.png" id="3" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of13.png" id="4" onclick="getbig(this)"/>
+                        <img class="img-small" src="images/of13.png" id="5" onclick="getbig(this)" style="display: none"/>
+                        <a class="right-arrow" ></a>
+                    </div>
+
+
+                </div>
             </div>
+            <div class="col-md-7 single-top-left ">
+                <div class="single-right" style="margin-top: 30px">
+                    <h3>商品名称：Wheat</h3>
+
+
+                    <div class="pr-single">
+                        <p class="reduced ">
+                            <span style="color: #5b5b5b">价格：</span><del>$10.00</del>
+                            $5.00
+                        </p>
+
+                    </div>
+                    <p>库存容量：200</p>
+                    <p class="in-pa"> <span style="color: #999999">详细介绍：</span>There are many variations of passages of Lorem Ipsum available, but the majority
+                        have suffered alteration in some form, by injected humour, or randomised words which don't look
+                        even slightly believable. </p>
+                    <div class="add add-3">
+                        <input type="submit" class="btn123" value="审核通过" style="margin-right: 10px">
+
+                        <input type="submit" class="btn123" value="审核不通过" onclick="show_reason()">
+                        <div id="reason" style="display: none">
+                        <p>理由：</p>
+                        <textarea rows="4" cols="60" style="margin-top: 5px"></textarea>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
         </div>
-        <script type="text/javascript">
-            function selectALLNO() {
-                // 获取要操作的复选框
-                var box1 = document.getElementById("boxId");
-                //checked判断是否选中
-                if (box1.checked == true) {
-                    selectAll();
-                }
-                else {
-                    SelectNO();
-                }
-            }
 
-            function selectAll() {
-                // 获取要操作的复选框
-                var box1 = document.getElementsByName("love");
-                //checked判断是否选中
-                for (var x = 0; x < box1.length; x++) {
-                    var value1 = box1[x];
-                    value1.checked = true;
-                }
-            }
 
-            function SelectNO() {
-                // 获取要操作的复选框
-                var box2 = document.getElementsByName("love");
-                //checked判断是否选中
-                for (var x = 0; x < box2.length; x++) {
-                    var value1 = box2[x];
-                    value1.checked = false;
-                }
-            }
-
-            function selectOther() {
-                // 获取要操作的复选框
-                var box1 = document.getElementsByName("love");
-                //checked判断是否选中
-                for (var x = 0; x < box1.length; x++) {
-                    var value1 = box1[x];
-                    if (value1.checked)
-                        value1.checked = false;
-                    else
-                        value1.checked = true;
-                }
-            }
-        </script>
-        <table class="table ">
-            <tr>
-                <th class="t-head head-it ">商品</th>
-                <th class="t-head">价格</th>
-                <th class="t-head">数量</th>
-                <th class="t-head">操作</th>
-            </tr>
-            <tr class="cross">
-                <td class="ring-in t-data">
-                    <a href="item_details.html" target="_blank" class="at-in">
-                        <img src="images/wi2.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="sed">
-                        <h5>Sed ut perspiciatis unde</h5>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="cart-checkbox">
-                        <input type="checkbox" style="vertical-align: center" name="love"/>
-                    </div>
-                </td>
-                <td class="t-data">$10.00</td>
-                <td class="t-data">
-                    <div class="quantity">
-                        <div class="quantity-select">
-                            <div class="entry value-minus">&nbsp;</div>
-                            <div class="entry value"><span class="span-1">1</span></div>
-                            <div class="entry value-plus active">&nbsp;</div>
-                        </div>
-                    </div>
-                </td>
-                <td class="t-data t-w3l"><a class=" add-1" href="#">购买</a></td>
-
-            </tr>
-            <tr class="cross1">
-                <td class="t-data ring-in">
-                    <a href="single.html" class="at-in">
-                        <img src="images/wi1.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="sed">
-                        <h5>Sed ut perspiciatis unde</h5>
-                    </div>
-                    <div class="clearfix"></div>
-                    <input type="checkbox" name="love"/>
-                </td>
-                <td class="t-data">$20.00</td>
-                <td class="t-data">
-                    <div class="quantity">
-                        <div class="quantity-select">
-                            <div class="entry value-minus">&nbsp;</div>
-                            <div class="entry value"><span class="span-1">1</span></div>
-                            <div class="entry value-plus active">&nbsp;</div>
-                        </div>
-                    </div>
-
-                </td>
-
-                <td class="t-data t-w3l"><a class=" add-1" href="#">购买</a></td>
-
-            </tr>
-            <tr class="cross2">
-                <td class="t-data ring-in">
-                    <a href="single.html" class="at-in">
-                        <img src="images/wi2.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="sed">
-                        <h5>Sed ut perspiciatis unde</h5>
-                    </div>
-                    <div class="clearfix"></div>
-                    <input type="checkbox" style="vertical-align:center;" name="love"/>
-                </td>
-                <td class="t-data">$15.00</td>
-                <td class="t-data">
-                    <div class="quantity">
-                        <div class="quantity-select">
-                            <div class="entry value-minus">&nbsp;</div>
-                            <div class="entry value"><span class="span-1">1</span></div>
-                            <div class="entry value-plus active">&nbsp;</div>
-                        </div>
-                    </div>
-
-                </td>
-
-                <td class="t-data"><a class=" add-1" href="#">购买</a></td>
-
-            </tr>
-            <tr class="cross2">
-                <td>
-                    <input type="checkbox" id="boxId" onclick="selectALLNO();"/>全选/全不选<br/>
-                </td>
-                <td>合计：￥45</td>
-                <td></td>
-                <td class="t-data"><a class=" add-1" href="###">结算购物车</a>
-                    <a class=" cart-delete" href="###">删除</a></td>
-            </tr>
-        </table>
     </div>
 </div>
-
-<!--quantity-->
-<script>
-    $('.value-plus').on('click', function () {
-        var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) + 1;
-        divUpd.text(newVal);
-    });
-
-    $('.value-minus').on('click', function () {
-        var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) - 1;
-        if (newVal >= 1) divUpd.text(newVal);
-    });
-</script>
-<!--quantity-->
-
-
 <!--footer-->
 <div class="footer">
     <div class="container">
@@ -313,6 +201,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!-- //footer-->
+
 <!-- smooth scrolling -->
 <script type="text/javascript">
     $(document).ready(function () {
@@ -350,7 +239,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             }, 500, "linear", function () {
                 $image.remove();
             });
-        }
+        };
 
         $('.my-cart-btn').myCart({
             classCartIcon: 'my-cart-icon',
@@ -374,27 +263,62 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
 
     });
+    function getbig(target) {
+        var id=$(target)[0].getAttribute("id");
+        var src=document.getElementById(id).getAttribute("src");
+        var img=document.getElementById("big_img");
+        img.setAttribute("src",src);
+    }
+    function show_reason() {
+        var div=document.getElementById("reason");
+        div.style.display="block";
+    }
 </script>
 <style>
-    .cart-delete:hover {
-        text-decoration: none;
-        background: #FAB005;
-        color: #fff;
+    .left-arrow{
+        width: 0;
+        height: 0;
+        border-bottom: 5px solid transparent; /* left arrow slant */
+        border-top: 5px solid transparent; /* right arrow slant */
+        border-right: 5px solid #2f2f2f; /* bottom, add background color here */
+        font-size: 0;
+        line-height: 0;
+        margin-right: 5px;
+    }
+    .img-small{
+        width: 92.5px;
+        height: 92.5px;
+        margin-top: 5px;
+        margin-left: 2.5px;
+        margin-right: 2.5px;
+        object-fit: cover;
+        border: 1px solid #999999;
+        padding: 5px;
+    }
+    .right-arrow{
+        width: 0;
+        height: 0;
+        border-bottom: 5px solid transparent; /* left arrow slant */
+        border-top: 5px solid transparent; /* right arrow slant */
+        border-left: 5px solid #2f2f2f; /* bottom, add background color here */
+        font-size: 0;
+        line-height: 0;
+    }
+    .btn123 {
+        background: #fdb515;
+        color: #FFFFFF;
+        text-align: center;
+        padding: 10px 5px;
+        border: none;
+        font-size: 0.8em;
+        outline: none;
+        cursor: pointer;
+        width: 70px;
+        height: 35px;
+        margin-bottom: 10px;
+        margin-top: 5px;
     }
 
-    .cart-delete {
-        text-decoration: none;
-        color: #fff;
-        padding: 7px 10px;
-        width: auto;
-        font-size: 1em;
-        background: #ac2925;
-    }
-
-    .cart-delete {
-        padding: 7px 4px;
-        font-size: 0.9em;
-    }
 </style>
 </body>
 </html>

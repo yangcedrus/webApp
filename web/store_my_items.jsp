@@ -1,10 +1,11 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: 22278
+  Date: 2018/7/13
+  Time: 16:42
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
 <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Hold :: w3layouts</title>
@@ -63,7 +64,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 			<div class="head-t">
 				<ul class="card">
 					<li><a href="login,jsp" ><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-					<li><a href="register.html" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
+					<li><a href="register.jsp" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
 				</ul>	
 			</div>
 					
@@ -72,7 +73,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <div class="banner-top">
 	<div class="container">
 		<h3 >我的店铺</h3>
-		<h4><a href="index,jsp">首页</a><label>/</label><a href="store_my_items.html">卖家个人中心</a><label>/</label>我的店铺</h4>
+		<h4><a href="index,jsp">首页</a><label>/</label><a href="store_my_items.jsp">卖家个人中心</a><label>/</label>我的店铺</h4>
 		<div class="clearfix"> </div>
 	</div>
 </div>
@@ -109,7 +110,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 						</a>
 						<div class="mid-1">
 							<div class="women">
-								<h6><a href="item_details.html">Cat Food</a>(500 g)</h6>
+								<h6><a href="item_details.jsp">Cat Food</a>(500 g)</h6>
 							</div>
 							<div class="mid-2">
 								<p ><label>¥7.00</label><em class="item_price">¥6.00</em></p>
@@ -129,7 +130,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="item_details.html">Safety Pins</a>(100 g)</h6>
+											<h6><a href="item_details.jsp">Safety Pins</a>(100 g)</h6>
 										</div>
 										<div class="mid-2">
 											<p ><label>$5.00</label><em class="item_price">$4.50</em></p>
@@ -149,7 +150,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="item_details.html">Agarbatti</a>(200 g)</h6>
+											<h6><a href="item_details.jsp">Agarbatti</a>(200 g)</h6>
 										</div>
 										<div class="mid-2">
 											<p ><label>$4.00</label><em class="item_price">$3.50</em></p>
@@ -169,7 +170,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="item_details.html">Candle Set </a>(1 pc)</h6>
+											<h6><a href="item_details.jsp">Candle Set </a>(1 pc)</h6>
 										</div>
 										<div class="mid-2">
 											<p ><label>$1.00</label><em class="item_price">$0.80</em></p>
@@ -190,7 +191,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="item_details.html">Dust Bin</a>(1 pc)</h6>
+											<h6><a href="item_details.jsp">Dust Bin</a>(1 pc)</h6>
 										</div>
 										<div class="mid-2">
 											<p ><label>$7.00</label><em class="item_price">$6.00</em></p>
@@ -210,7 +211,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="item_details.html"> Hanger</a>(1 pc)</h6>
+											<h6><a href="item_details.jsp"> Hanger</a>(1 pc)</h6>
 										</div>
 										<div class="mid-2">
 											<p ><label>$5.00</label><em class="item_price">$4.50</em></p>
@@ -230,7 +231,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="item_details.html"> Pet Bowl</a>(1 pc)</h6>
+											<h6><a href="item_details.jsp"> Pet Bowl</a>(1 pc)</h6>
 										</div>
 										<div class="mid-2">
 											<p ><label>$4.00</label><em class="item_price">$3.50</em></p>
@@ -250,7 +251,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="item_details.html">Tailum</a>(500 g)</h6>
+											<h6><a href="item_details.jsp">Tailum</a>(500 g)</h6>
 										</div>
 										<div class="mid-2">
 											<p ><label>$1.00</label><em class="item_price">$0.80</em></p>
@@ -271,7 +272,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="item_details.html"> Container</a>(1 pc)</h6>
+											<h6><a href="item_details.jsp"> Container</a>(1 pc)</h6>
 										</div>
 										<div class="mid-2">
 											<p ><label>$7.00</label><em class="item_price">$6.00</em></p>
@@ -291,7 +292,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="item_details.html">Scrub Sponge</a>(100 g)</h6>
+											<h6><a href="item_details.jsp">Scrub Sponge</a>(100 g)</h6>
 										</div>
 										<div class="mid-2">
 											<p ><label>$5.00</label><em class="item_price">$4.50</em></p>
@@ -311,7 +312,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="item_details.html">Reindeer </a>(1 pc)</h6>
+											<h6><a href="item_details.jsp">Reindeer </a>(1 pc)</h6>
 										</div>
 										<div class="mid-2">
 											<p ><label>$4.00</label><em class="item_price">$3.50</em></p>
@@ -331,7 +332,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="item_details.html"> Cleaner</a>(1 pc)</h6>
+											<h6><a href="item_details.jsp"> Cleaner</a>(1 pc)</h6>
 										</div>
 										<div class="mid-2">
 											<p ><label>$1.00</label><em class="item_price">$0.80</em></p>
@@ -449,7 +450,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 		$().UItoTop({ easingType: 'easeOutQuart' });
 		});
 		function modify() {
-			window.location.href='store_modi_item.html'
+			window.location.href='store_modi_item.jsp'
         }
 	</script>
 	<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
