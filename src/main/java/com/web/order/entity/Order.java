@@ -4,21 +4,21 @@ package com.web.order.entity;
  * 订单实体类
  */
 public class Order {
-    private Long orderid;   //订单id
+    private Integer orderid;   //订单id
     private String ordernumber;   //订单号
-    private Long customerid;   //买家ID
-    private Long itemid;    //商品ID
-    private Long num;       //购买数量
+    private Integer customerid;   //买家ID
+    private Integer itemid;    //商品ID
+    private Integer num;       //购买数量
     private String startt;  //订单开始时间
     private String endt;    //订单截至时间
-    private Long state; //订单状态0 未付款 1 未发货 2 未收货 3已完成
+    private Integer state; //订单状态0 未付款 1 未发货 2 未收货 3已完成
     private Double total; //订单总价格
 
-    public Long getOrderid() {
+    public Integer getOrderid() {
         return orderid;
     }
 
-    public void setOrderid(Long orderid) {
+    public void setOrderid(Integer orderid) {
         this.orderid = orderid;
     }
 
@@ -30,27 +30,27 @@ public class Order {
         this.ordernumber = ordernumber;
     }
 
-    public Long getCustomerid() {
+    public Integer getCustomerid() {
         return customerid;
     }
 
-    public void setCustomerid(Long customerid) {
+    public void setCustomerid(Integer customerid) {
         this.customerid = customerid;
     }
 
-    public Long getItemid() {
+    public Integer getItemid() {
         return itemid;
     }
 
-    public void setItemid(Long itemid) {
+    public void setItemid(Integer itemid) {
         this.itemid = itemid;
     }
 
-    public Long getNum() {
+    public Integer getNum() {
         return num;
     }
 
-    public void setNum(Long num) {
+    public void setNum(Integer num) {
         this.num = num;
     }
 
@@ -70,11 +70,11 @@ public class Order {
         this.endt = endt;
     }
 
-    public Long getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(Long state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 

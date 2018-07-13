@@ -6,18 +6,18 @@ import java.sql.Date;
  * 顾客的实体类
  */
 public class Customer {
-    private Long customerid;    //买家ID
+    private Integer customerid;    //买家ID
     private String name;    //用户名
     private String psw;     //买家密码
-    private Long sex;       //买家性别
+    private Integer sex;       //买家性别
     private String phone;   //买家手机号
     private Integer state;  //买家状态默认1，删除后为0,账号无效
 
-    public Long getCustomerid() {
+    public Integer getCustomerid() {
         return customerid;
     }
 
-    public void setCustomerid(Long customerid) {
+    public void setCustomerid(Integer customerid) {
         this.customerid = customerid;
     }
 
@@ -37,11 +37,11 @@ public class Customer {
         this.psw = psw;
     }
 
-    public Long getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(Long sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 

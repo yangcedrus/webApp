@@ -4,7 +4,7 @@ package com.web.store.entity;
  * 商店实体类
  */
 public class Store {
-    private Long storeid;   //卖家ID
+    private Integer storeid;   //卖家ID
     private String name;  //卖家用户名
     private String psw;     //卖家密码
     private Integer sex;    //商家性别 0男 1女
@@ -12,11 +12,11 @@ public class Store {
     private String description;    //商家描述
     private String state; //商家状态
 
-    public Long getStoreid() {
+    public Integer getStoreid() {
         return storeid;
     }
 
-    public void setStoreid(Long storeid) {
+    public void setStoreid(Integer storeid) {
         this.storeid = storeid;
     }
 

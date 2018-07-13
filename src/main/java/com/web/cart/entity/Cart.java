@@ -4,23 +4,23 @@ package com.web.cart.entity;
  * 购物车实体类
  */
 public class Cart {
-    private Long cartid;    //购物车ID
-    private Long customerid;    //用户ID
+    private Integer cartid;    //购物车ID
+    private Integer customerid;    //用户ID
     private Double total; //购物车总价
 
-    public Long getCartid() {
+    public Integer getCartid() {
         return cartid;
     }
 
-    public void setCartid(Long cartid) {
+    public void setCartid(Integer cartid) {
         this.cartid = cartid;
     }
 
-    public Long getCustomerid() {
+    public Integer getCustomerid() {
         return customerid;
     }
 
-    public void setCustomerid(Long customerid) {
+    public void setCustomerid(Integer customerid) {
         this.customerid = customerid;
     }
 

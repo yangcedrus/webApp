@@ -4,19 +4,19 @@ package com.web.item.entity;
  * 商品实体类
  */
 public class Item {
-    private Long itemid;    //商品ID
+    private Integer itemid;    //商品ID
     private String name;    //商品名称
     private Double price;   //商品价格
-    private Long stock;       //商品库存
-    private Long storeid;   //商品所属店家ID
+    private Integer stock;       //商品库存
+    private Integer storeid;   //商品所属店家ID
     private String description; //商品描述
     private Integer state;     //商品状态0未审核 1已审核 2已下架
 
-    public Long getItemid() {
+    public Integer getItemid() {
         return itemid;
     }
 
-    public void setItemid(Long itemid) {
+    public void setItemid(Integer itemid) {
         this.itemid = itemid;
     }
 
@@ -36,20 +36,20 @@ public class Item {
         this.price = price;
     }
 
-    public Long getStoreid() {
-        return storeid;
-    }
-
-    public void setStoreid(Long storeid) {
-        this.storeid = storeid;
-    }
-
-    public Long getStock() {
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(Long stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Integer getStoreid() {
+        return storeid;
+    }
+
+    public void setStoreid(Integer storeid) {
+        this.storeid = storeid;
     }
 
     public String getDescription() {
