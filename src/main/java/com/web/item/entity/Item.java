@@ -1,5 +1,7 @@
 package com.web.item.entity;
 
+import java.util.List;
+
 /**
  * 商品实体类
  */
@@ -11,6 +13,15 @@ public class Item {
     private Integer storeid;   //商品所属店家ID
     private String description; //商品描述
     private Integer state;     //商品状态0未审核 1已审核 2已下架
+    private List<String> imagePath; //商品图片地址
+
+    public List<String> getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(List<String> imagePath) {
+        this.imagePath = imagePath;
+    }
 
     public Integer getItemid() {
         return itemid;
