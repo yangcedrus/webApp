@@ -6,6 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page import="java.util.List" %>
+<%@ page import="java.awt.event.ItemEvent" %>
+<%@ page import="com.web.item.entity.Item" %>
+
 <html>
 <head>
     <title>Big store a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | offer :: w3layouts</title>
@@ -111,29 +116,58 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </tr>
                 </thead>
                 <tbody>
-                <tr style="text-align: center;border-bottom: 1px solid #999999">
-                    <td>1</td>
-                    <td>Moong</td>
-                    <td>¥100</td>
-                    <td>100</td>
-                    <td><button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情审核</button>
+                <%
+                //循环显示数据
+                    List<Item> itemList=(List) request.getSession().getAttribute("items");
+                    if(itemList!=null&&itemList.size()!=0){
+                        for(int i=0;i<itemList.size();i++){
+                            pageContext.setAttribute("item",itemList.get(i));
+                            pageContext.setAttribute("num",i+1);
+                %>
+                    <tr style="text-align: center;border-bottom: 1px solid #999999">
+                        <td>${num}</td>
+                        <td>${item.name}</td>
+                        <td>${item.price}</td>
+                        <td>${item.stock}</td>
+                        <td>
+                            <button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情审核</button>
+                        </td>
+                    </tr>
+                <%
+                    }
+                }else{
+                %>
+                <tr>
+                    <td>没有待审核的商品！</td>
                 </tr>
-                <tr style="text-align: center;border-bottom: 1px solid #999999">
-                    <td>2</td>
-                    <td>Sunflower Oil</td>
-                    <td>¥99</td>
-                    <td>100</td>
-                    <td><button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情审核</button>
-                    </td>
-                </tr>
-                <tr style="text-align: center;border-bottom: 1px solid #999999">
-                    <td>3</td>
-                    <td>Kabuli Chana</td>
-                    <td>¥88.88</td>
-                    <td>100</td>
-                    <td><button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情审核</button>
+                <%
+                    }
+                %>
+                <%--<tr style="text-align: center;border-bottom: 1px solid #999999">--%>
+                    <%--<td>1</td>--%>
+                    <%--<td>Moong</td>--%>
+                    <%--<td>¥100</td>--%>
+                    <%--<td>100</td>--%>
+                    <%--<td>--%>
+                        <%--<a href="ItemscheckServlet?itemid=${item.itemid}"><button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情审核</button></a>--%>
+                    <%--</td>--%>
+                <%--</tr>--%>
+                <%--<tr style="text-align: center;border-bottom: 1px solid #999999">--%>
+                    <%--<td>2</td>--%>
+                    <%--<td>Sunflower Oil</td>--%>
+                    <%--<td>¥99</td>--%>
+                    <%--<td>100</td>--%>
+                    <%--<td><button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情审核</button>--%>
+                    <%--</td>--%>
+                <%--</tr>--%>
+                <%--<tr style="text-align: center;border-bottom: 1px solid #999999">--%>
+                    <%--<td>3</td>--%>
+                    <%--<td>Kabuli Chana</td>--%>
+                    <%--<td>¥88.88</td>--%>
+                    <%--<td>100</td>--%>
+                    <%--<td><button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情审核</button>--%>
 
-                </tr>
+                <%--</tr>--%>
                 </tbody>
             </table>
         </div>
@@ -143,7 +177,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--跳转-->
 <script>
     function details(){
-        window.location.href='item_details_check.jsp';
+        window.location.href='items_check?itemid=${item.itemid}';
     }
 </script>
 <!--footer-->

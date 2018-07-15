@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.List" %><%--
 Created by IntelliJ IDEA.
 User: 22278
 Date: 2018/7/13
@@ -128,11 +128,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                     <div style="height: auto;width: 435px;margin-left: 10px;margin-right: 10px">
                         <a class="left-arrow"></a>
-                        <img class="img-small" src="images/si-1.jpg" id="1" onclick="getbig(this)"/>
-                        <img class="img-small" src="images/of11.png" id="2" onclick="getbig(this)"/>
-                        <img class="img-small" src="images/of12.png" id="3" onclick="getbig(this)"/>
-                        <img class="img-small" src="images/of13.png" id="4" onclick="getbig(this)"/>
-                        <img class="img-small" src="images/of13.png" id="5" onclick="getbig(this)" style="display: none"/>
+                        <%
+                            List<String> list=(List)request.getSession().getAttribute("img");
+                            if(list.size()>0){
+                                for(int i=0;i<list.size();i++){
+                                    pageContext.setAttribute("img",list.get(i));
+                                    pageContext.setAttribute("num",i+1);
+                        %>
+                        <img class="img-small" src="${img}" id="${num}" onclick="getbig(this)"/>
+                        <%
+                                }
+                            }
+                        %>
+                        <%--<img class="img-small" src="images/of11.png" id="2" onclick="getbig(this)"/>--%>
+                        <%--<img class="img-small" src="images/of12.png" id="3" onclick="getbig(this)"/>--%>
+                        <%--<img class="img-small" src="images/of13.png" id="4" onclick="getbig(this)"/>--%>
+                        <%--<img class="img-small" src="images/of13.png" id="5" onclick="getbig(this)" style="display: none"/>--%>
                         <a class="right-arrow" ></a>
                     </div>
 
@@ -141,27 +152,39 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="col-md-7 single-top-left ">
                 <div class="single-right" style="margin-top: 30px">
-                    <h3>商品名称：Wheat</h3>
+                    <%
+                        String info=request.getSession().getAttribute("info").toString();
+                        String id=null,name=null,price=null,stock=null,desc=null,storeid=null;
+                        if(info.equals("true")){
+                            id=request.getSession().getAttribute("id").toString();
+                            price=request.getSession().getAttribute("price").toString();
+                            stock=request.getSession().getAttribute("stock").toString();
+                            name=request.getSession().getAttribute("name").toString();
+                            desc=request.getSession().getAttribute("desc").toString();
+                            storeid=request.getSession().getAttribute("storeid").toString();
+                        }
+
+                    %>
+                    <h3>商品名称：<%=name%></h3>
 
 
                     <div class="pr-single">
                         <p class="reduced ">
                             <span style="color: #5b5b5b">价格：</span><del>$10.00</del>
-                            $5.00
+                            <%=price%>
                         </p>
 
                     </div>
-                    <p>库存容量：200</p>
-                    <p class="in-pa"> <span style="color: #999999">详细介绍：</span>There are many variations of passages of Lorem Ipsum available, but the majority
-                        have suffered alteration in some form, by injected humour, or randomised words which don't look
-                        even slightly believable. </p>
-                    <div class="add add-3">
-                        <input type="submit" class="btn123" value="审核通过" style="margin-right: 10px">
+                    <p>库存容量：<%=stock%></p>
+                    <p class="in-pa"> <span style="color: #999999">详细介绍：</span> <%=desc%> </p>
+                    <div class="add add-3" id="<%=id%>">
+                        <input type="submit" class="btn123" value="审核通过" style="margin-right: 10px" onclick="pass()">
 
-                        <input type="submit" class="btn123" value="审核不通过" onclick="show_reason()">
-                        <div id="reason" style="display: none">
-                        <p>理由：</p>
-                        <textarea rows="4" cols="60" style="margin-top: 5px"></textarea>
+                        <input  type="submit" class="btn123" value="审核不通过" onclick="show_reason()">
+                        <div id="reason1" style="display: none">
+                            <p >理由：</p>
+                            <textarea id="reason" name="reason" rows="4" cols="60" style="margin-top: 5px"></textarea>
+                            <button type="submit" value="提交" name="<%=id%>" class="btn123"></button>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -270,9 +293,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         img.setAttribute("src",src);
     }
     function show_reason() {
-        var div=document.getElementById("reason");
+        var div=document.getElementById("reason1");
         div.style.display="block";
     }
+    function pass() {
+        window.location.href="pass_item?itemid="+<%=id%>;
+    }
+
 </script>
 <style>
     .left-arrow{

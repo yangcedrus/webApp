@@ -153,7 +153,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mid-1">
                         <div class="add">
                             <h2 class="t-button">
-                                <a href="admin_delete_item.jsp"><button class="label label-warning">违规商品管理</button></a>
+                                <button class="label label-warning" onclick="show_items()">违规商品管理</button>
                             </h2>
                         </div>
                     </div>
@@ -252,6 +252,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
 
     });
+    function show_items() {
+        window.location.href="check_items";
+    }
 </script>
 
 </body>

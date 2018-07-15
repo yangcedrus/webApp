@@ -141,7 +141,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 							<button class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">
 								修改
 							</button>
-							<button class="btn btn-danger my-cart-btn my-cart-b">
+							<button class="btn btn-danger my-cart-btn my-cart-b" href="DeleteuserServlet?id=${customer.id}">
 								删除
 							</button>
 						</td>
