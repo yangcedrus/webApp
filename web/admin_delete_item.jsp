@@ -49,7 +49,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="head-t">
             <ul class="card">
-                <li><a href="login,jsp" ><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
+                <li><a href="login.jsp" ><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
                 <li><a href="register.jsp" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
                 <li><a href="admin_me.jsp"><i class="fa fa-user-md" aria-hidden="true"></i>管理员个人</a></li>
             </ul>

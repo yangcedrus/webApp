@@ -76,7 +76,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 			</div>
 			<div class="head-t">
 				<ul class="card">
-					<li><a href="login,jsp" ><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
+					<li><a href="login.jsp" ><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
 					<li><a href="register.jsp" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
 				</ul>	
 			</div>

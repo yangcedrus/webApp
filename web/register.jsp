@@ -82,7 +82,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="head-t">
             <ul class="card">
-                <li><a href="login,jsp"><i class="fa fa-user" aria-hidden="true"></i>登 录</a></li>
+                <li><a href="login.jsp"><i class="fa fa-user" aria-hidden="true"></i>登 录</a></li>
                 <li><a href="register.jsp"><i class="fa fa-arrow-right" aria-hidden="true"></i>注 册</a></li>
             </ul>
         </div>
@@ -165,7 +165,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="clearfix"></div>
                 </div>
                 <input type="submit" value="立即注册">
-                <a href="login,jsp"
+                <a href="login.jsp"
                    style="float: right;text-align: center;padding: 10px 0;border: none;font-size: 1em;outline: none;width: 32%;cursor: pointer;margin-bottom:30px;">已有账号？登录</a>
             </form>
         </div>
