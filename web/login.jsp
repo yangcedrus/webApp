@@ -116,7 +116,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="main-agileits">
             <div class="form-w3agile">
                 <h3>登录</h3>
-                <form action="customer_login" method="post">
+                <form action="user_login" method="post">
                     <div class="key">
                         <i class="fa fa-envelope" aria-hidden="true"></i>
                         <input type="text" value="Name" name="Name" onfocus="this.value = '';"

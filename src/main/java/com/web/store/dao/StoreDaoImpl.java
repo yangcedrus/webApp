@@ -25,7 +25,7 @@ public class StoreDaoImpl implements StoreDao{
         try{
             con=BaseDao.getCon();//1:获取数据库连接
             //2:书写sql语句
-            String sql="select * from store where name=? and psw=?";
+            String sql="select * from store where name=? and psw=? and state=1";
             ps=con.prepareStatement(sql);//3:预编译
             //4:设置值
             ps.setString(1,name);
@@ -35,7 +35,7 @@ public class StoreDaoImpl implements StoreDao{
             if(rs.next()){
                 stores=new Store();
                 //从数据库中获取值设置到实体类的setter方法中
-                stores.setStoreid(rs.getInt("id"));
+                stores.setStoreid(rs.getInt("storeid"));
                 stores.setName(rs.getString("name"));
                 stores.setPsw(rs.getString("psw"));
                 stores.setPhone(rs.getString("phone"));

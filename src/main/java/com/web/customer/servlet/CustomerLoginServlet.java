@@ -26,7 +26,7 @@ public class CustomerLoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setCharacterEncoding("UTF-8");
-        Customer customer=new Customer();
+        Customer customer;
         //获取数据
         String name=req.getParameter("Name");
         String psw=req.getParameter("Password");
