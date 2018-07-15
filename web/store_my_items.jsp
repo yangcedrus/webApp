@@ -59,7 +59,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<div class="container">
 			
 			<div class="logo">
-				<h1 ><a href="index,jsp">四次元口袋<span>Dimensional Pockets</span></a></h1>
+				<h1 ><a href="index.jsp">四次元口袋<span>Dimensional Pockets</span></a></h1>
 			</div>
 			<div class="head-t">
 				<ul class="card">
@@ -73,7 +73,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <div class="banner-top">
 	<div class="container">
 		<h3 >我的店铺</h3>
-		<h4><a href="index,jsp">首页</a><label>/</label><a href="store_my_items.jsp">卖家个人中心</a><label>/</label>我的店铺</h4>
+		<h4><a href="index.jsp">首页</a><label>/</label><a href="store_my_items.jsp">卖家个人中心</a><label>/</label>我的店铺</h4>
 		<div class="clearfix"> </div>
 	</div>
 </div>
@@ -355,7 +355,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<div class="container">
 		<div class="clearfix"></div>
 			<div class="footer-bottom">
-				<h2 ><a href="index,jsp">四次元口袋<span>The Best Supermarket</span></a></h2>
+				<h2 ><a href="index.jsp">四次元口袋<span>The Best Supermarket</span></a></h2>
 				<div class=" address">
 					<div class="col-md-4 fo-grid1">
 							<p><i class="fa fa-home" aria-hidden="true"></i>12K Street , 45 Building Road Canada.</p>

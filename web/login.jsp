@@ -76,7 +76,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="header">
     <div class="container">
         <div class="logo">
-            <h1><a href="index,jsp">四次元口袋<span>Dimensional Pockets</span></a></h1>
+            <h1><a href="index.jsp">四次元口袋<span>Dimensional Pockets</span></a></h1>
         </div>
         <div class="head-t">
             <ul class="card">
@@ -105,7 +105,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="banner-top">
         <div class="container">
             <h3>登录</h3>
-            <h4><a href="index,jsp">主页</a><label>/</label>登录</h4>
+            <h4><a href="index.jsp">主页</a><label>/</label>登录</h4>
             <div class="clearfix"></div>
         </div>
     </div>
@@ -159,7 +159,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
             <div class="clearfix"></div>
             <div class="footer-bottom">
-                <h2><a href="index,jsp">四次元口袋<span>Dimensional Pockets</span></a></h2>
+                <h2><a href="index.jsp">四次元口袋<span>Dimensional Pockets</span></a></h2>
                 <div class=" address">
                     <div class="col-md-4 fo-grid1">
                         <p><i class="fa fa-home" aria-hidden="true"></i>幻想鄉</p>
