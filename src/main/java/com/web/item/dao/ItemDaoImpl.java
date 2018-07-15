@@ -30,7 +30,7 @@ public class ItemDaoImpl implements ItemDao {
             //连接数据库
             con = BaseDao.getCon();
             //书写sql语句
-            String sql = "select * from item where name like %?% and state<>2";
+            String sql = "select * from item where name like %?% and state<2";
             ps = con.prepareStatement(sql);
             //写入参数
             ps.setString(1, name);
