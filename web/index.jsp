@@ -99,13 +99,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     if(type!=null){
                         switch (type){
                             case "customer":
-                                out.print("<li><a href=\"customer_me.jsp\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>买家个人</a></li>");
+                                out.print("<li><a href=\"customer_me.jsp?name="+username+"\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>买家个人</a></li>");
                                 break;
                             case "store":
-                                out.print("<li><a href=\"store_me.jsp\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>卖家个人</a></li>");
+                                out.print("<li><a href=\"store_me.jsp?name="+username+"\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>卖家个人</a></li>");
                                 break;
                             case "admin":
-                                out.print("<li><a href=\"admin_me.jsp\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>管理员个人</a></li>");
+                                out.print("<li><a href=\"admin_me.jsp?name="+username+"\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>管理员个人</a></li>");
                                 break;
                             default:break;
                         }

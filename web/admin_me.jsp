@@ -83,8 +83,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="head-t">
             <ul class="card">
-                <li><a href="login.jsp"><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.jsp"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
+                <%
+                    String username=(String)request.getSession().getAttribute("info");
+                    if(username==null){
+                        out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录</a></li>");
+                    }else{
+                        if(username.equals("登录失败"))
+                            out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败,重新登录</a></li>");
+                        else
+                            // TODO: 2018/7/15 注销功能待实现
+                            out.print("<li><a href=\"###\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好,"+username+"</a></li>");
+                    }
+                %>
+                <%
+                    if(username==null){
+                        out.print("注册");
+                    }else {
+                        out.print("<li><a href=\"###\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>管理员个人</a></li>");
+                    }
+                %>
             </ul>
         </div>
 
@@ -138,7 +155,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="mid-1">
                     <div class="add">
                         <h2 class="t-button">
-                            <a href="admin_user_management.jsp"><button class="label label-warning">用户管理</button></a>
+                            <a href="admin_search_customers?info=<%out.print(username);%>"><button class="label label-warning">用户管理</button></a>
                         </h2>
                     </div>
                 </div>
@@ -153,7 +170,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mid-1">
                         <div class="add">
                             <h2 class="t-button">
-                                <a href="admin_delete_item.jsp"><button class="label label-warning">违规商品管理</button></a>
+                                <a href="admin_delete_item.jsp?info=<%out.print(username);%>"><button class="label label-warning">违规商品管理</button></a>
                             </h2>
                         </div>
                     </div>

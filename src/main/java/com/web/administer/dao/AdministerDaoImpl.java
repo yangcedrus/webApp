@@ -2,16 +2,24 @@ package com.web.administer.dao;
 
 import com.web.administer.entity.Administer;
 import com.web.administer.utils.BaseDao;
+import com.web.customer.entity.Customer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 管理员接口实现类
  */
 public class AdministerDaoImpl implements AdministerDao{
+    /**
+     * @param name 用户名
+     * @param psw 用户密码
+     * @return 管理员信息
+     */
     @Override
     public Administer login(String name, String psw){
         Connection con= null;
@@ -45,5 +53,138 @@ public class AdministerDaoImpl implements AdministerDao{
             e.printStackTrace();
         }
         return administer;
+    }
+
+    /**
+     * @param name 要修改密码的用户名
+     * @param psw 要修改的密码
+     * @return 修改结果
+     */
+    @Override
+    public int modifyCustomer(String name, String psw) {
+        int flag=0;
+        Connection con;
+        PreparedStatement ps;
+        ResultSet rs;
+        try {
+            //链接数据库
+            con=BaseDao.getCon();
+            //书写sql语句
+            String sql="update customer set psw=? where name=? and state=1";
+            ps=con.prepareStatement(sql);
+            //输入参数
+            ps.setString(1,psw);
+            ps.setString(2,name);
+            //执行sql语句
+            flag=ps.executeUpdate();
+            if(flag>0){
+                flag=1;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    /**
+     * @return 买家用户列表
+     */
+    @Override
+    public List<Customer> searchAllCustomer() {
+        Connection con;
+        PreparedStatement ps;
+        ResultSet rs;
+        List<Customer> customers=new ArrayList<>();
+        try {
+            //链接数据库
+            con=BaseDao.getCon();
+            //书写sql语句
+            String sql="select * from customer  where state=1 order by customerid";
+            ps=con.prepareStatement(sql);
+            //执行sql语句
+            rs=ps.executeQuery();
+            //拼装实体
+            while(rs.next()){
+                Customer customer=new Customer();
+
+                customer.setCustomerid(rs.getInt("customerid"));
+                customer.setName(rs.getString("name"));
+                customer.setPsw(rs.getString("psw"));
+                customer.setSex(rs.getInt("sex"));
+                customer.setPhone(rs.getString("phone"));
+                customer.setState(rs.getInt("state"));
+
+                customers.add(customer);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return customers;
+    }
+
+    @Override
+    public Customer searchCustomer(Integer customerid) {
+        Connection con;
+        PreparedStatement ps;
+        ResultSet rs;
+        Customer customer=new Customer();
+        try {
+            //链接数据库
+            con=BaseDao.getCon();
+            //书写sql语句
+            String sql="select * from customer  where customerid=? and state=1";
+            ps=con.prepareStatement(sql);
+            ps.setInt(1,customerid);
+            //执行sql语句
+            rs=ps.executeQuery();
+            //拼装实体
+            if(rs.next()){
+                customer.setCustomerid(rs.getInt("customerid"));
+                customer.setName(rs.getString("name"));
+                customer.setPsw(rs.getString("psw"));
+                customer.setSex(rs.getInt("sex"));
+                customer.setPhone(rs.getString("phone"));
+                customer.setState(rs.getInt("state"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return customer;
+    }
+
+    /**
+     *
+     * @param customerid 买家用户账号id
+     * @return 删除结果
+     */
+    @Override
+    public int deleteCustomer(Integer customerid) {
+        int flag=0;
+        Connection con;
+        PreparedStatement ps;
+        try {
+            //链接数据库
+            con=BaseDao.getCon();
+            //书写sql语句
+            String sql="update customer set state=0 where customerid=? and state=1";
+            ps=con.prepareStatement(sql);
+            ps.setInt(1,customerid);
+            //执行sql语句
+            flag=ps.executeUpdate();
+            if(flag>0){
+                flag=1;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return flag;
     }
 }

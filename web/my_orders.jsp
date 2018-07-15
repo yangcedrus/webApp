@@ -385,49 +385,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/jquery.quickpaginate.packed.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
     $(function(){
-        $("#orders_list li").quickpaginate({ perpage: 4, pager : $("#order_list_counter") });
-    });
-</script>
-<script type="text/javascript">
-    $(function () {
-
-        var goToCartIcon = function ($addTocartBtn) {
-            var $cartIcon = $(".my-cart-icon");
-            var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({
-                "position": "fixed",
-                "z-index": "999"
-            });
-            $addTocartBtn.prepend($image);
-            var position = $cartIcon.position();
-            $image.animate({
-                top: position.top,
-                left: position.left
-            }, 500, "linear", function () {
-                $image.remove();
-            });
-        }
-
-        $('.my-cart-btn').myCart({
-            classCartIcon: 'my-cart-icon',
-            classCartBadge: 'my-cart-badge',
-            affixCartIcon: true,
-            checkoutCart: function (products) {
-                $.each(products, function () {
-                    console.log(this);
-                });
-            },
-            clickOnAddToCart: function ($addTocart) {
-                goToCartIcon($addTocart);
-            },
-            getDiscountPrice: function (products) {
-                var total = 0;
-                $.each(products, function () {
-                    total += this.quantity * this.price;
-                });
-                return total * 0.5;
-            }
-        });
-
+        $("#orders_list li").quickpaginate({ perpage: 3, pager : $("#order_list_counter") });
     });
 </script>
 </body>

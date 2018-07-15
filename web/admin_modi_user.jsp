@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.web.customer.entity.Customer" %>
+<%@ page import="com.sun.javafx.css.parser.Css2Bin" %><%--
   Created by IntelliJ IDEA.
   User: 22278
   Date: 2018/7/13
@@ -121,8 +122,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="head-t">
             <ul class="card">
-                <li><a href="login.jsp"><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.jsp"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
+                <%
+                    String username=(String)request.getSession().getAttribute("info");
+                    if(username==null){
+                        out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录</a></li>");
+                    }else{
+                        if(username.equals("登录失败"))
+                            out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败,重新登录</a></li>");
+                        else
+                            // TODO: 2018/7/15 注销功能待实现
+                            out.print("<li><a href=\"###\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好,"+username+"</a></li>");
+                    }
+                %>
+                <%
+                    if(username==null){
+                        out.print("注册");
+                    }else {
+                        out.print("<li><a href=\"admin_me.jsp?name="+username+"\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>管理员个人</a></li>");
+                    }
+                %>
             </ul>
         </div>
 
@@ -162,33 +180,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="tab-pane active" id="panel-33529">
                 <div class="form-w3agile">
                     <h3>修改用户<h5>(Tips:只能修改密码)</h5></h3>
-                    <form action="javascript:history.back(-1)" method="post">
+                    <form action="admin_modify_customer" method="post">
                         <div class="key">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
-                            <input type="text" value="User" name="User" disabled onfocus="this.value = '';"
-                                   onblur="if (this.value == '') {this.value = '用户名';}" required="">
+                            <input type="text" name="Name" value="<%
+                            Customer customer=(Customer)request.getSession().getAttribute("customer_info");
+                            pageContext.setAttribute("customer", customer);
+                            if(customer==null){
+                                out.print("查无此人");
+                            }else{
+                                out.print(customer.getName());
+                            }
+                            %>" readonly required="">
                             <div class="clearfix"></div>
                         </div>
                         <div class="key">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
-                            <input type="text" value="Phone" name="Phone" disabled onfocus="this.value = '';"
-                                   onblur="if (this.value == '') {this.value = '电话';}" required="">
+                            <input type="text" name="Phone" value="<%if(customer==null){
+                                out.print("查无此人");
+                            }else{
+                                out.print(customer.getPhone());
+                            }%>" disabled required="">
                             <div class="clearfix"></div>
                         </div>
                         <div class="key">
                             <i class="fa fa-lock" aria-hidden="true"></i>
-                            <input type="password" value="Password" name="Password" onfocus="this.value = '';"
+                            <input type="password" value="Password" name="Password" onfocus="this.value='';"
                                    onblur="if (this.value == '') {this.value = 'Password';}" required="">
                             <div class="clearfix"></div>
                         </div>
                         <div class="key">
                             <i class="fa fa-lock" aria-hidden="true"></i>
-                            <input type="password" value="Ensure" name="Ensure" onfocus="this.value = '';"
+                            <input type="password" value="Password" name="Ensure" onfocus="this.value='';"
                                    onblur="if (this.value == '') {this.value = 'Password';}" required="">
                             <div class="clearfix"></div>
                         </div>
-                        <input class="btn123" type="submit" value="保存" style="float: left;margin-left: 20px" >
-                        <input class="btn123" type="submit" value="退出" style="float: right;margin-right: 20px">
+                        <input class="btn123" type="submit" onclick="check()" value="保存" style="float: left;margin-left: 20px">
+                        <input class="btn123" type="submit" onclick="goback()" value="退出"  style="float: right;margin-right: 20px">
                         <div class="clearfix"></div>
                     </form>
                 </div>
@@ -258,6 +286,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         height: 35px;
     }
 </style>
+<script>
+    function goback() {
+        history.back(-1);
+        return false;
+    }
+    function check() {
+        var psw=document.getElementsByName("Password").item(0).value;
+        var conf=document.getElementsByName("Ensure").item(0).value;
 
+        if(psw!=conf){
+            alert("两次输入密码不匹配，请重新输入！");
+            return false;
+        }else{
+            return true;
+        }
+    }
+</script>
 </body>
 </html>
