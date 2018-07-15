@@ -38,6 +38,7 @@ public class CustomerLoginServlet extends HttpServlet {
 
         if(customer!=null){
             req.getSession().setAttribute("info",customer.getName());
+            req.getSession().setAttribute("login_type","customer");
         }else{
             req.getSession().setAttribute("info","登录失败");
         }

@@ -35,6 +35,8 @@ public class AdministerLoginServlet extends HttpServlet{
 
         if(administer!=null){
             req.getSession().setAttribute("info",administer.getName());
+            req.getSession().setAttribute("login_type","admin");
+
         }else{
             req.getSession().setAttribute("info","登录失败");
         }

@@ -36,6 +36,7 @@ public class StoreLoginServlet extends HttpServlet{
         store = dao.login(name, psw);
         if (store != null) {
             req.getSession().setAttribute("info", store.getName());
+            req.getSession().setAttribute("login_type","store");
         } else {
             req.getSession().setAttribute("info", "登陆失败");
         }
