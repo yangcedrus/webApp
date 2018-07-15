@@ -10,7 +10,7 @@ public class Store {
     private Integer sex;    //商家性别 0男 1女
     private String phone;   //商家电话
     private String description;    //商家描述
-    private String state; //商家状态
+    private Integer state; //商家状态
 
     public Integer getStoreid() {
         return storeid;
@@ -60,11 +60,11 @@ public class Store {
         this.description = description;
     }
 
-    public String getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 }

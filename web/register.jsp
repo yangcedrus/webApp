@@ -116,18 +116,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 
-<!--login-->
+<!--user-->
 
 <div class="login">
     <div class="main-agileits">
         <div class="form-w3agile form1">
             <h3>注册</h3>
-            <form action="index.jsp" method="post">
+            <form action="user_register" method="post">
                 <div class="key">
                     <i class="fa fa-user" aria-hidden="true"></i>
 
-                    <input type="text" value="用户名.." name="Username" onfocus="this.value = '';"
-                           onblur="if (this.value == '') {this.value = '用户名..';}" required="">
+                    <input type="text" value="用户名" name="Username" onfocus="this.value = '';"
+                           onblur="if (this.value == '') {this.value = '用户名';}" required="">
                     <div class="clearfix"></div>
                 </div>
                 <div class="key1" style="background: #fff;margin-bottom: 2em;">
@@ -141,15 +141,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <div class="key1" style="background: #fff;margin-bottom: 2em;">
                     <!--<i class="fa fa-envelope" aria-hidden="true"></i>-->
-                    <input type="radio" value="customer" name="type" checked
+                    <input type="radio" value="customer" name="register_type" checked
                            style="margin-right: 15px;margin-left: 100px"> 顾客
-                    <input type="radio" value="store" name="type" style="margin-right: 15px;margin-left: 67px"> 商家
+                    <input type="radio" value="store" name="register_type" style="margin-right: 15px;margin-left: 67px"> 商家
                     <div class="clearfix"></div>
                 </div>
                 <div class="key">
                     <i class="fa fa-phone" aria-hidden="true"></i>
-                    <input type="text" value="手机号.." name="Phone" onfocus="this.value = '';"
-                           onblur="if (this.value == '') {this.value = '手机号..';}" required="">
+                    <input type="text" value="手机号" name="Phone" onfocus="this.value = '';"
+                           onblur="if (this.value == '') {this.value = '手机号';}" required="">
                     <div class="clearfix"></div>
                 </div>
                 <div class="key">

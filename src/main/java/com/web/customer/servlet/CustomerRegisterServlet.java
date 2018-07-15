@@ -1,8 +1,8 @@
-package com.web.store.servlet;
+package com.web.customer.servlet;
 
-import com.web.store.dao.StoreDao;
-import com.web.store.dao.StoreDaoImpl;
-import com.web.store.entity.Store;
+import com.web.customer.dao.CustomerDao;
+import com.web.customer.dao.CustomerDaoImpl;
+import com.web.customer.entity.Customer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 卖家注册服务
+ * 买家注册服务
  */
-@WebServlet("/store_register")
-public class StoreRegisterServlet extends HttpServlet {
+@WebServlet("/customer_register")
+public class CustomerRegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
@@ -36,16 +36,16 @@ public class StoreRegisterServlet extends HttpServlet {
             req.getRequestDispatcher("/register.jsp").forward(req, resp);
         }
         //组装买家实体
-        Store store=new Store();
-        store.setName(name);
-        store.setPsw(psw);
-        store.setSex(sex.equals("male")?0:1);
-        store.setPhone(phone);
-        store.setState(1);
+        Customer customer=new Customer();
+        customer.setName(name);
+        customer.setPsw(psw);
+        customer.setSex(sex.equals("male")?0:1);
+        customer.setPhone(phone);
+        customer.setState(1);
 
         //调用DAO层
-        StoreDao dao=new StoreDaoImpl();
-        int flag=dao.register(store);
+        CustomerDao dao=new CustomerDaoImpl();
+        int flag=dao.register(customer);
         if(flag==0){
             req.getSession().setAttribute("info","注册失败,数据库异常");
             req.getRequestDispatcher("/register.jsp").forward(req, resp);

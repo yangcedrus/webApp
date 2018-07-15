@@ -109,7 +109,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="clearfix"></div>
         </div>
     </div>
-    <!--login-->
+    <!--user-->
 
     <div class="login">
 
@@ -119,8 +119,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <form action="user_login" method="post">
                     <div class="key">
                         <i class="fa fa-envelope" aria-hidden="true"></i>
-                        <input type="text" value="Name" name="Name" onfocus="this.value = '';"
-                               onblur="if (this.value == '') {this.value = 'Email';}" required="">
+                        <input type="text" value="用户名" name="Name" onfocus="this.value = '';"
+                               onblur="if (this.value == '') {this.value = '用户名';}" required="">
                         <div class="clearfix"></div>
                     </div>
                     <div class="key">

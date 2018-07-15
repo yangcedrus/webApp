@@ -14,5 +14,5 @@ public interface StoreDao {
     /**
      * 商家注册的方法
      */
-    public  boolean register(Store store);
+    public  int register(Store store);
 }

@@ -88,9 +88,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录</a></li>");
                     }else{
                         if(username.equals("登录失败"))
-                            out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败</a></li>");
+                            out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败,重新登录</a></li>");
                         else
-                            // TODO: 2018/7/15 注销功能
+                            // TODO: 2018/7/15 注销功能待实现
                             out.print("<li><a href=\"###\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好,"+username+"</a></li>");
                     }
                 %>
@@ -102,10 +102,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 out.print("<li><a href=\"customer_me.jsp\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>买家个人</a></li>");
                                 break;
                             case "store":
-                                out.print("<li><a href=\"store_me.jsp\"><i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>卖家个人</a></li>");
+                                out.print("<li><a href=\"store_me.jsp\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>卖家个人</a></li>");
                                 break;
                             case "admin":
-                                out.print("<li><a href=\"admin_me.jsp\"><i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>管理员个人</a></li>");
+                                out.print("<li><a href=\"admin_me.jsp\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>管理员个人</a></li>");
                                 break;
                             default:break;
                         }

@@ -41,7 +41,7 @@ public class StoreDaoImpl implements StoreDao{
                 stores.setPhone(rs.getString("phone"));
                 stores.setDescription(rs.getString("description"));
                 stores.setSex(rs.getInt("sex"));
-                stores.setState(rs.getString("state"));
+                stores.setState(rs.getInt("state"));
                 return stores;
             }else{
                 return null;
@@ -63,20 +63,33 @@ public class StoreDaoImpl implements StoreDao{
      * @return
      */
     @Override
-    public boolean register(Store store) {
-        String sql = "insert into user values(0,?,?,?,?)";
-        List<Object> list = new ArrayList<Object>();
-        list.add(store.getName());
-        list.add(store.getPsw());
-        list.add(store.getPhone());
-        list.add(store.getSex());
-        list.add(store.getDescription());
-
-        boolean flag = BaseDao.addUpdateDelete(sql,list.toArray());
-        if (flag) {
-            return true;
-        } else {
-            return false;
+    public int register(Store store) {
+        Connection con=null;
+        PreparedStatement ps=null;
+        int flag=0;
+        try{
+            //连接数据库
+            con=BaseDao.getCon();
+            //书写sql语句
+            String sql="insert into store(name,psw,phone,sex,description,state) values(?,?,?,?,?,1)";
+            ps=con.prepareStatement(sql);
+            //设置参数
+            ps.setString(1,store.getName());
+            ps.setString(2,store.getPsw());
+            ps.setString(3,store.getPhone());
+            ps.setInt(4,store.getSex());
+            ps.setString(5,store.getDescription());
+            //执行语句
+            flag=ps.executeUpdate();
+            //查看结果
+            if(flag>0){
+                flag=1;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
         }
+        return flag;
     }
 }

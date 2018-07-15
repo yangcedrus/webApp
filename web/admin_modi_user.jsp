@@ -161,7 +161,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="tab-content">
             <div class="tab-pane active" id="panel-33529">
                 <div class="form-w3agile">
-                    <h3>修改用户<h5>(Tips:只能修改密码和性别)</h5></h3>
+                    <h3>修改用户<h5>(Tips:只能修改密码)</h5></h3>
                     <form action="javascript:history.back(-1)" method="post">
                         <div class="key">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -185,14 +185,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <i class="fa fa-lock" aria-hidden="true"></i>
                             <input type="password" value="Ensure" name="Ensure" onfocus="this.value = '';"
                                    onblur="if (this.value == '') {this.value = 'Password';}" required="">
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="key1" style="background: #fff;margin-bottom: 2em;">
-                            <!--<i class="fa fa-envelope" aria-hidden="true"></i>-->
-                            <input type="radio" value="male" name="sex" checked
-                                   style="margin-right: 15px;margin-left: 100px"> 男
-                            <input type="radio" value="female" name="sex" style="margin-right: 15px;margin-left: 80px">
-                            女
                             <div class="clearfix"></div>
                         </div>
                         <input class="btn123" type="submit" value="保存" style="float: left;margin-left: 20px" >
