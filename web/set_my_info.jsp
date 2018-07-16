@@ -147,6 +147,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!---->
 
 <!--banner-->
+<%
+
+%>
 <div class="banner-top">
     <div class="container">
         <h3>个人信息</h3>

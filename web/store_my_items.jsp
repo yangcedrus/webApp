@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.web.item.entity.Item" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: 22278
   Date: 2018/7/13
@@ -103,248 +104,261 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 			</div>
 		</div>
 			<div class=" con-w3l agileinf" id="item-menu">
+				<%
+					List<Item> itemList =(List) request.getSession().getAttribute("list");
+					if(itemList!=null&&itemList.size()>0){
+						for(int i=0;i<itemList.size();i++){
+							pageContext.setAttribute("item",itemList.get(i));
+							//pageContext.setAttribute("num",i+1);
+				%>
 				<div class="col-md-3 pro-1">
 					<div class="col-m">
 						<a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
-							<img src="images/of48.png" class="img-responsive" alt="">
+							<img src="${item.imagePath.get(0)}" class="img-responsive" alt="">
 						</a>
 						<div class="mid-1">
 							<div class="women">
-								<h6><a href="item_details.jsp">Cat Food</a>(500 g)</h6>
+								<h6><a href="item_details.jsp?itemid=${item.itemid}">${item.name}</a></h6>
 							</div>
 							<div class="mid-2">
-								<p ><label>¥7.00</label><em class="item_price">¥6.00</em></p>
-								<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>
+								<p ><label>¥7.00</label><em class="item_price">${item.price}</em></p>
+								<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：${item.stock}</span>
 								<div class="clearfix"></div>
 							</div>
 							<div class="add">
-								<button class="modify-btn" data-id="48" data-name="Cat Food" data-summary="summary 48" data-price="6.00" data-quantity="1" data-image="images/of48.png" onclick="modify()">点击修改</button>
+								<button id="modify" name="${item.itemid}" class="modify-btn" data-id="48" data-name="Cat Food" data-summary="summary 48" data-price="6.00" data-quantity="1" data-image="images/of48.png" onclick="modify()">点击修改</button>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 pro-1">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal2" class="offer-img">
-										<img src="images/of49.png" class="img-responsive" alt="">
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="item_details.jsp">Safety Pins</a>(100 g)</h6>
-										</div>
-										<div class="mid-2">
-											<p ><label>$5.00</label><em class="item_price">$4.50</em></p>
-											<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="modify-btn" data-id="49" data-name="Safety Pins" data-summary="summary 49" data-price="4.50" data-quantity="1" data-image="images/of49.png" onclick="modify()">点击修改</button>
-										</div>
-									</div>
-								</div>
-							</div>
-				<div class="col-md-3 pro-1">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal3" class="offer-img">
-										<img src="images/of50.png" class="img-responsive" alt="">
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="item_details.jsp">Agarbatti</a>(200 g)</h6>
-										</div>
-										<div class="mid-2">
-											<p ><label>$4.00</label><em class="item_price">$3.50</em></p>
-											<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="modify-btn" data-id="50" data-name="Agarbatti" data-summary="summary 50" data-price="3.50" data-quantity="1" data-image="images/of50.png" onclick="modify()">点击修改</button>
-										</div>
-									</div>
-								</div>
-							</div>
-				<div class="col-md-3 pro-1">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal4" class="offer-img">
-										<img src="images/of51.png" class="img-responsive" alt="">
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="item_details.jsp">Candle Set </a>(1 pc)</h6>
-										</div>
-										<div class="mid-2">
-											<p ><label>$1.00</label><em class="item_price">$0.80</em></p>
-											<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="modify-btn" data-id="51" data-name="Candle Set" data-summary="summary 51" data-price="0.80" data-quantity="1" data-image="images/of51.png" onclick="modify()">点击修改</button>
-										</div>
-									</div>
-								</div>
-							</div>
+				<%
+						}
+					}else {
+					    out.print("没有商品！");
+						}
+				%>
+				<%--<div class="col-md-3 pro-1">--%>
+								<%--<div class="col-m">--%>
+									<%--<a href="#" data-toggle="modal" data-target="#myModal2" class="offer-img">--%>
+										<%--<img src="images/of49.png" class="img-responsive" alt="">--%>
+									<%--</a>--%>
+									<%--<div class="mid-1">--%>
+										<%--<div class="women">--%>
+											<%--<h6><a href="item_details.jsp">Safety Pins</a>(100 g)</h6>--%>
+										<%--</div>--%>
+										<%--<div class="mid-2">--%>
+											<%--<p ><label>$5.00</label><em class="item_price">$4.50</em></p>--%>
+											<%--<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>--%>
+											<%--<div class="clearfix"></div>--%>
+										<%--</div>--%>
+											<%--<div class="add">--%>
+										   <%--<button class="modify-btn" data-id="49" data-name="Safety Pins" data-summary="summary 49" data-price="4.50" data-quantity="1" data-image="images/of49.png" onclick="modify()">点击修改</button>--%>
+										<%--</div>--%>
+									<%--</div>--%>
+								<%--</div>--%>
+							<%--</div>--%>
+				<%--<div class="col-md-3 pro-1">--%>
+								<%--<div class="col-m">--%>
+									<%--<a href="#" data-toggle="modal" data-target="#myModal3" class="offer-img">--%>
+										<%--<img src="images/of50.png" class="img-responsive" alt="">--%>
+									<%--</a>--%>
+									<%--<div class="mid-1">--%>
+										<%--<div class="women">--%>
+											<%--<h6><a href="item_details.jsp">Agarbatti</a>(200 g)</h6>--%>
+										<%--</div>--%>
+										<%--<div class="mid-2">--%>
+											<%--<p ><label>$4.00</label><em class="item_price">$3.50</em></p>--%>
+											<%--<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>--%>
+											<%--<div class="clearfix"></div>--%>
+										<%--</div>--%>
+											<%--<div class="add">--%>
+										   <%--<button class="modify-btn" data-id="50" data-name="Agarbatti" data-summary="summary 50" data-price="3.50" data-quantity="1" data-image="images/of50.png" onclick="modify()">点击修改</button>--%>
+										<%--</div>--%>
+									<%--</div>--%>
+								<%--</div>--%>
+							<%--</div>--%>
+				<%--<div class="col-md-3 pro-1">--%>
+								<%--<div class="col-m">--%>
+									<%--<a href="#" data-toggle="modal" data-target="#myModal4" class="offer-img">--%>
+										<%--<img src="images/of51.png" class="img-responsive" alt="">--%>
+									<%--</a>--%>
+									<%--<div class="mid-1">--%>
+										<%--<div class="women">--%>
+											<%--<h6><a href="item_details.jsp">Candle Set </a>(1 pc)</h6>--%>
+										<%--</div>--%>
+										<%--<div class="mid-2">--%>
+											<%--<p ><label>$1.00</label><em class="item_price">$0.80</em></p>--%>
+											<%--<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>--%>
+											<%--<div class="clearfix"></div>--%>
+										<%--</div>--%>
+											<%--<div class="add">--%>
+										   <%--<button class="modify-btn" data-id="51" data-name="Candle Set" data-summary="summary 51" data-price="0.80" data-quantity="1" data-image="images/of51.png" onclick="modify()">点击修改</button>--%>
+										<%--</div>--%>
+									<%--</div>--%>
+								<%--</div>--%>
+							<%--</div>--%>
 
-				<div class="col-md-3 pro-1">
-								<div class="col-m">
-								<a href="#" data-toggle="modal" data-target="#myModal5" class="offer-img">
-										<img src="images/of52.png" class="img-responsive" alt="">
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="item_details.jsp">Dust Bin</a>(1 pc)</h6>
-										</div>
-										<div class="mid-2">
-											<p ><label>$7.00</label><em class="item_price">$6.00</em></p>
-											<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="modify-btn" data-id="52" data-name="Dust Bin" data-summary="summary 52" data-price="6.00" data-quantity="1" data-image="images/of52.png" onclick="modify()">点击修改</button>
-										</div>
-									</div>
-								</div>
-							</div>
-				<div class="col-md-3 pro-1">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal6" class="offer-img">
-										<img src="images/of53.png" class="img-responsive" alt="">
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="item_details.jsp"> Hanger</a>(1 pc)</h6>
-										</div>
-										<div class="mid-2">
-											<p ><label>$5.00</label><em class="item_price">$4.50</em></p>
-											<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="modify-btn" data-id="53" data-name="Hanger" data-summary="summary 53" data-price="4.50" data-quantity="1" data-image="images/of53.png" onclick="modify()">点击修改</button>
-										</div>
-									</div>
-								</div>
-							</div>
-				<div class="col-md-3 pro-1">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal7" class="offer-img">
-										<img src="images/of54.png" class="img-responsive" alt="">
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="item_details.jsp"> Pet Bowl</a>(1 pc)</h6>
-										</div>
-										<div class="mid-2">
-											<p ><label>$4.00</label><em class="item_price">$3.50</em></p>
-											<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="modify-btn" data-id="54" data-name="Pet Bowl" data-summary="summary 54" data-price="3.50" data-quantity="1" data-image="images/of54.png" onclick="modify()">点击修改</button>
-										</div>
-									</div>
-								</div>
-							</div>
-				<div class="col-md-3 pro-1">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal8" class="offer-img">
-										<img src="images/of55.png" class="img-responsive" alt="">
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="item_details.jsp">Tailum</a>(500 g)</h6>
-										</div>
-										<div class="mid-2">
-											<p ><label>$1.00</label><em class="item_price">$0.80</em></p>
-											<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="modify-btn" data-id="55" data-name="Tailum" data-summary="summary 55" data-price="0.80" data-quantity="1" data-image="images/of55.png" onclick="modify()">点击修改</button>
-										</div>
-									</div>
-								</div>
-							</div>
+				<%--<div class="col-md-3 pro-1">--%>
+								<%--<div class="col-m">--%>
+								<%--<a href="#" data-toggle="modal" data-target="#myModal5" class="offer-img">--%>
+										<%--<img src="images/of52.png" class="img-responsive" alt="">--%>
+									<%--</a>--%>
+									<%--<div class="mid-1">--%>
+										<%--<div class="women">--%>
+											<%--<h6><a href="item_details.jsp">Dust Bin</a>(1 pc)</h6>--%>
+										<%--</div>--%>
+										<%--<div class="mid-2">--%>
+											<%--<p ><label>$7.00</label><em class="item_price">$6.00</em></p>--%>
+											<%--<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>--%>
+											<%--<div class="clearfix"></div>--%>
+										<%--</div>--%>
+											<%--<div class="add">--%>
+										   <%--<button class="modify-btn" data-id="52" data-name="Dust Bin" data-summary="summary 52" data-price="6.00" data-quantity="1" data-image="images/of52.png" onclick="modify()">点击修改</button>--%>
+										<%--</div>--%>
+									<%--</div>--%>
+								<%--</div>--%>
+							<%--</div>--%>
+				<%--<div class="col-md-3 pro-1">--%>
+								<%--<div class="col-m">--%>
+									<%--<a href="#" data-toggle="modal" data-target="#myModal6" class="offer-img">--%>
+										<%--<img src="images/of53.png" class="img-responsive" alt="">--%>
+									<%--</a>--%>
+									<%--<div class="mid-1">--%>
+										<%--<div class="women">--%>
+											<%--<h6><a href="item_details.jsp"> Hanger</a>(1 pc)</h6>--%>
+										<%--</div>--%>
+										<%--<div class="mid-2">--%>
+											<%--<p ><label>$5.00</label><em class="item_price">$4.50</em></p>--%>
+											<%--<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>--%>
+											<%--<div class="clearfix"></div>--%>
+										<%--</div>--%>
+											<%--<div class="add">--%>
+										   <%--<button class="modify-btn" data-id="53" data-name="Hanger" data-summary="summary 53" data-price="4.50" data-quantity="1" data-image="images/of53.png" onclick="modify()">点击修改</button>--%>
+										<%--</div>--%>
+									<%--</div>--%>
+								<%--</div>--%>
+							<%--</div>--%>
+				<%--<div class="col-md-3 pro-1">--%>
+								<%--<div class="col-m">--%>
+									<%--<a href="#" data-toggle="modal" data-target="#myModal7" class="offer-img">--%>
+										<%--<img src="images/of54.png" class="img-responsive" alt="">--%>
+									<%--</a>--%>
+									<%--<div class="mid-1">--%>
+										<%--<div class="women">--%>
+											<%--<h6><a href="item_details.jsp"> Pet Bowl</a>(1 pc)</h6>--%>
+										<%--</div>--%>
+										<%--<div class="mid-2">--%>
+											<%--<p ><label>$4.00</label><em class="item_price">$3.50</em></p>--%>
+											<%--<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>--%>
+											<%--<div class="clearfix"></div>--%>
+										<%--</div>--%>
+											<%--<div class="add">--%>
+										   <%--<button class="modify-btn" data-id="54" data-name="Pet Bowl" data-summary="summary 54" data-price="3.50" data-quantity="1" data-image="images/of54.png" onclick="modify()">点击修改</button>--%>
+										<%--</div>--%>
+									<%--</div>--%>
+								<%--</div>--%>
+							<%--</div>--%>
+				<%--<div class="col-md-3 pro-1">--%>
+								<%--<div class="col-m">--%>
+									<%--<a href="#" data-toggle="modal" data-target="#myModal8" class="offer-img">--%>
+										<%--<img src="images/of55.png" class="img-responsive" alt="">--%>
+									<%--</a>--%>
+									<%--<div class="mid-1">--%>
+										<%--<div class="women">--%>
+											<%--<h6><a href="item_details.jsp">Tailum</a>(500 g)</h6>--%>
+										<%--</div>--%>
+										<%--<div class="mid-2">--%>
+											<%--<p ><label>$1.00</label><em class="item_price">$0.80</em></p>--%>
+											<%--<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>--%>
+											<%--<div class="clearfix"></div>--%>
+										<%--</div>--%>
+											<%--<div class="add">--%>
+										   <%--<button class="modify-btn" data-id="55" data-name="Tailum" data-summary="summary 55" data-price="0.80" data-quantity="1" data-image="images/of55.png" onclick="modify()">点击修改</button>--%>
+										<%--</div>--%>
+									<%--</div>--%>
+								<%--</div>--%>
+							<%--</div>--%>
 
-				<div class="col-md-3 pro-1">
-								<div class="col-m">
-								<a href="#" data-toggle="modal" data-target="#myModal9" class="offer-img">
-										<img src="images/of56.png" class="img-responsive" alt="">
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="item_details.jsp"> Container</a>(1 pc)</h6>
-										</div>
-										<div class="mid-2">
-											<p ><label>$7.00</label><em class="item_price">$6.00</em></p>
-											<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="modify-btn" data-id="56" data-name="Container" data-summary="summary 56" data-price="6.00" data-quantity="1" data-image="images/of56.png" onclick="modify()">点击修改</button>
-										</div>
-									</div>
-								</div>
-							</div>
-				<div class="col-md-3 pro-1">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal10" class="offer-img">
-										<img src="images/of57.png" class="img-responsive" alt="">
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="item_details.jsp">Scrub Sponge</a>(100 g)</h6>
-										</div>
-										<div class="mid-2">
-											<p ><label>$5.00</label><em class="item_price">$4.50</em></p>
-											<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="modify-btn" data-id="57" data-name="Scrub Sponge" data-summary="summary 57" data-price="4.50" data-quantity="1" data-image="images/of57.png" onclick="modify()">点击修改</button>
-										</div>
-									</div>
-								</div>
-							</div>
-				<div class="col-md-3 pro-1">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal11" class="offer-img">
-										<img src="images/of58.png" class="img-responsive" alt="">
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="item_details.jsp">Reindeer </a>(1 pc)</h6>
-										</div>
-										<div class="mid-2">
-											<p ><label>$4.00</label><em class="item_price">$3.50</em></p>
-											<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="modify-btn" data-id="58" data-name="Xmas Reindeer" data-summary="summary 58" data-price="3.50" data-quantity="1" data-image="images/of58.png" onclick="modify()">点击修改</button>
-										</div>
-									</div>
-								</div>
-							</div>
-				<div class="col-md-3 pro-1">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal12" class="offer-img">
-										<img src="images/of59.png" class="img-responsive" alt="">
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="item_details.jsp"> Cleaner</a>(1 pc)</h6>
-										</div>
-										<div class="mid-2">
-											<p ><label>$1.00</label><em class="item_price">$0.80</em></p>
-											<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>
-											<div class="clearfix"></div>
-										</div>
-											<div class="add">
-										   <button class="modify-btn" data-id="59" data-name="Cleaner" data-summary="summary 59" data-price="0.80" data-quantity="1" data-image="images/of59.png" onclick="modify()">点击修改</button>
-										</div>
-									</div>
-								</div>
-							</div>
+				<%--<div class="col-md-3 pro-1">--%>
+								<%--<div class="col-m">--%>
+								<%--<a href="#" data-toggle="modal" data-target="#myModal9" class="offer-img">--%>
+										<%--<img src="images/of56.png" class="img-responsive" alt="">--%>
+									<%--</a>--%>
+									<%--<div class="mid-1">--%>
+										<%--<div class="women">--%>
+											<%--<h6><a href="item_details.jsp"> Container</a>(1 pc)</h6>--%>
+										<%--</div>--%>
+										<%--<div class="mid-2">--%>
+											<%--<p ><label>$7.00</label><em class="item_price">$6.00</em></p>--%>
+											<%--<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>--%>
+											<%--<div class="clearfix"></div>--%>
+										<%--</div>--%>
+											<%--<div class="add">--%>
+										   <%--<button class="modify-btn" data-id="56" data-name="Container" data-summary="summary 56" data-price="6.00" data-quantity="1" data-image="images/of56.png" onclick="modify()">点击修改</button>--%>
+										<%--</div>--%>
+									<%--</div>--%>
+								<%--</div>--%>
+							<%--</div>--%>
+				<%--<div class="col-md-3 pro-1">--%>
+								<%--<div class="col-m">--%>
+									<%--<a href="#" data-toggle="modal" data-target="#myModal10" class="offer-img">--%>
+										<%--<img src="images/of57.png" class="img-responsive" alt="">--%>
+									<%--</a>--%>
+									<%--<div class="mid-1">--%>
+										<%--<div class="women">--%>
+											<%--<h6><a href="item_details.jsp">Scrub Sponge</a>(100 g)</h6>--%>
+										<%--</div>--%>
+										<%--<div class="mid-2">--%>
+											<%--<p ><label>$5.00</label><em class="item_price">$4.50</em></p>--%>
+											<%--<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>--%>
+											<%--<div class="clearfix"></div>--%>
+										<%--</div>--%>
+											<%--<div class="add">--%>
+										   <%--<button class="modify-btn" data-id="57" data-name="Scrub Sponge" data-summary="summary 57" data-price="4.50" data-quantity="1" data-image="images/of57.png" onclick="modify()">点击修改</button>--%>
+										<%--</div>--%>
+									<%--</div>--%>
+								<%--</div>--%>
+							<%--</div>--%>
+				<%--<div class="col-md-3 pro-1">--%>
+								<%--<div class="col-m">--%>
+									<%--<a href="#" data-toggle="modal" data-target="#myModal11" class="offer-img">--%>
+										<%--<img src="images/of58.png" class="img-responsive" alt="">--%>
+									<%--</a>--%>
+									<%--<div class="mid-1">--%>
+										<%--<div class="women">--%>
+											<%--<h6><a href="item_details.jsp">Reindeer </a>(1 pc)</h6>--%>
+										<%--</div>--%>
+										<%--<div class="mid-2">--%>
+											<%--<p ><label>$4.00</label><em class="item_price">$3.50</em></p>--%>
+											<%--<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>--%>
+											<%--<div class="clearfix"></div>--%>
+										<%--</div>--%>
+											<%--<div class="add">--%>
+										   <%--<button class="modify-btn" data-id="58" data-name="Xmas Reindeer" data-summary="summary 58" data-price="3.50" data-quantity="1" data-image="images/of58.png" onclick="modify()">点击修改</button>--%>
+										<%--</div>--%>
+									<%--</div>--%>
+								<%--</div>--%>
+							<%--</div>--%>
+				<%--<div class="col-md-3 pro-1">--%>
+								<%--<div class="col-m">--%>
+									<%--<a href="#" data-toggle="modal" data-target="#myModal12" class="offer-img">--%>
+										<%--<img src="images/of59.png" class="img-responsive" alt="">--%>
+									<%--</a>--%>
+									<%--<div class="mid-1">--%>
+										<%--<div class="women">--%>
+											<%--<h6><a href="item_details.jsp"> Cleaner</a>(1 pc)</h6>--%>
+										<%--</div>--%>
+										<%--<div class="mid-2">--%>
+											<%--<p ><label>$1.00</label><em class="item_price">$0.80</em></p>--%>
+											<%--<span style="float:right;font-size:0.9em;color:#B4B4B4;">数量：20件</span>--%>
+											<%--<div class="clearfix"></div>--%>
+										<%--</div>--%>
+											<%--<div class="add">--%>
+										   <%--<button class="modify-btn" data-id="59" data-name="Cleaner" data-summary="summary 59" data-price="0.80" data-quantity="1" data-image="images/of59.png" onclick="modify()">点击修改</button>--%>
+										<%--</div>--%>
+									<%--</div>--%>
+								<%--</div>--%>
+							<%--</div>--%>
 
 				<div class="clearfix"></div>
 			</div>

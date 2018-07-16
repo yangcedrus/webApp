@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.web.item.entity.Item" %><%--
   Created by IntelliJ IDEA.
   User: 22278
   Date: 2018/7/13
@@ -67,6 +68,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </head>
 <body>
+<%--<%--%>
+    <%--String msg=(String)request.getSession().getAttribute("modi");--%>
+    <%--if(msg=="true"){--%>
+        <%--out.print("<script type=\"text/javascript\">alert('修改成功')</script");--%>
+    <%--}--%>
+<%--%>--%>
 <div class="header">
 
     <div class="container">
@@ -128,45 +135,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <tr>
                     <th>序号</th>
                     <th>商品名称</th>
-                    <th>商品描述</th>
+                    <th>商品价格</th>
                     <th>库存容量</th>
                     <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
+                <%
+                    List<Item> items=(List)request.getSession().getAttribute("store");
+                    if(items!=null&&items.size()>0){
+                        for(int i=0;i<items.size();i++){
+                            pageContext.setAttribute("item",items.get(i));
+                            pageContext.setAttribute("num",i+1);
+                %>
                 <tr>
-                    <td>1</td>
-                    <td>Moong</td>
-                    <td>quick overview</td>
-                    <td>100</td>
+                    <td>${num}</td>
+                    <td>${item.name}</td>
+                    <td>¥ ${item.price}</td>
+                    <td>${item.stock}</td>
                     <td>
-                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情</button>
-                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">修改</button>
-                        <button class="btn btn-danger my-cart-btn my-cart-b">下架</button>
+                        <button id="show" name="${item.itemid}" class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情</button>
+                        <button id="modify" name="${item.itemid}" class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">修改</button>
+                        <button id="getdown" name="${item.itemid}" class="btn btn-danger my-cart-btn my-cart-b" onclick="getdown()">下架</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Sunflower Oil</td>
-                    <td>quick overview</td>
-                    <td>100</td>
-                    <td>
-                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情</button>
-                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">修改</button>
-                        <button class="btn btn-danger my-cart-btn my-cart-b">下架</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Kabuli Chana</td>
-                    <td>quick overview</td>
-                    <td>100</td>
-                    <td>
-                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情</button>
-                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">修改</button>
-                        <button class="btn btn-danger my-cart-btn my-cart-b">下架</button>
-                    </td>
-                </tr>
+                <%
+                        }
+                    }
+                %>
+
                 </tbody>
             </table>
         </div>
@@ -234,14 +231,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //smooth scrolling -->
 <!--button跳转-->
 <script>
+    //详情
     function details(){
-        window.open("item_details.jsp","_blank");
+        var itemid=document.getElementById("show").getAttribute("name");
+        window.location.href="one_item_details?itemid="+itemid;
     }
+    //修改
     function modify(){
-        window.location.href='store_modi_item.jsp';
+        var itemid=document.getElementById("modify").getAttribute("name");
+        window.location.href="modi_item_info?itemid="+itemid;
     }
+    //添加
+    <%
+        String store_name=(String)request.getSession().getAttribute("store_name");
+    %>
     function add() {
-        window.location.href='store_add_item.jsp';
+        window.location.href='store_add_item.jsp?name=<%=store_name%>';
+    }
+    //下架
+    function getdown() {
+        var itemid=document.getElementById("getdown").getAttribute("name");
+        window.location.href="item_getdown?itemid="+itemid;
     }
 </script>
 

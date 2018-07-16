@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.web.item.entity.Item" %><%--
 Created by IntelliJ IDEA.
 User: 22278
 Date: 2018/7/13
@@ -73,6 +73,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </head>
 <body>
+<%--<%--%>
+    <%--String msg=(String)request.getSession().getAttribute("modi");--%>
+    <%--if(msg=="true"){--%>
+        <%--out.print("<script type=\"text/javascript\">alert('修改成功')</script");--%>
+    <%--}--%>
+<%--%>--%>
 <div class="header">
 
     <div class="container">
@@ -118,9 +124,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="single">
             <div class="col-md-5 single-top">
                 <div class="single-w3agile">
-
+                    <%
+                        Item item1=(Item)request.getSession().getAttribute("item");
+                        if (item1!=null) {
+                            pageContext.setAttribute("item", item1);
+                        }
+                    %>
                     <div id="picture-frame">
-                        <img src="images/si.jpg" data-src="images/si-1.jpg" alt="" class="img-responsive"/>
+                        <img src="${item.imagePath.get(0)}" data-src="images/si-1.jpg" alt="" class="img-responsive"/>
                     </div>
 
                     <script src="js/jquery.zoomtoo.js"></script>
@@ -135,39 +146,47 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                 </div>
                 <div class="add add-3">
+
                     <button class="btn btn-danger my-cart-btn my-cart-b fileinput-button" style="margin-top: 15px">
                         <span>修改图片</span>
                         <input type="file">
                     </button>
                 </div>
             </div>
+
             <div class="col-md-7 single-top-left ">
                 <div class="single-right">
-                    <h3>商品名称：<input type="text" disabled="disabled" value="wheat" id="item_name"></h3>
+                    <%
+                        Item item=(Item)request.getSession().getAttribute("item");
+                        if (item!=null) {
+                            pageContext.setAttribute("item", item);
+                        }
+                    %>
+                    <h3>商品名称：<input type="text" disabled="disabled" value="${item.name}" id="item_name" name="name"></h3>
 
 
                     <div class="pr-single">
                         <p class="reduced ">
-                            价格：<input type="text" disabled="disabled" value="¥100.00" id="item_price">
+                            价格：<input type="text" disabled="disabled" value="${item.price}" id="item_price" name="price">
                             <!--<del>$10.00</del>-->
                             <!--$5.00-->
                         </p>
                     </div>
                     <div class="pr-single">
                         <p class="reduced " style="color: #999999">
-                            件数：<input type="text" disabled value="200" id="item_num">
+                            件数：<input type="text" disabled value="${item.stock}" id="item_num" name="num">
                             <!--<del>$10.00</del>-->
                             <!--$5.00-->
                         </p>
                     </div>
 
-                    <p class="in-pa">详细介绍：<textarea rows="5" cols="80" disabled id="item_info">    There are many variations of passages of Lorem Ipsum available, but the majorityhave suffered alteration in some form, by injected humour, or randomised words which don't lookeven slightly believable. </textarea>
+                    <p class="in-pa">详细介绍：<textarea rows="5" cols="80" disabled id="item_info" name="info">${item.description}</textarea>
                     </p>
                     <div class="add add-3">
                         <button class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">
                             修改
                         </button>
-                        <button class="btn btn-danger my-cart-btn my-cart-b" style="margin-left: 30px">
+                        <button class="btn btn-danger my-cart-btn my-cart-b" style="margin-left: 30px" onclick="save()">
                             保存
                         </button>
                     </div>
@@ -276,6 +295,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         document.getElementById("item_price").disabled = "";
         document.getElementById("item_num").disabled = "";
         document.getElementById("item_info").disabled = "";
+    }
+    function save() {
+        var name=document.getElementById("item_name").value;
+        var price=document.getElementById("item_price").value;
+        var stock=document.getElementById("item_num").value;
+        var details=document.getElementById("item_info").innerHTML;
+        window.location.href="modi_item?itemid=${item.itemid}&name="+name+"&price="+price+"&stock="+stock+"&desc="+details;
     }
 </script>
 
