@@ -170,7 +170,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mid-1">
                         <div class="add">
                             <h2 class="t-button">
-                                <a href="admin_delete_item.jsp?info=<%out.print(username);%>"><button class="label label-warning">违规商品管理</button></a>
+                                <a href="check_items?info=<%out.print(username);%>"><button class="label label-warning">违规商品管理</button></a>
                             </h2>
                         </div>
                     </div>

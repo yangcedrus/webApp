@@ -24,7 +24,7 @@ public class NotpassServlet extends HttpServlet{
         req.setCharacterEncoding("UTF-8");
         Administer administer=new Administer();
         AdministerDao dao= new AdministerDaoImpl();
-        String itemid=req.getParameter("itemid");
+        Integer itemid=Integer.parseInt(req.getParameter("itemid")) ;
         String reason=req.getParameter("reason");
         System.out.println(itemid);
         boolean res=dao.nopass(itemid,reason);
@@ -35,7 +35,7 @@ public class NotpassServlet extends HttpServlet{
             List<Item> item=dao.show_items();
             req.getSession().setAttribute("items",item);
 
-            req.getRequestDispatcher("admin_delete_item.jsp").forward(req,resp);
+            req.getRequestDispatcher("admin_items_management.jsp").forward(req,resp);
         }else{
             //req.getSession().setAttribute("info","fail");
         }

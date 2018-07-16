@@ -23,16 +23,13 @@ public class ShowitemServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         req.setCharacterEncoding("UTF-8");
-        Administer administer=new Administer();
+        List<Item> items;
+
+        String name=req.getParameter("info");
         AdministerDao dao= new AdministerDaoImpl();
-        List<Item> items=null;
         items=dao.show_items();
-        System.out.println(items.size());
-        if(items.size()>0&&items!=null){
-            req.getSession().setAttribute("items",items);
-        }else {
-            req.getSession().setAttribute("items","没有待审核商品");
-        }
-        req.getRequestDispatcher("admin_delete_item.jsp").forward(req,resp);
+
+        req.getSession().setAttribute("admin_items",items);
+        req.getRequestDispatcher("admin_items_management.jsp?info="+name).forward(req,resp);
     }
 }

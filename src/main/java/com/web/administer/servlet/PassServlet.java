@@ -25,19 +25,22 @@ public class PassServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         req.setCharacterEncoding("UTF-8");
+
         Administer administer=new Administer();
         AdministerDao dao= new AdministerDaoImpl();
-        String itemid=req.getParameter("itemid");
-        System.out.println(itemid);
+
+        Integer itemid=Integer.parseInt(req.getParameter("itemid"));
+
         boolean res=dao.getpass(itemid);
-        if(res==true){
+
+        if(res){
 //            resp.setContentType("text/html;charset=utf-8");
 //            PrintWriter out=resp.getWriter();
 //            out.print("<script language='javascript'>alert('提交成功');</script>");
             List<Item> item=dao.show_items();
             req.getSession().setAttribute("items",item);
 
-            req.getRequestDispatcher("admin_delete_item.jsp").forward(req,resp);
+            req.getRequestDispatcher("admin_items_management.jsp").forward(req,resp);
         }else{
             //req.getSession().setAttribute("info","fail");
         }

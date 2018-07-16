@@ -2,6 +2,7 @@ package com.web.administer.dao;
 
 import com.web.administer.entity.Administer;
 import com.web.customer.entity.Customer;
+import com.web.item.entity.Item;
 
 import java.util.List;
 
@@ -43,4 +44,32 @@ public interface AdministerDao {
      * @return 删除结果
      */
     public int deleteCustomer(Integer customerid);
+
+    /**
+     *
+     * @param itemid
+     * @param reason
+     * @return
+     */
+    public boolean nopass(Integer itemid,String reason);
+
+    /**
+     *
+     * @return
+     */
+    public List<Item> show_items();
+
+    /**
+     *
+     * @param itemid
+     * @return
+     */
+    public Item show_item(int itemid);
+
+    /**
+     *
+     * @param itemid
+     * @return
+     */
+    public boolean getpass(Integer itemid);
 }

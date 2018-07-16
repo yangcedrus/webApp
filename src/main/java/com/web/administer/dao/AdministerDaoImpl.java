@@ -3,6 +3,7 @@ package com.web.administer.dao;
 import com.web.administer.entity.Administer;
 import com.web.administer.utils.BaseDao;
 import com.web.customer.entity.Customer;
+import com.web.item.entity.Item;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -186,5 +187,165 @@ public class AdministerDaoImpl implements AdministerDao{
             e.printStackTrace();
         }
         return flag;
+    }
+
+    /**
+     * 未通过审核
+     * @param itemid 商品id
+     * @param reason 未通过理由
+     * @return
+     */
+    @Override
+    public boolean nopass(Integer itemid,String reason){
+        Connection con= null;
+        PreparedStatement ps=null;
+        int rs=0;
+        try {
+            //连接数据库
+            con=BaseDao.getCon();
+            //书写sql语句
+            //3为未通过审核
+            String sql="update item set state=3 where itemid=?";
+            ps=con.prepareStatement(sql);
+
+            ps.setInt(1,itemid);
+
+            rs=ps.executeUpdate(sql);
+            if(rs>0){
+                return true;
+            }else {
+                return false;
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 查询所有商品
+     * @return
+     */
+    @Override
+    public List<Item> show_items(){
+        List<Item> items=new ArrayList<Item>();
+        Connection con= null;
+        PreparedStatement ps=null;
+        ResultSet res=null;
+        try {
+            //连接数据库
+            con= BaseDao.getCon();
+            String sql="select * from item where state=0";
+            ps=con.prepareStatement(sql);
+
+            res=ps.executeQuery();
+            while(res.next()){
+                Item item=new Item();
+
+                item.setItemid(res.getInt("itemid"));
+                item.setName(res.getString("name"));
+                item.setDescription(res.getString("description"));
+                item.setPrice(res.getDouble("price"));
+                item.setStock(res.getInt("stock"));
+                item.setStoreid(res.getInt("storeid"));
+                item.setState(res.getInt("state"));
+
+                items.add(item);
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+
+    /**
+     * 查询单个商品信息
+     * @param itemid 商品id
+     * @return
+     */
+    @Override
+    public Item show_item(int itemid){
+        Item item=new Item();
+        Connection con= null;
+        PreparedStatement ps=null;
+        ResultSet res=null;
+        ResultSet res1=null;
+        try {
+            //连接数据库
+            con= BaseDao.getCon();
+            String sql="select * from item where itemid=?";
+            ps=con.prepareStatement(sql);
+            ps.setInt(1,itemid);
+            res=ps.executeQuery();
+            if(res.next()){
+                item.setItemid(res.getInt("itemid"));
+                //System.out.println(res.getInt("itemid"));
+                item.setName(res.getString("name"));
+                item.setDescription(res.getString("description"));
+                item.setPrice(res.getDouble("price"));
+                item.setStock(res.getInt("stock"));
+                item.setStoreid(res.getInt("storeid"));
+                item.setState(res.getInt("state"));
+                sql="select imagepath from image where itemid=?";
+                ps=con.prepareStatement(sql);
+                ps.setInt(1,itemid);
+                res1=ps.executeQuery();
+                List<String> img=new ArrayList<>();
+                String img1;
+                while(res1.next()){
+                    img1=res1.getString("imagepath");
+                    img.add(img1);
+                }
+                if(img.size()>0){
+                    item.setImagePath(img);
+                }else {
+                    item.setImagePath(null);
+                }
+            }else {
+                return null;
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return item;
+    }
+
+    /**
+     * 商品通过审核
+     * @param itemid 商品id
+     * @return
+     */
+    @Override
+    public boolean getpass(Integer itemid){
+        Connection con= null;
+        PreparedStatement ps=null;
+        int rs=0;
+        try {
+            //连接数据库
+            con= BaseDao.getCon();
+            //书写sql语句
+            String sql="update item set state=1 where itemid=?";
+            ps=con.prepareStatement(sql);
+            ps.setInt(1,itemid);
+            rs=ps.executeUpdate();
+            if(rs>0){
+                return true;
+            }else {
+                return false;
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

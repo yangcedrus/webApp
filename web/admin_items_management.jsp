@@ -54,9 +54,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="head-t">
             <ul class="card">
-                <li><a href="login.jsp" ><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.jsp" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
-                <li><a href="admin_me.jsp"><i class="fa fa-user-md" aria-hidden="true"></i>管理员个人</a></li>
+                <%
+                    String username=(String)request.getSession().getAttribute("info");
+                    if(username==null){
+                        out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录</a></li>");
+                    }else{
+                        if(username.equals("登录失败"))
+                            out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败,重新登录</a></li>");
+                        else
+                            // TODO: 2018/7/15 注销功能待实现
+                            out.print("<li><a href=\"###\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好,"+username+"</a></li>");
+                    }
+                %>
+                <%
+                    if(username==null){
+                        out.print("注册");
+                    }else {
+                        out.print("<li><a href=\"###\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>管理员个人</a></li>");
+                    }
+                %>
             </ul>
         </div>
 
@@ -118,7 +134,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <tbody>
                 <%
                 //循环显示数据
-                    List<Item> itemList=(List) request.getSession().getAttribute("items");
+                    List<Item> itemList=(List) request.getSession().getAttribute("admin_items");
                     if(itemList!=null&&itemList.size()!=0){
                         for(int i=0;i<itemList.size();i++){
                             pageContext.setAttribute("item",itemList.get(i));
@@ -130,7 +146,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <td>${item.price}</td>
                         <td>${item.stock}</td>
                         <td>
-                            <button class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情审核</button>
+                            <button class="btn btn-danger my-cart-btn my-cart-b" onclick="details(${item.itemid})">详情审核</button>
                         </td>
                     </tr>
                 <%
@@ -176,8 +192,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <!--跳转-->
 <script>
-    function details(){
-        window.location.href='items_check?itemid=${item.itemid}';
+    function details(x){
+        window.location.href='items_check?itemid='+x;
     }
 </script>
 <!--footer-->

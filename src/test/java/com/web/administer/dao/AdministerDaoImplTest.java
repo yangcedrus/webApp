@@ -48,7 +48,7 @@ class AdministerDaoImplTest {
     void pass(){
         boolean res;
         administerDao=new AdministerDaoImpl();
-        res=administerDao.getpass("13");
+        res=administerDao.getpass(13);
         System.out.println(res);
     }
 }

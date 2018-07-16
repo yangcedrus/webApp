@@ -10,11 +10,14 @@ import java.util.List;
  */
 public interface CartDao {
     /**
-     * 添加Item到购物车中
-    * @param cart
-     * @return
+     * 添加商品到购物车
+     * @param itemid 商品id
+     * @param cartid 购物车id
+     * @param num 商品数量
+     * @param storeid 商店id
+     * @return 返回添加结果
      */
-    public int addItemToCart (Cart cart);
+    public int addItemToCart(Integer itemid,Integer cartid,Integer num,Integer storeid);
 
     /**
      * 从购物车中删除Item

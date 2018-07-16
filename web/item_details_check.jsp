@@ -109,7 +109,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="banner-top">
     <div class="container">
         <h3>审核商品-详情</h3>
-        <h4><a href="admin_delete_item.jsp">商品审核</a><label>/</label>审核商品-详情</h4>
+        <h4><a href="admin_items_management.jsp">商品审核</a><label>/</label>审核商品-详情</h4>
         <div class="clearfix"></div>
     </div>
 </div>
@@ -130,7 +130,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <a class="left-arrow"></a>
                         <%
                             List<String> list=(List)request.getSession().getAttribute("img");
-                            if(list.size()>0){
+                            if(list!=null&&list.size()>0){
                                 for(int i=0;i<list.size();i++){
                                     pageContext.setAttribute("img",list.get(i));
                                     pageContext.setAttribute("num",i+1);

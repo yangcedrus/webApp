@@ -12,11 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  创建一个接口实现购物车添加删除清空购买等功能
+ * 创建一个接口实现购物车添加删除清空购买等功能
  */
-public class CartDaoImpl implements CartDao{
-    public int addItemToCart (Cart cart){
-        List<Cart> carts=new ArrayList<>();
+public class CartDaoImpl implements CartDao {
+    /**
+     *
+     * @param itemid 商品id
+     * @param cartid 购物车id
+     * @param num 商品数量
+     * @param storeid 商店id
+     * @return 返回添加结果
+     */
+    public int addItemToCart(Integer itemid,Integer cartid,Integer num,Integer storeid) {
+        List<Cart> carts = new ArrayList<>();
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -25,19 +33,18 @@ public class CartDaoImpl implements CartDao{
             //连接数据库
             con = BaseDao.getCon();
             //书写sql语句
-            for(String s : cart.getCartitem()){
-            String sql= "insert into cartitem(cartid,itemid,num,storeid) values(?,?,?,?)";
-            ps = con.prepareStatement(sql);
-            //写入参数
-            ps.setInt(1,cart.getCartid());
-            ps.setString(2,s);
+            String sql="insert into cartitem(cartid,itemid,num,storeid) values(?,?,?,?)";
+            ps=con.prepareStatement(sql);
+            ps.setInt(1,cartid);
+            ps.setInt(2,itemid);
+            ps.setInt(3,num);
+            ps.setInt(4,storeid);
             //执行sql语句
-            flag = ps.executeUpdate();
+            flag=ps.executeUpdate();
             if (flag > 0) {
                 flag = 1;
             } else {
                 return 0;
-            }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -49,8 +56,8 @@ public class CartDaoImpl implements CartDao{
         return flag;
     }
 
-    public int deleteItemFromCart (Cart cart){
-        List<Cart> carts=new ArrayList<>();
+    public int deleteItemFromCart(Cart cart) {
+        List<Cart> carts = new ArrayList<>();
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -59,12 +66,11 @@ public class CartDaoImpl implements CartDao{
             //连接数据库
             con = BaseDao.getCon();
             //书写sql语句
-            for(String s : cart.getCartitem()){
-                String sql= "delete from cartitem where cartid=?";
+            for (String s : cart.getCartitem()) {
+                String sql = "delete from cartitem where cartid=?";
                 ps = con.prepareStatement(sql);
                 //写入参数
-                ps.setInt(1,cart.getCartid());
-                ps.setString(2,s);
+                ps.setInt(1, cart.getCartid());
                 //执行sql语句
                 flag = ps.executeUpdate();
                 if (flag > 0) {
@@ -101,5 +107,5 @@ public class CartDaoImpl implements CartDao{
     private void form_cart(List<Cart> carts, ResultSet rs) {
     }
 
-    String sql2= "insert into cartitem(cartid,itemid,num,storeid) values(?,?,?,?)";
+    String sql2 = "insert into cartitem(cartid,itemid,num,storeid) values(?,?,?,?)";
 }
