@@ -77,10 +77,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="head-t">
             <ul class="card">
+                <%
+                    String name = request.getParameter("name");   //获取url中的参数值
+                    if(name!=null){
+                %>
+                <li><i class="fa fa-user" aria-hidden="true"></i>您好,<span id="storename"><%=name%></span></li>
+                <%--<li><a href="register.jsp" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>--%>
+                <%--<li><a href="customer_me.jsp" ><i class="fa fa-file-text-o" aria-hidden="true"></i>买家个人</a></li>--%>
                 <li><a href="login.jsp" ><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
                 <li><a href="register.jsp" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
                 <li><a href="customer_me.jsp" ><i class="fa fa-file-text-o" aria-hidden="true"></i>买家个人</a></li>
                 <li><a href="store_me.jsp" ><i class="fa fa-ship" aria-hidden="true"></i>卖家个人</a></li>
+                <%
+                }
+                else{
+                    out.print("<script type=\"text/javascript\">alert('请登录后查看！')</script");
+                %>
+                <li><a href="login.jsp"><i class="fa fa-user" aria-hidden="true"></i>商家入口(登录)</a></li>
+                <%
+                    }
+                %>
             </ul>
         </div>
 
@@ -133,7 +149,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mid-1">
                         <div class="add">
                             <h2 class="t-button">
-                                <a href="set_my_info.jsp"><button class="label label-warning">设置个人信息</button></a>
+                                <a href="set_my_info.jsp"><button class="label label-warning" onclick="modi_info()">设置个人信息</button></a>
                             </h2>
                         </div>
                     </div>
@@ -148,7 +164,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mid-1">
                         <div class="add">
                             <h2 class="t-button">
-                                <a href="store_my_items.jsp"><button class="label label-warning">我的店铺</button></a>
+                                <button class="label label-warning" onclick="item_list()">我的店铺</button>
                             </h2>
                         </div>
                     </div>
@@ -163,7 +179,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mid-1">
                         <div class="add">
                             <h2 class="t-button">
-                                <a href="store_orders.jsp"><button class="label label-warning">我的订单</button></a>
+                                <a href="my_orders.jsp"><button class="label label-warning">我的订单</button></a>
                             </h2>
                             </span>
                         </div>
@@ -179,7 +195,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mid-1">
                         <div class="add">
                             <h2 class="t-button">
-                                <a href="store_item_management.jsp"><button class="label label-warning">商品管理</button></a>
+                                <button class="label label-warning" onclick="item_manage()">商品管理</button>
                             </h2>
                             </span>
                         </div>
@@ -274,6 +290,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
 
     });
+    function item_list() {
+        var s=document.getElementById("storename");
+        var name=s.innerHTML;
+        window.location.href="store_item?name="+name;
+    }
+    function modi_info() {
+        var s=document.getElementById("storename");
+        var name=s.innerHTML;
+        window.location.href="show_item_info?name="+name;
+    }
+    function my_order() {
+        var s=document.getElementById("storename");
+        var name=s.innerHTML;
+        window.location.href="store_item?name="+name;
+    }
+    function item_manage() {
+        var s=document.getElementById("storename");
+        var name=s.innerHTML;
+        window.location.href="item_manage?name="+name;
+    }
 </script>
 
 </body>
