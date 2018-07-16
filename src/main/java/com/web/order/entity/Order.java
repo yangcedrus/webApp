@@ -1,13 +1,16 @@
 package com.web.order.entity;
 
+import com.web.customer.entity.Customer;
+import com.web.item.entity.Item;
+
 /**
  * 订单实体类
  */
 public class Order {
     private Integer orderid;   //订单id
     private String ordernumber;   //订单号
-    private Integer customerid;   //买家ID
-    private Integer itemid;    //商品ID
+    private Customer customer;   //买家
+    private Item item;    //商品
     private Integer num;       //购买数量
     private String startt;  //订单开始时间
     private String endt;    //订单截至时间
@@ -28,20 +31,20 @@ public class Order {
         this.ordernumber = ordernumber;
     }
 
-    public Integer getCustomerid() {
-        return customerid;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerid(Integer customerid) {
-        this.customerid = customerid;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public Integer getItemid() {
-        return itemid;
+    public Item getItem() {
+        return item;
     }
 
-    public void setItemid(Integer itemid) {
-        this.itemid = itemid;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public Integer getNum() {

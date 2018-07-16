@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.web.order.entity.Order" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: 22278
   Date: 2018/7/13
@@ -131,6 +132,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <b class="line"></b>
             </div>
         </div>
+        <table id="customer_table" class="table">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>商品名称</th>
+                <th>店铺名</th>
+                <th>数量</th>
+                <th>价格</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%--获取所有用户--%>
+            <%
+                //循环显示数据
+                List<Order> order_list = (List) request.getSession().getAttribute("order_list");
+                if (order_list != null && order_list.size() != 0) {
+                    for (int i = 0; i < order_list.size(); i++) {
+                        pageContext.setAttribute("item", order_list.get(i));
+                        pageContext.setAttribute("num", i+1);
+                        //保存到页面pageContext里面方便下面进行EL表达式调用
+            %>
+            <tr>
+                <td>${num}</td>
+                <td id="customer_name">${}</td>
+                <td>${customer.phone}</td>
+                <td>
+                    <button class="btn btn-danger my-cart-btn my-cart-b" onclick="customer_modify(${customer.customerid})">修改</button>
+                    <button class="btn btn-danger my-cart-btn my-cart-b" onclick='del_confirm(${customer.customerid})'>删除</button>
+                </td>
+            </tr>
+            <%
+                }
+            } else {
+            %>
+            <tr>
+                <td>数据库中没有数据！</td>
+            </tr>
+            <%
+                }
+            %>
+            </tbody>
+        </table>
         <div class="panel-group" id="accordion">
             <!-- First Panel -->
             <div class="panel panel-default">
@@ -166,7 +209,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                 </div>
             </div>
-
             <!-- Second Panel -->
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -201,7 +243,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                 </div>
             </div>
-
             <!-- Third Panel -->
             <div class="panel panel-default">
                 <div class="panel-heading">

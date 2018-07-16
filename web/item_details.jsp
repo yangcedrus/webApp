@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.web.item.entity.Item" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: 22278
   Date: 2018/7/13
@@ -45,31 +46,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
-    <!--- start-rate---->
-    <script src="js/jstarbox.js"></script>
-    <link rel="stylesheet" href="css/jstarbox.css" type="text/css" media="screen" charset="utf-8"/>
-    <script type="text/javascript">
-        jQuery(function () {
-            jQuery('.starbox').each(function () {
-                var starbox = jQuery(this);
-                starbox.starbox({
-                    average: starbox.attr('data-start-value'),
-                    changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
-                    ghosting: starbox.hasClass('ghosting'),
-                    autoUpdateAverage: starbox.hasClass('autoupdate'),
-                    buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
-                    stars: starbox.attr('data-star-count') || 5
-                }).bind('starbox-value-changed', function (event, value) {
-                    if (starbox.hasClass('random')) {
-                        var val = Math.random();
-                        starbox.next().text(' ' + val);
-                        return val;
-                    }
-                })
-            });
-        });
-    </script>
-    <!---//End-rate---->
 
 </head>
 <body>
@@ -82,8 +58,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="head-t">
             <ul class="card">
-                <li><a href="login.jsp"><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.jsp"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
+                <%
+                    String username = (String) request.getSession().getAttribute("info");
+                    if (username == null) {
+                        out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录</a></li>");
+                    } else {
+                        if (username.equals("登录失败"))
+                            out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败,重新登录</a></li>");
+                        else
+                            // TODO: 2018/7/15 注销功能待实现
+                            out.print("<li><a href=\"###\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好," + username + "</a></li>");
+                    }
+                    String type = (String) request.getSession().getAttribute("login_type");
+                    if (type != null) {
+                        switch (type) {
+                            case "customer":
+                                out.print("<li><a href=\"customer_me.jsp?name=" + username + "\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>买家个人</a></li>");
+                                break;
+                            case "store":
+                                out.print("<li><a href=\"store_me.jsp?name=" + username + "\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>卖家个人</a></li>");
+                                break;
+                            case "admin":
+                                out.print("<li><a href=\"admin_me.jsp?name=" + username + "\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>管理员个人</a></li>");
+                                break;
+                            default:
+                                break;
+                        }
+                    } else {
+                        out.print("<li><a href=\"register.jsp\"><i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>注册</a></li>");
+                    }
+                %>
             </ul>
         </div>
 
@@ -105,6 +109,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!---->
+<%
+    Item item = (Item) request.getSession().getAttribute("one_item_info");
+    pageContext.setAttribute("item", item);
+%>
 <!--banner-->
 <div class="banner-top">
     <div class="container">
@@ -120,47 +128,47 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="single-w3agile">
 
                     <div id="picture-frame">
-                        <img src="images/si.jpg" data-src="images/si-1.jpg" alt="" class="img-responsive" id="big_img" style="height: 300px;width: 300px;object-fit: cover;"/>
+                        <img src=<%if(item.getImagePath()==null||item.getImagePath().size()<=0){out.print("\"images/si-1.jpg\"");}else out.print(item.getImagePath().get(0));%>
+                                     data-src="images/si-1.jpg" alt="" class="img-responsive" id="big_img"
+                             style="height: 300px;width: 300px;object-fit: cover;"/>
                     </div>
 
                 </div>
                 <div style="width: 445px;height: auto">
 
                     <div style="height: auto;width: 435px;margin-left: 10px;margin-right: 10px">
-                        <a class="left-arrow"></a>
-                        <img class="img-small" src="images/si-1.jpg" id="1" onclick="getbig(this)"/>
-                        <img class="img-small" src="images/of11.png" id="2" onclick="getbig(this)"/>
-                        <img class="img-small" src="images/of12.png" id="3" onclick="getbig(this)"/>
-                        <img class="img-small" src="images/of13.png" id="4" onclick="getbig(this)"/>
-                        <img class="img-small" src="images/of13.png" id="5" onclick="getbig(this)" style="display: none"/>
-                        <a class="right-arrow" ></a>
+                        <%
+                            List<String> path=item.getImagePath();
+                            if(path!=null&&path.size()>0){
+                                out.print("<a class=\"left-arrow\"></a>");
+                                for(int i=1;i<path.size();i++){
+                                    pageContext.setAttribute("num",i);
+                        %>
+                        <img class="img-small" src=<%out.print(item.getImagePath().get(i-1));%> id=${num} onclick="getbig(this)"/>
+                        <%
+                                }
+                                out.print("<img class=\"img-small\" src="+item.getImagePath().get(item.getImagePath().size()-1)+" id=\"5\" onclick=\"getbig(this)\" style=\"display: none\"/>");
+                                out.print("<a class=\"right-arrow\"></a>");
+                            }
+                        %>
                     </div>
-
-
                 </div>
             </div>
             <div class="col-md-7 single-top-left ">
                 <div class="single-right" style="margin-top: 30px">
-                    <h3>Wheat</h3>
-
-
+                    <h3>${item.name}</h3>
                     <div class="pr-single">
                         <p class="reduced ">
-                            <del>$10.00</del>
-                            $5.00
+                            ￥${item.price}
                         </p>
                     </div>
-                    <div class="block block-w3">
-                        <div class="starbox small ghosting"></div>
-                    </div>
-                    <p class="in-pa"> There are many variations of passages of Lorem Ipsum available, but the majority
-                        have suffered alteration in some form, by injected humour, or randomised words which don't look
-                        even slightly believable. </p>
+                    <p class="in-pa">${item.description}</p>
                     <div style="margin-bottom: 20px">
-                    <input class="min" name="" type="button" value="-" style="width: 25px" onclick="minnum()"/>
-                    <input class="text_box" id="itemnum" type="text" value="1" style="width:40px;text-align: center" />
-                    <input class="add" name="" type="button" value="+" style="width: 25px" onclick="addnum()"/>
-                    <span id="msg"></span>
+                        <input class="min" name="" type="button" value="-" style="width: 25px" onclick="minnum()"/>
+                        <input class="text_box" id="itemnum" type="text" value="1"
+                               style="width:40px;text-align: center"/>
+                        <input class="add" name="" type="button" value="+" style="width: 25px" onclick="addnum()"/>
+                        <span id="msg"></span>
                     </div>
                     <div class="add add-3">
                         <button class="btn btn-danger my-cart-btn my-cart-b">
@@ -266,33 +274,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
 
     });
+
     function getbig(target) {
-        var id=$(target)[0].getAttribute("id");
-        var src=document.getElementById(id).getAttribute("src");
-        var img=document.getElementById("big_img");
-        img.setAttribute("src",src);
+        var id = $(target)[0].getAttribute("id");
+        var src = document.getElementById(id).getAttribute("src");
+        var img = document.getElementById("big_img");
+        img.setAttribute("src", src);
     }
+
     function minnum() {
-        var num=document.getElementById("itemnum").value;
+        var num = document.getElementById("itemnum").value;
         num--;
-        if(num<=0){
-            document.getElementById("msg").innerText="不能再减少了";
+        if (num <= 0) {
+            document.getElementById("msg").innerText = "不能再减少了";
         }
-        else{
-            document.getElementById("itemnum").value=num;
+        else {
+            document.getElementById("itemnum").value = num;
         }
     }
+
     function addnum() {
-        var num=document.getElementById("itemnum").value;
+        var num = document.getElementById("itemnum").value;
         num++;
-        if(num>0){
-            document.getElementById("msg").innerText="";
+        if (num > 0) {
+            document.getElementById("msg").innerText = "";
         }
-        document.getElementById("itemnum").value=num;
+        document.getElementById("itemnum").value = num;
     }
 </script>
 <style>
-    .left-arrow{
+    .left-arrow {
         width: 0;
         height: 0;
         border-bottom: 5px solid transparent; /* left arrow slant */
@@ -302,7 +313,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         line-height: 0;
         margin-right: 5px;
     }
-    .img-small{
+
+    .img-small {
         width: 92.5px;
         height: 92.5px;
         margin-top: 5px;
@@ -312,7 +324,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         border: 1px solid #999999;
         padding: 5px;
     }
-    .right-arrow{
+
+    .right-arrow {
         width: 0;
         height: 0;
         border-bottom: 5px solid transparent; /* left arrow slant */

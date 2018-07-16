@@ -163,7 +163,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mid-1">
                         <div class="add">
                             <h2 class="t-button">
-                                <a href="my_orders.jsp"><button class="label label-warning">我的订单</button></a>
+                                <a href="customer_orders.jsp"><button class="label label-warning">我的订单</button></a>
                             </h2>
                             </span>
                         </div>

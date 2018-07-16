@@ -9,7 +9,7 @@ public interface OrderDao {
     /**
      * 订单操作接口
      */
-    public boolean addOrder(String ordernum, int customerid, int itemid, int num);
-    public List<Order> showOrder(int customerid);
-    public boolean changeState(int orderid,String state);
+    public boolean addOrder(String customername, int itemid, int num);
+    public List<Order> showOrder(String customername);
+    public boolean changeState(int orderid,int state);
 }

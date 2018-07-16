@@ -30,10 +30,10 @@ public class ItemDaoImpl implements ItemDao {
             //连接数据库
             con = BaseDao.getCon();
             //书写sql语句
-            String sql = "select * from item where name like %?% and state<2";
+            String sql = "select * from item where name like ? and state<2";
             ps = con.prepareStatement(sql);
             //写入参数
-            ps.setString(1, name);
+            ps.setString(1, "%"+name+"%");
             //执行sql语句
             rs = ps.executeQuery();
 
@@ -169,7 +169,7 @@ public class ItemDaoImpl implements ItemDao {
      * @throws SQLException
      */
     private void form_item(List<Item> items, ResultSet rs) throws SQLException {
-        if (rs.next()) {
+        while (rs.next()) {
             Item item = new Item();
             //拼装实体类
             item.setItemid(rs.getInt("itemid"));
@@ -182,5 +182,54 @@ public class ItemDaoImpl implements ItemDao {
             //添加到list
             items.add(item);
         }
+    }
+
+    @Override
+    public Item getOneItem(Integer itemid) {
+        Item item=null;
+        Connection conn;
+        ResultSet rs = null;
+        ResultSet rs1 = null;
+        PreparedStatement ps = null;
+
+        try {
+            conn = BaseDao.getCon();
+            String sql = "select * from item where itemid=? and state=1";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1,itemid);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                item = new Item();
+                //拼装实体类
+                item.setItemid(rs.getInt("itemid"));
+                item.setName(rs.getString("name"));
+                item.setDescription(rs.getString("description"));
+                item.setPrice(rs.getDouble("price"));
+                item.setStock(rs.getInt("stock"));
+                item.setStoreid(rs.getInt("storeid"));
+                item.setState(rs.getInt("state"));
+                //查找图片
+                String sql2 = "select imagepath from image where itemid=?";
+                ps = conn.prepareStatement(sql2);
+                ps.setInt(1, item.getItemid());
+                rs = ps.executeQuery();
+                List<String> images = new ArrayList<>();
+                while (rs.next()) {
+                    String path = rs.getString("imagepath");
+                    images.add(path);
+                }
+                if (images.size() > 0) {
+                    item.setImagePath(images);
+                } else {
+                    item.setImagePath(null);
+                }
+            }
+            rs.close();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return item;
     }
 }

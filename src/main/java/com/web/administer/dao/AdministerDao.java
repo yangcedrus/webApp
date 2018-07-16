@@ -39,6 +39,12 @@ public interface AdministerDao {
     public Customer searchCustomer(Integer customerid);
 
     /**
+     * 查找买家用户信息
+     * @return 买家信息
+     */
+    public Customer searchCustomer(String customername);
+
+    /**
      * 删除买家用户
      * @param customerid 买家用户账号id
      * @return 删除结果

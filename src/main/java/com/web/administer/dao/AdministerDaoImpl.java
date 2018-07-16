@@ -159,6 +159,38 @@ public class AdministerDaoImpl implements AdministerDao{
         return customer;
     }
 
+    @Override
+    public Customer searchCustomer(String customername) {
+        Connection con;
+        PreparedStatement ps;
+        ResultSet rs;
+        Customer customer=new Customer();
+        try {
+            //链接数据库
+            con=BaseDao.getCon();
+            //书写sql语句
+            String sql="select * from customer  where name=? and state=1";
+            ps=con.prepareStatement(sql);
+            ps.setString(1,customername);
+            //执行sql语句
+            rs=ps.executeQuery();
+            //拼装实体
+            if(rs.next()){
+                customer.setCustomerid(rs.getInt("customerid"));
+                customer.setName(rs.getString("name"));
+                customer.setPsw(rs.getString("psw"));
+                customer.setSex(rs.getInt("sex"));
+                customer.setPhone(rs.getString("phone"));
+                customer.setState(rs.getInt("state"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return customer;
+    }
+
     /**
      *
      * @param customerid 买家用户账号id
@@ -284,7 +316,6 @@ public class AdministerDaoImpl implements AdministerDao{
             res=ps.executeQuery();
             if(res.next()){
                 item.setItemid(res.getInt("itemid"));
-                //System.out.println(res.getInt("itemid"));
                 item.setName(res.getString("name"));
                 item.setDescription(res.getString("description"));
                 item.setPrice(res.getDouble("price"));

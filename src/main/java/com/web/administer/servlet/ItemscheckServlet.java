@@ -23,22 +23,21 @@ public class ItemscheckServlet extends HttpServlet{
         req.setCharacterEncoding("UTF-8");
         Administer administer=new Administer();
         AdministerDao dao= new AdministerDaoImpl();
+        String name=req.getParameter("info");
         int itemid=Integer.parseInt(req.getParameter("itemid"));
-        System.out.println(itemid);
         Item item=dao.show_item(itemid);
         if(item!=null) {
-            req.getSession().setAttribute("info","true");
+            req.getSession().setAttribute("check_info","true");
             req.getSession().setAttribute("id", item.getItemid());
             req.getSession().setAttribute("name",item.getName());
-            System.out.println(item.getName());
             req.getSession().setAttribute("price",item.getPrice());
             req.getSession().setAttribute("stock",item.getStock());
             req.getSession().setAttribute("desc",item.getDescription());
             req.getSession().setAttribute("storeid",item.getStoreid());
             req.getSession().setAttribute("img",item.getImagePath());
         }else{
-            req.getSession().setAttribute("info","没有信息");
+            req.getSession().setAttribute("check_info","没有信息");
         }
-        req.getRequestDispatcher("item_details_check.jsp").forward(req,resp);
+        req.getRequestDispatcher("item_details_check.jsp?info="+name).forward(req,resp);
     }
 }

@@ -1,4 +1,11 @@
-<%--
+<%@ page import="com.web.administer.utils.BaseDao" %>
+<%@ page import="com.web.item.entity.Item" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: 22278
   Date: 2018/7/13
@@ -45,71 +52,91 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
-    <!--- start-rate---->
-    <script src="js/jstarbox.js"></script>
-    <link rel="stylesheet" href="css/jstarbox.css" type="text/css" media="screen" charset="utf-8"/>
-    <script type="text/javascript">
-        jQuery(function () {
-            jQuery('.starbox').each(function () {
-                var starbox = jQuery(this);
-                starbox.starbox({
-                    average: starbox.attr('data-start-value'),
-                    changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
-                    ghosting: starbox.hasClass('ghosting'),
-                    autoUpdateAverage: starbox.hasClass('autoupdate'),
-                    buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
-                    stars: starbox.attr('data-star-count') || 5
-                }).bind('starbox-value-changed', function (event, value) {
-                    if (starbox.hasClass('random')) {
-                        var val = Math.random();
-                        starbox.next().text(' ' + val);
-                        return val;
-                    }
-                })
-            });
-        });
-    </script>
-    <!---//End-rate---->
 
 </head>
+<%--获取数据库内容--%>
+<%
+    List<Item> items = new ArrayList<>();
+    Connection conn;
+    ResultSet rs = null;
+    ResultSet rs1 = null;
+    PreparedStatement ps = null;
+
+    try {
+        conn = BaseDao.getCon();
+        String sql = "select * from item where state=1";
+        ps = conn.prepareStatement(sql);
+
+        rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Item item = new Item();
+            //拼装实体类
+            item.setItemid(rs.getInt("itemid"));
+            item.setName(rs.getString("name"));
+            item.setDescription(rs.getString("description"));
+            item.setPrice(rs.getDouble("price"));
+            item.setStock(rs.getInt("stock"));
+            item.setStoreid(rs.getInt("storeid"));
+            item.setState(rs.getInt("state"));
+            //查找图片
+            String sql2 = "select imagepath from image where itemid=?";
+            ps = conn.prepareStatement(sql2);
+            ps.setInt(1, item.getItemid());
+            rs1 = ps.executeQuery();
+            List<String> images = new ArrayList<>();
+            while (rs1.next()) {
+                String path = rs.getString("imagepath");
+                images.add(path);
+            }
+            if (images.size() > 0) {
+                item.setImagePath(images);
+            } else {
+                item.setImagePath(null);
+            }
+            //添加到list
+            items.add(item);
+        }
+        rs.close();
+    } catch (SQLException | ClassNotFoundException e) {
+        e.printStackTrace();
+    }
+%>
 <body>
 <div class="header">
-
     <div class="container">
-
         <div class="logo">
             <h1><a href="index.jsp">四次元口袋<span>Dimensional Pockets</span></a></h1>
         </div>
         <div class="head-t">
             <ul class="card">
                 <%
-                    String username=(String)request.getSession().getAttribute("info");
-                    if(username==null){
+                    String username = (String) request.getSession().getAttribute("info");
+                    if (username == null) {
                         out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录</a></li>");
-                    }else{
-                        if(username.equals("登录失败"))
+                    } else {
+                        if (username.equals("登录失败"))
                             out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败,重新登录</a></li>");
                         else
                             // TODO: 2018/7/15 注销功能待实现
-                            out.print("<li><a href=\"###\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好,"+username+"</a></li>");
+                            out.print("<li><a href=\"###\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好," + username + "</a></li>");
                     }
-                %>
-                <%
-                    String type=(String)request.getSession().getAttribute("login_type");
-                    if(type!=null){
-                        switch (type){
+                    String type = (String) request.getSession().getAttribute("login_type");
+                    if (type != null) {
+                        switch (type) {
                             case "customer":
-                                out.print("<li><a href=\"customer_me.jsp?name="+username+"\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>买家个人</a></li>");
+                                out.print("<li><a href=\"customer_me.jsp?name=" + username + "\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>买家个人</a></li>");
                                 break;
                             case "store":
-                                out.print("<li><a href=\"store_me.jsp?name="+username+"\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>卖家个人</a></li>");
+                                out.print("<li><a href=\"store_me.jsp?name=" + username + "\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>卖家个人</a></li>");
                                 break;
                             case "admin":
-                                out.print("<li><a href=\"admin_me.jsp?name="+username+"\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>管理员个人</a></li>");
+                                out.print("<li><a href=\"admin_me.jsp?name=" + username + "\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>管理员个人</a></li>");
                                 break;
-                            default:break;
+                            default:
+                                break;
                         }
-                    }else{
+                    } else {
                         out.print("<li><a href=\"register.jsp\"><i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>注册</a></li>");
                     }
                 %>
@@ -140,8 +167,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="banner-info">
             <h3> 做你生活中的四次元口袋 </h3>
             <div class="search-form">
-                <form action="search.jsp" method="post">
-                    <input type="text" placeholder="搜索..." name="Search...">
+                <form action="search_name_items?info=${info}&type=<%out.print(type);%>" method="get">
+                    <input type="text" placeholder="搜索..." name="Search">
                     <input type="submit" value=" ">
                 </form>
             </div>
@@ -149,7 +176,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 
-<script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min	.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
 <script src="js/jquery.vide.min.js"></script>
 
 <!--content-->
@@ -163,412 +190,45 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <b class="line"></b>
             </div>
         </div>
-        <div class="con-w3l wthree-of">
+        <div id="items_list" class="con-w3l wthree-of">
             <!--四个推荐商品-->
+            <%
+                if (items.size() != 0) {
+                    for (int i = 0; i < items.size(); i++) {
+                        pageContext.setAttribute("item", items.get(i));
+                        pageContext.setAttribute("num", i + 1);
+                        pageContext.setAttribute("info", username);
+                        //保存到页面pageContext里面方便下面进行EL表达式调用
+            %>
             <div class="col-md-3 pro-1">
                 <div class="col-m">
-                    <a href="item_details.jsp" target="_blank" class="offer-img">
-                        <img src="images/of16.png" class="img-responsive" alt="">
+                    <a href="one_item_details?<%if(username!=null){out.print("info="+username+"&");}%>itemid=${item.itemid}" target="_blank" class="offer-img">
+                        <%
+                            if(items.get(i).getImagePath()!=null){
+                                out.print("<img src=\""+items.get(i).getImagePath().get(0)+"\" class=\"img-responsive\" alt=\"\">");
+                            }else {
+                                out.print("<img src=\"images/of17.png\" class=\"img-responsive\" alt=\"\">");
+                            }
+                        %>
                     </a>
                     <div class="mid-1">
                         <div class="women">
-                            <h6><a href="item_details.jsp" target="_blank">Moisturiser</a>(500 g)</h6>
+                            <h6><a href="item_details.jsp?<%if(username!=null){out.print("info="+username+"&");}%>itemid=${item.itemid}" target="_blank">${item.name}</a></h6>
                         </div>
                         <div class="mid-2">
-                            <p><label>$7.00</label><em class="item_price">$6.00</em></p>
+                            <p><em class="item_price">￥${item.price}</em></p>
                             <div class="clearfix"></div>
                         </div>
                         <div class="add add-2">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-image="images/of16.png">添加到购物车
-                            </button>
+                            <button class="btn btn-danger my-cart-btn my-cart-b">添加到购物车</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 pro-1">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal18" class="offer-img">
-                        <img src="images/of17.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <h6><a href="single.html"> Lady Finger</a>(250 g)</h6>
-                        </div>
-                        <div class="mid-2">
-                            <p><label>$5.00</label><em class="item_price">$4.50</em></p>
-                            <div class="block">
-                                <div class="starbox small ghosting"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="add">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"
-                                    data-summary="summary 1" data-price="4.50" data-quantity="1"
-                                    data-image="images/of17.png">Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 pro-1">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal19" class="offer-img">
-                        <img src="images/of18.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <h6><a href="single.html"> Ribbon</a>(1 pc)</h6>
-                        </div>
-                        <div class="mid-2">
-                            <p><label>$4.00</label><em class="item_price">$3.50</em></p>
-                            <div class="block">
-                                <div class="starbox small ghosting"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="add">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"
-                                    data-summary="summary 1" data-price="3.50" data-quantity="1"
-                                    data-image="images/of18.png">Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 pro-1">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal20" class="offer-img">
-                        <img src="images/of19.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <h6><a href="single.html">Grapes</a>(500 g)</h6>
-                        </div>
-                        <div class="mid-2">
-                            <p><label>$1.00</label><em class="item_price">$0.80</em></p>
-                            <div class="block">
-                                <div class="starbox small ghosting"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="add">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"
-                                    data-summary="summary 1" data-price="0.80" data-quantity="1"
-                                    data-image="images/of19.png">Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 pro-1">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal21" class="offer-img">
-                        <img src="images/of20.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <h6><a href="single.html">Clips</a>(1 pack)</h6>
-                        </div>
-                        <div class="mid-2">
-                            <p><label>$7.00</label><em class="item_price">$6.00</em></p>
-                            <div class="block">
-                                <div class="starbox small ghosting"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="add">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"
-                                    data-summary="summary 1" data-price="6.00" data-quantity="1"
-                                    data-image="images/of20.png">Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 pro-1">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal22" class="offer-img">
-                        <img src="images/of21.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <h6><a href="single.html">Conditioner</a>(250 g)</h6>
-                        </div>
-                        <div class="mid-2">
-                            <p><label>$5.00</label><em class="item_price">$4.50</em></p>
-                            <div class="block">
-                                <div class="starbox small ghosting"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="add">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"
-                                    data-summary="summary 1" data-price="4.50" data-quantity="1"
-                                    data-image="images/of21.png">Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 pro-1">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal23" class="offer-img">
-                        <img src="images/of22.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <h6><a href="single.html">Cleaner</a>(250 kg)</h6>
-                        </div>
-                        <div class="mid-2">
-                            <p><label>$4.00</label><em class="item_price">$3.50</em></p>
-                            <div class="block">
-                                <div class="starbox small ghosting"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="add">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"
-                                    data-summary="summary 1" data-price="3.50" data-quantity="1"
-                                    data-image="images/of22.png">Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 pro-1">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal24" class="offer-img">
-                        <img src="images/of23.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <h6><a href="single.html">Gel</a>(150 g)</h6>
-                        </div>
-                        <div class="mid-2">
-                            <p><label>$1.00</label><em class="item_price">$0.80</em></p>
-                            <div class="block">
-                                <div class="starbox small ghosting"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="add">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"
-                                    data-summary="summary 1" data-price="0.80" data-quantity="1"
-                                    data-image="images/of23.png">Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 pro-1">
-                <div class="col-m">
-                    <a href="item_details.jsp" target="_blank" class="offer-img">
-                        <img src="images/of16.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <h6><a href="item_details.jsp" target="_blank">Moisturiser</a>(500 g)</h6>
-                        </div>
-                        <div class="mid-2">
-                            <p><label>$7.00</label><em class="item_price">$6.00</em></p>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="add add-2">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-image="images/of16.png">添加到购物车
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 pro-1">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal18" class="offer-img">
-                        <img src="images/of17.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <h6><a href="single.html"> Lady Finger</a>(250 g)</h6>
-                        </div>
-                        <div class="mid-2">
-                            <p><label>$5.00</label><em class="item_price">$4.50</em></p>
-                            <div class="block">
-                                <div class="starbox small ghosting"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="add">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"
-                                    data-summary="summary 1" data-price="4.50" data-quantity="1"
-                                    data-image="images/of17.png">Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 pro-1">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal19" class="offer-img">
-                        <img src="images/of18.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <h6><a href="single.html"> Ribbon</a>(1 pc)</h6>
-                        </div>
-                        <div class="mid-2">
-                            <p><label>$4.00</label><em class="item_price">$3.50</em></p>
-                            <div class="block">
-                                <div class="starbox small ghosting"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="add">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"
-                                    data-summary="summary 1" data-price="3.50" data-quantity="1"
-                                    data-image="images/of18.png">Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 pro-1">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal20" class="offer-img">
-                        <img src="images/of19.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <h6><a href="single.html">Grapes</a>(500 g)</h6>
-                        </div>
-                        <div class="mid-2">
-                            <p><label>$1.00</label><em class="item_price">$0.80</em></p>
-                            <div class="block">
-                                <div class="starbox small ghosting"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="add">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"
-                                    data-summary="summary 1" data-price="0.80" data-quantity="1"
-                                    data-image="images/of19.png">Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 pro-1">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal21" class="offer-img">
-                        <img src="images/of20.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <h6><a href="single.html">Clips</a>(1 pack)</h6>
-                        </div>
-                        <div class="mid-2">
-                            <p><label>$7.00</label><em class="item_price">$6.00</em></p>
-                            <div class="block">
-                                <div class="starbox small ghosting"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="add">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"
-                                    data-summary="summary 1" data-price="6.00" data-quantity="1"
-                                    data-image="images/of20.png">Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 pro-1">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal22" class="offer-img">
-                        <img src="images/of21.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <h6><a href="single.html">Conditioner</a>(250 g)</h6>
-                        </div>
-                        <div class="mid-2">
-                            <p><label>$5.00</label><em class="item_price">$4.50</em></p>
-                            <div class="block">
-                                <div class="starbox small ghosting"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="add">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"
-                                    data-summary="summary 1" data-price="4.50" data-quantity="1"
-                                    data-image="images/of21.png">Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 pro-1">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal23" class="offer-img">
-                        <img src="images/of22.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <h6><a href="single.html">Cleaner</a>(250 kg)</h6>
-                        </div>
-                        <div class="mid-2">
-                            <p><label>$4.00</label><em class="item_price">$3.50</em></p>
-                            <div class="block">
-                                <div class="starbox small ghosting"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="add">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"
-                                    data-summary="summary 1" data-price="3.50" data-quantity="1"
-                                    data-image="images/of22.png">Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 pro-1">
-                <div class="col-m">
-                    <a href="#" data-toggle="modal" data-target="#myModal24" class="offer-img">
-                        <img src="images/of23.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="mid-1">
-                        <div class="women">
-                            <h6><a href="single.html">Gel</a>(150 g)</h6>
-                        </div>
-                        <div class="mid-2">
-                            <p><label>$1.00</label><em class="item_price">$0.80</em></p>
-                            <div class="block">
-                                <div class="starbox small ghosting"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="add">
-                            <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"
-                                    data-summary="summary 1" data-price="0.80" data-quantity="1"
-                                    data-image="images/of23.png">Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-
-            <ul class="pagination pagination-lg" style="float: right">
-                <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-            </ul>
+            <%
+                    }
+                }
+            %>
             <div class="clearfix"></div>
         </div>
     </div>
@@ -622,48 +282,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- for bootstrap working -->
 <script src="js/bootstrap.js"></script>
 <!-- //for bootstrap working -->
-<script type='text/javascript' src="js/jquery.mycart.js"></script>
-<script type="text/javascript">
-    $(function () {
-
-        var goToCartIcon = function ($addTocartBtn) {
-            var $cartIcon = $(".my-cart-icon");
-            var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({
-                "position": "fixed",
-                "z-index": "999"
-            });
-            $addTocartBtn.prepend($image);
-            var position = $cartIcon.position();
-            $image.animate({
-                top: position.top,
-                left: position.left
-            }, 500, "linear", function () {
-                $image.remove();
-            });
-        }
-
-        $('.my-cart-btn').myCart({
-            classCartIcon: 'my-cart-icon',
-            classCartBadge: 'my-cart-badge',
-            affixCartIcon: true,
-            checkoutCart: function (products) {
-                $.each(products, function () {
-                    console.log(this);
-                });
-            },
-            clickOnAddToCart: function ($addTocart) {
-                goToCartIcon($addTocart);
-            },
-            getDiscountPrice: function (products) {
-                var total = 0;
-                $.each(products, function () {
-                    total += this.quantity * this.price;
-                });
-                return total * 1;
-            }
-        });
-
-    });
-</script>
 </body>
 </html>

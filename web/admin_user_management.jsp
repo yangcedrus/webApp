@@ -262,7 +262,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
 </script>
 
-<script src="jquery-1.11.1.js"></script>
+<script src="js/jquery-1.11.1.min.js"></script>
 <script>
     $(function(){
         var $table = $('table');

@@ -35,4 +35,11 @@ public interface ItemDao {
      * @return
      */
     public int addItem(Item item);
+
+    /**
+     * 查找一个物品信息
+     * @param itemid 商品id
+     * @return 返回商品信息
+     */
+    public Item getOneItem(Integer itemid);
 }
