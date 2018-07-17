@@ -22,7 +22,6 @@ public class LoginServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         //获取数据
         String role=req.getParameter("login_type");
-
         switch (role){
             case "customer":req.getRequestDispatcher("/customer_login").forward(req, resp);break;
             case "store":req.getRequestDispatcher("/store_login").forward(req, resp);break;

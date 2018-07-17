@@ -315,7 +315,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <div id="address">
                     <div class="row clearfix" >
-                        <div class="col-md-12 column" style="margin-left: 20px" id="${address.customerid}">
+                        <div class="col-md-12 column" style="margin-left: 20px" id="<%=customer.getCustomerid()%>">
                             <select id="province" runat="server" onchange="selectprovince(this);"
                                     style="width: 110px"></select>
                             <select id="city" runat="server" style=" width:95px;"></select>
@@ -393,14 +393,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 }
 function save(obj) {
     var type=obj.value;
-    var addressid=obj.parentNode.parentNode.id;
-    var customerid=obj.parentNode.id;
     var p=document.getElementById("province").value;
     var c=document.getElementById("city").value;
     var s=$("#details").val();
     //alert(s);
     var address=p+"-"+c+"-"+s;
-    window.location.href="address_check?id1="+customerid+"&id2="+addressid+"&address="+address+"&type="+type;
+    if(type=="修改"){
+        var addressid=obj.parentNode.parentNode.id;
+        var customerid1=obj.parentNode.id;
+        window.location.href="address_modi?id1="+customerid1+"&id2="+addressid+"&address="+address;
+    }
+    else{
+        var customerid=obj.parentNode.id;
+        window.location.href="address_add?id1="+customerid+"&address="+address;
+    }
+
 
 
 }
