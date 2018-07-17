@@ -25,7 +25,7 @@ public class StoreitemServlet extends HttpServlet{
 
         req.setCharacterEncoding("UTF-8");
         List<Item> itemList ;
-        String name = req.getParameter("name");
+        String name = req.getParameter("info");
         //引入数据交互层
         StoreDao dao = new StoreDaoImpl();
         itemList = dao.store_item(name);

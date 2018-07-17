@@ -13,10 +13,10 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * 买家查看订单
+ * 商店订单
  */
-@WebServlet("/customer_orders_list")
-public class CustomerOrdersServlet extends HttpServlet {
+@WebServlet("/store_orders_list")
+public class StoreOrdersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
@@ -24,10 +24,10 @@ public class CustomerOrdersServlet extends HttpServlet {
         String username = req.getParameter("info");
 
         OrderDao dao = new OrderDaoImpl();
-        List<Order> orders = dao.showOrder(username);
+        List<Order> orders = dao.showStoreOrder(username);
 
         req.getSession().setAttribute("info", username);
         req.getSession().setAttribute("customer_list_orders", orders);
-        req.getRequestDispatcher("customer_orders.jsp").forward(req, resp);
+        req.getRequestDispatcher("store_orders.jsp").forward(req, resp);
     }
 }

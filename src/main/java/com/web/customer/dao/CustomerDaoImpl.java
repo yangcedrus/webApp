@@ -92,5 +92,30 @@ public class CustomerDaoImpl implements CustomerDao {
         return flag;
     }
 
+    @Override
+    public int updateInfo(String customername,String Phone, String psw) {
+        Connection con;
+        PreparedStatement ps;
+        int flag=0;
+        try {
+            con=BaseDao.getCon();
+            String sql="update customer set phone=?,psw=? where name=?";
+            ps=con.prepareStatement(sql);
+            ps.setString(1,Phone);
+            ps.setString(2,psw);
+            ps.setString(3,customername);
 
+            flag=ps.executeUpdate();
+            if(flag>0){
+                flag=1;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            return 0;
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+            return 0;
+        }
+        return flag;
+    }
 }

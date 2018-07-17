@@ -40,31 +40,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
-    <!--- start-rate---->
-    <script src="js/jstarbox.js"></script>
-    <link rel="stylesheet" href="css/jstarbox.css" type="text/css" media="screen" charset="utf-8" />
-    <script type="text/javascript">
-        jQuery(function() {
-            jQuery('.starbox').each(function() {
-                var starbox = jQuery(this);
-                starbox.starbox({
-                    average: starbox.attr('data-start-value'),
-                    changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
-                    ghosting: starbox.hasClass('ghosting'),
-                    autoUpdateAverage: starbox.hasClass('autoupdate'),
-                    buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
-                    stars: starbox.attr('data-star-count') || 5
-                }).bind('starbox-value-changed', function(event, value) {
-                    if(starbox.hasClass('random')) {
-                        var val = Math.random();
-                        starbox.next().text(' '+val);
-                        return val;
-                    }
-                })
-            });
-        });
-    </script>
-    <!---//End-rate---->
 
 </head>
 <body>
@@ -83,8 +58,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="head-t">
             <ul class="card">
-                <li><a href="login.jsp" ><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.jsp" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
+                <%
+                    String username = (String) request.getSession().getAttribute("info");
+                    if (username == null) {
+                        out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录</a></li>");
+                    } else {
+                        if (username.equals("登录失败"))
+                            out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败,重新登录</a></li>");
+                        else {
+                            // TODO: 2018/7/15 注销功能待实现
+                            out.print("<li><a href=\"###\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好," + username + "</a></li>");
+                            pageContext.setAttribute("username", username);
+                        }
+                    }
+                    if (username == null) {
+                        out.print("<li><a href=\"register.jsp\"><i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>注册</a></li>");
+                    } else {
+                        out.print("<li><a href=\"###\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>卖家个人</a></li>");
+                    }
+                %>
             </ul>
         </div>
 
@@ -154,9 +146,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <td>¥ ${item.price}</td>
                     <td>${item.stock}</td>
                     <td>
-                        <button id="show" name="${item.itemid}" class="btn btn-danger my-cart-btn my-cart-b" onclick="details()">详情</button>
-                        <button id="modify" name="${item.itemid}" class="btn btn-danger my-cart-btn my-cart-b" onclick="modify()">修改</button>
-                        <button id="getdown" name="${item.itemid}" class="btn btn-danger my-cart-btn my-cart-b" onclick="getdown()">下架</button>
+                        <button id="show" name="${item.itemid}" class="btn btn-danger my-cart-btn my-cart-b" onclick="details(${item.itemid})">详情</button>
+                        <button id="modify" name="${item.itemid}" class="btn btn-danger my-cart-btn my-cart-b" onclick="modify(${item.itemid})">修改</button>
+                        <button id="getdown" name="${item.itemid}" class="btn btn-danger my-cart-btn my-cart-b" onclick="getdown(${item.itemid})">下架</button>
                     </td>
                 </tr>
                 <%
@@ -207,15 +199,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- smooth scrolling -->
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#store_item_management_table tr").click(function() {
-
-//change the background color to red before removing
-            $(this).fadeOut(400, function(){
-                $(this).remove();
-            });
-        });
-    });
-    $(document).ready(function() {
         /*
             var defaults = {
             containerID: 'toTop', // fading element id
@@ -232,71 +215,95 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--button跳转-->
 <script>
     //详情
-    function details(){
-        var itemid=document.getElementById("show").getAttribute("name");
-        window.location.href="one_item_details?itemid="+itemid;
+    function details(x){
+        window.location.href="one_item_details?info=${username}&itemid="+x;
     }
     //修改
-    function modify(){
-        var itemid=document.getElementById("modify").getAttribute("name");
-        window.location.href="modi_item_info?itemid="+itemid;
+    function modify(x){
+        window.location.href="modi_item_info?info=${username}&itemid="+x;
     }
     //添加
     <%
         String store_name=(String)request.getSession().getAttribute("store_name");
     %>
     function add() {
-        window.location.href='store_add_item.jsp?name=<%=store_name%>';
+        window.location.href='store_add_item.jsp?info=${username}&name=<%=store_name%>';
     }
     //下架
-    function getdown() {
-        var itemid=document.getElementById("getdown").getAttribute("name");
-        window.location.href="item_getdown?itemid="+itemid;
+    function getdown(x) {
+        window.location.href="item_getdown?info=${username}&itemid="+x;
     }
 </script>
 
 <!-- for bootstrap working -->
 <script src="js/bootstrap.js"></script>
 <!-- //for bootstrap working -->
-<script type='text/javascript' src="js/jquery.mycart.js"></script>
-<script type="text/javascript">
-    $(function () {
-
-        var goToCartIcon = function($addTocartBtn){
-            var $cartIcon = $(".my-cart-icon");
-            var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
-            $addTocartBtn.prepend($image);
-            var position = $cartIcon.position();
-            $image.animate({
-                top: position.top,
-                left: position.left
-            }, 500 , "linear", function() {
-                $image.remove();
-            });
-        }
-
-        $('.my-cart-btn').myCart({
-            classCartIcon: 'my-cart-icon',
-            classCartBadge: 'my-cart-badge',
-            affixCartIcon: true,
-            checkoutCart: function(products) {
-                $.each(products, function(){
-                    console.log(this);
-                });
-            },
-            clickOnAddToCart: function($addTocart){
-                goToCartIcon($addTocart);
-            },
-            getDiscountPrice: function(products) {
-                var total = 0;
-                $.each(products, function(){
-                    total += this.quantity * this.price;
-                });
-                return total * 1;
-            }
+<script>
+    $(function(){
+        var $table = $('table');
+        var currentPage = 0;//当前页默认值为0
+        var pageSize = 5;//每一页显示的数目
+        $table.bind('paging',function(){
+            $table.find('tbody tr').hide().slice(currentPage*pageSize,(currentPage+1)*pageSize).show();
         });
+        var sumRows = $table.find('tbody tr').length;
+        var sumPages = Math.ceil(sumRows/pageSize);//总页数
 
+        var $pager = $('<div class="page"></div>');  //新建div，放入a标签,显示底部分页码
+        for(var pageIndex = 0 ; pageIndex<sumPages ; pageIndex++){
+            $('<a href="#" id="pageStyle" onclick="changCss(this)"><span>'+(pageIndex+1)+'</span></a>').bind("click",{"newPage":pageIndex},function(event){
+                currentPage = event.data["newPage"];
+                $table.trigger("paging");
+                //触发分页函数
+            }).appendTo($pager);
+            $pager.append(" ");
+        }
+        $pager.insertAfter($table);
+        $table.trigger("paging");
+
+        //默认第一页的a标签效果
+        var $pagess = $('#pageStyle');
+        $pagess[0].style.backgroundColor="#006B00";
+        $pagess[0].style.color="#ffffff";
     });
+
+    //a链接点击变色，再点其他回复原色
+    function changCss(obj){
+        var arr = document.getElementsByTagName("a");
+        for(var i=0;i<arr.length;i++){
+            if(obj==arr[i]){       //当前页样式
+                obj.style.backgroundColor="#006B00";
+                obj.style.color="#ffffff";
+            }
+            else
+            {
+                arr[i].style.color="";
+                arr[i].style.backgroundColor="";
+            }
+        }
+    }
 </script>
+
+<style>
+    #pageStyle{
+        display:inline-block;
+        width:32px;
+        height:32px;
+        border:1px solid #CCC;
+        line-height:32px;
+        text-align:center;
+        color:#999;
+        margin-top:20px;
+        text-decoration:none;
+
+    }
+    #pageStyle:hover{
+        background-color:#CCC;
+    }
+    #pageStyle .active{
+        background-color:#0CF;
+        color:#ffffff;
+    }
+</style>
 </body>
 </html>

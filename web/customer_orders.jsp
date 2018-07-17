@@ -83,10 +83,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="head-t">
             <ul class="card">
-                <li><a href="login.jsp" ><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.jsp" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
-                <li><a href="customer_me.jsp" ><i class="fa fa-file-text-o" aria-hidden="true"></i>买家个人</a></li>
-                <li><a href="store_me.jsp" ><i class="fa fa-ship" aria-hidden="true"></i>卖家个人</a></li>
+                <%
+                    String username = (String) request.getSession().getAttribute("info");
+                    if (username == null) {
+                        out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录</a></li>");
+                    } else {
+                        if (username.equals("登录失败"))
+                            out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败,重新登录</a></li>");
+                        else {
+                            // TODO: 2018/7/15 注销功能待实现
+                            out.print("<li><a href=\"###\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好," + username + "</a></li>");
+                            pageContext.setAttribute("username",username);
+                        }
+                    }
+                    if (username == null) {
+                        out.print("<li><a href=\"register.jsp\"><i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>注册</a></li>");
+                    } else {
+                        out.print("<li><a href=\"###\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>买家个人</a></li>");
+                    }
+                %>
             </ul>
         </div>
 
@@ -137,29 +152,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <tr>
                 <th>序号</th>
                 <th>商品名称</th>
-                <th>店铺名</th>
                 <th>数量</th>
                 <th>价格</th>
+                <th>操作</th>
             </tr>
             </thead>
             <tbody>
             <%--获取所有用户--%>
             <%
                 //循环显示数据
-                List<Order> order_list = (List) request.getSession().getAttribute("order_list");
+                List<Order> order_list = (List) request.getSession().getAttribute("customer_list_orders");
                 if (order_list != null && order_list.size() != 0) {
                     for (int i = 0; i < order_list.size(); i++) {
-                        pageContext.setAttribute("item", order_list.get(i));
-                        pageContext.setAttribute("num", i+1);
+                        pageContext.setAttribute("order", order_list.get(i));
+                        pageContext.setAttribute("num", i + 1);
                         //保存到页面pageContext里面方便下面进行EL表达式调用
             %>
             <tr>
                 <td>${num}</td>
-                <td id="customer_name">${}</td>
-                <td>${customer.phone}</td>
+                <td id="customer_name">${order.item.name}</td>
+                <td>${order.num}</td>
+                <td>${order.total}</td>
                 <td>
-                    <button class="btn btn-danger my-cart-btn my-cart-b" onclick="customer_modify(${customer.customerid})">修改</button>
-                    <button class="btn btn-danger my-cart-btn my-cart-b" onclick='del_confirm(${customer.customerid})'>删除</button>
+                    <button class="btn btn-danger my-cart-btn my-cart-b" onclick='get_confirm(${order.orderid})'>确认收货
+                    </button>
+                    <button class="btn btn-danger my-cart-btn my-cart-b" onclick='get_details(${order.orderid})'>查看详情
+                    </button>
                 </td>
             </tr>
             <%
@@ -168,208 +186,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             %>
             <tr>
                 <td>数据库中没有数据！</td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
             </tr>
             <%
                 }
             %>
             </tbody>
         </table>
-        <div class="panel-group" id="accordion">
-            <!-- First Panel -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title" data-toggle="collapse" data-target="#collapseOne">
-                        <span>1.</span>商品1
-                    </h4>
-                    <h4 align="right">店铺1</h4>
-                    <img src="images/of.png" height="50" width="50" alt="">
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <table class="table table-striped">
-                            <tbody>
-                            <tr>
-                                <td>收件人</td>
-                                <td>张三</td>
-                            </tr>
-                            <tr>
-                                <td>订单编号</td>
-                                <td>0123456789876543210</td>
-                            </tr>
-                            <tr>
-                                <td>创建时间</td>
-                                <td>2018-07-07 00:00:00</td>
-                            </tr>
-                            <tr>
-                                <td>完成时间</td>
-                                <td>2018-07-08 00:00:00</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- Second Panel -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title" data-toggle="collapse" data-target="#collapseTwo">
-                        <span>1.</span>商品1
-                    </h4>
-                    <h4 align="right">店铺1</h4>
-                    <img src="images/of.png" height="50" width="50" alt="">
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <table class="table table-striped">
-                            <tbody>
-                            <tr>
-                                <td>收件人</td>
-                                <td>张三</td>
-                            </tr>
-                            <tr>
-                                <td>订单编号</td>
-                                <td>0123456789876543210</td>
-                            </tr>
-                            <tr>
-                                <td>创建时间</td>
-                                <td>2018-07-07 00:00:00</td>
-                            </tr>
-                            <tr>
-                                <td>完成时间</td>
-                                <td>2018-07-08 00:00:00</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- Third Panel -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title" data-toggle="collapse" data-target="#collapseThree">
-                        <span>1.</span>商品1
-                    </h4>
-                    <h4 align="right">店铺1</h4>
-                    <img src="images/of.png" height="50" width="50" alt="">
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <table class="table table-striped">
-                            <tbody>
-                            <tr>
-                                <td>收件人</td>
-                                <td>张三</td>
-                            </tr>
-                            <tr>
-                                <td>订单编号</td>
-                                <td>0123456789876543210</td>
-                            </tr>
-                            <tr>
-                                <td>创建时间</td>
-                                <td>2018-07-07 00:00:00</td>
-                            </tr>
-                            <tr>
-                                <td>完成时间</td>
-                                <td>2018-07-08 00:00:00</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- Fourth Panel -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title" data-toggle="collapse" data-target="#collapseFour">
-                        <span>1.</span>商品1
-                    </h4>
-                    <h4 align="right">店铺1</h4>
-                    <img src="images/of.png" height="50" width="50" alt="">
-                </div>
-                <div id="collapseFour" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <table class="table table-striped">
-                            <tbody>
-                            <tr>
-                                <td>收件人</td>
-                                <td>张三</td>
-                            </tr>
-                            <tr>
-                                <td>订单编号</td>
-                                <td>0123456789876543210</td>
-                            </tr>
-                            <tr>
-                                <td>创建时间</td>
-                                <td>2018-07-07 00:00:00</td>
-                            </tr>
-                            <tr>
-                                <td>完成时间</td>
-                                <td>2018-07-08 00:00:00</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- Fifth Panel -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title" data-toggle="collapse" data-target="#collapseFive">
-                        <span>1.</span>商品1
-                    </h4>
-                    <h4 align="right">店铺1</h4>
-                    <img src="images/of.png" height="50" width="50" alt="">
-                </div>
-                <div id="collapseFive" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <table class="table table-striped">
-                            <tbody>
-                            <tr>
-                                <td>收件人</td>
-                                <td>张三</td>
-                            </tr>
-                            <tr>
-                                <td>订单编号</td>
-                                <td>0123456789876543210</td>
-                            </tr>
-                            <tr>
-                                <td>创建时间</td>
-                                <td>2018-07-07 00:00:00</td>
-                            </tr>
-                            <tr>
-                                <td>完成时间</td>
-                                <td>2018-07-08 00:00:00</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <ul class="pagination pagination-lg">
-            <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-        </ul>
-
-        <ul id="orders_list">
-            <li>carrots</li>
-            <li>beef</li>
-            <li>pineapple</li>
-            <li>tofu</li>
-            <li>lettuce</li>
-            <li>washing up liquid</li>
-            <li>yoghurt</li>
-            <li>chocolate</li>
-            <li>milk</li>
-            <li>bread</li>
-        </ul>
-
-        <div id="order_list_counter"></div>
     </div>
 </div>
 <!-- // Terms of use -->
@@ -425,9 +251,83 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/jquery.quickpaginate.packed.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
-    $(function(){
-        $("#orders_list li").quickpaginate({ perpage: 3, pager : $("#order_list_counter") });
-    });
+    function get_confirm(x) {
+        window.location.href = "change_order_state?info=${username}&orderid=" + x + "&state=2";
+    }
+
+    function get_details(x) {
+        window.location.href = "one_order_detail?orderid=" + x;
+    }
 </script>
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script>
+    $(function () {
+        var $table = $('table');
+        var currentPage = 0;//当前页默认值为0
+        var pageSize = 3;//每一页显示的数目
+        $table.bind('paging', function () {
+            $table.find('tbody tr').hide().slice(currentPage * pageSize, (currentPage + 1) * pageSize).show();
+        });
+        var sumRows = $table.find('tbody tr').length;
+        var sumPages = Math.ceil(sumRows / pageSize);//总页数
+
+        var $pager = $('<div class="page"></div>');  //新建div，放入a标签,显示底部分页码
+        for (var pageIndex = 0; pageIndex < sumPages; pageIndex++) {
+            $('<a href="#" id="pageStyle" onclick="changCss(this)"><span>' + (pageIndex + 1) + '</span></a>').bind("click", {"newPage": pageIndex}, function (event) {
+                currentPage = event.data["newPage"];
+                $table.trigger("paging");
+                //触发分页函数
+            }).appendTo($pager);
+            $pager.append(" ");
+        }
+        $pager.insertAfter($table);
+        $table.trigger("paging");
+
+        //默认第一页的a标签效果
+        var $pagess = $('#pageStyle');
+        $pagess[0].style.backgroundColor = "#006B00";
+        $pagess[0].style.color = "#ffffff";
+    });
+
+    //a链接点击变色，再点其他回复原色
+    function changCss(obj) {
+        var arr = document.getElementsByTagName("a");
+        for (var i = 0; i < arr.length; i++) {
+            if (obj == arr[i]) {       //当前页样式
+                obj.style.backgroundColor = "#006B00";
+                obj.style.color = "#ffffff";
+            }
+            else {
+                arr[i].style.color = "";
+                arr[i].style.backgroundColor = "";
+            }
+        }
+    }
+</script>
+
+<style>
+    #pageStyle {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        border: 1px solid #CCC;
+        line-height: 32px;
+        text-align: center;
+        color: #999;
+        margin-top: 20px;
+        text-decoration: none;
+
+    }
+
+    #pageStyle:hover {
+        background-color: #CCC;
+    }
+
+    #pageStyle .active {
+        background-color: #0CF;
+        color: #ffffff;
+    }
+</style>
 </body>
 </html>

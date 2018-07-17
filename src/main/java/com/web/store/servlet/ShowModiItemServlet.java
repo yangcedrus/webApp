@@ -32,15 +32,18 @@ public class ShowModiItemServlet extends HttpServlet {
         Item item=new Item();
         //获取login.jsp页面提交的账号的密码
         int itemid = Integer.parseInt(req.getParameter("itemid"));
+        String name=req.getParameter("info");
         //引入数据交互层
         System.out.println(itemid);
         AdministerDao dao = new AdministerDaoImpl();
         item = dao.show_item(itemid);
         if (item != null) {
+            req.getSession().setAttribute("info",name);
             req.getSession().setAttribute("item", item);
             //req.getSession().setAttribute("type","store");
         } else {
-            req.getSession().setAttribute("item", "null");
+            req.getSession().setAttribute("info",name);
+            req.getSession().setAttribute("item", null);
         }
         req.getRequestDispatcher("/store_modi_item.jsp").forward(req,resp);
     }

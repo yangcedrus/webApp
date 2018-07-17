@@ -77,10 +77,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="head-t">
             <ul class="card">
-                <li><a href="login.jsp" ><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.jsp" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
-                <li><a href="customer_me.jsp" ><i class="fa fa-file-text-o" aria-hidden="true"></i>买家个人</a></li>
-                <li><a href="store_me.jsp" ><i class="fa fa-ship" aria-hidden="true"></i>卖家个人</a></li>
+                <%
+                    String username=(String)request.getSession().getAttribute("info");
+                    if(username==null){
+                        out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录</a></li>");
+                    }else{
+                        if(username.equals("登录失败"))
+                            out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败,重新登录</a></li>");
+                        else {
+                            // TODO: 2018/7/15 注销功能待实现
+                            out.print("<li><a href=\"###\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好," + username + "</a></li>");
+                            pageContext.setAttribute("username",username);
+                        }
+                    }
+                    if(username==null){
+                        out.print("<li><a href=\"register.jsp\"><i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>注册</a></li>");
+                    }else {
+                        out.print("<li><a href=\"###\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>买家个人</a></li>");
+                    }
+                %>
             </ul>
         </div>
 
@@ -133,7 +148,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mid-1">
                         <div class="add">
                             <h2 class="t-button">
-                                <a href="set_my_info.jsp"><button class="label label-warning">设置个人信息</button></a>
+                                <a href="get_my_info?info=${username}"><button class="label label-warning">设置个人信息</button></a>
                             </h2>
                         </div>
                     </div>
@@ -148,7 +163,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mid-1">
                         <div class="add">
                             <h2 class="t-button">
-                                <a href="customer_cart.jsp"><button class="label label-warning">我的购物车</button></a>
+                                <a href="cart.jsp.jsp"><button class="label label-warning">我的购物车</button></a>
                             </h2>
                         </div>
                     </div>
@@ -163,7 +178,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mid-1">
                         <div class="add">
                             <h2 class="t-button">
-                                <a href="customer_orders.jsp"><button class="label label-warning">我的订单</button></a>
+                                <a href="customer_orders_list"><button class="label label-warning">我的订单</button></a>
                             </h2>
                             </span>
                         </div>

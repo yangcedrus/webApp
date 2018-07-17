@@ -21,4 +21,6 @@ public interface CustomerDao {
      * @return 返回注册结果信息
      */
     public int register(Customer customer);
+
+    public int updateInfo(String customername,String Phone,String psw);
 }

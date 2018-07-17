@@ -4,6 +4,7 @@ import com.web.administer.entity.Administer;
 import com.web.administer.utils.BaseDao;
 import com.web.customer.entity.Customer;
 import com.web.item.entity.Item;
+import com.web.store.entity.Store;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -189,6 +190,45 @@ public class AdministerDaoImpl implements AdministerDao{
             e.printStackTrace();
         }
         return customer;
+    }
+
+    /**
+     *
+     * @param storename
+     * @return
+     */
+    @Override
+    public Store searchStore(String storename) {
+        Connection con;
+        PreparedStatement ps;
+        ResultSet rs;
+        Store store=null;
+        try {
+            con=BaseDao.getCon();
+            String sql="select * from store where name=? and state=1";
+            ps=con.prepareStatement(sql);
+            ps.setString(1,storename);
+
+            rs=ps.executeQuery();
+            if(rs.next()){
+                store=new Store();
+
+                store.setName(rs.getString("name"));
+                store.setPhone(rs.getString("phone"));
+                store.setDescription(rs.getString("description"));
+                store.setPsw(rs.getString("psw"));
+                store.setSex(rs.getInt("sex"));
+                store.setState(rs.getInt("state"));
+                store.setStoreid(rs.getInt("storeid"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+            return null;
+        }
+        return store;
     }
 
     /**

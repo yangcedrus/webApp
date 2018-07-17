@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.web.customer.entity.Customer" %>
+<%@ page import="com.web.store.entity.Store" %><%--
   Created by IntelliJ IDEA.
   User: 22278
   Date: 2018/7/13
@@ -121,8 +122,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="head-t">
             <ul class="card">
-                <li><a href="login.jsp"><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.jsp"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
+                <%
+                    String username = (String) request.getSession().getAttribute("info");
+                    if (username == null) {
+                        out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录</a></li>");
+                    } else {
+                        if (username.equals("登录失败"))
+                            out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败,重新登录</a></li>");
+                        else
+                            // TODO: 2018/7/15 注销功能待实现
+                            out.print("<li><a href=\"###\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好," + username + "</a></li>");
+                    }
+                    if (username == null) {
+                        out.print("<li><a href=\"register.jsp\"><i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>注册</a></li>");
+                    } else {
+                        out.print("<li><a href=\"###\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>买家个人</a></li>");
+                    }
+                %>
             </ul>
         </div>
 
@@ -147,9 +163,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!---->
 
 <!--banner-->
-<%
-
-%>
 <div class="banner-top">
     <div class="container">
         <h3>个人信息</h3>
@@ -167,42 +180,66 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </li>
 </ul>
 
-<div class="login">
+<%
+    Customer customer = (Customer) request.getSession().getAttribute("customer_info");
+    Store store=(Store)request.getSession().getAttribute("store_info");
+    if (customer != null) {
+        pageContext.setAttribute("user", customer);
+    }else{
+        if(store!=null){
+            pageContext.setAttribute("user", customer);
+        }
+    }
+%>
 
+<div class="login">
     <div class="tab-pane active" id="panel-33529">
         <div class="main-agileits">
             <div class="tab-content">
                 <div class="form-w3agile">
                     <h3>修改个人信息</h3>
-                    <form action="index.jsp" method="post">
+                    <form action="update_customer" method="post">
                         <div class="key">
                             <i class="fa fa-user" aria-hidden="true"></i>
-                            <input type="text" value="张三" name="User" disabled required="" style="color: #5b5b5b">
+                            <input type="text" value="<%if(customer!=null) out.print(customer.getName()); else out.print(store.getName());%>" name="User" readonly required=""
+                                   style="color: #5b5b5b">
                             <div class="clearfix"></div>
                         </div>
                         <div class="key">
                             <i class="fa fa-phone" aria-hidden="true"></i>
-                            <input type="text" value="13378789012" name="Phone" required=""
+                            <input type="text" value="<%if(customer!=null) out.print(customer.getPhone()); else out.print(store.getPhone());%>" name="Phone" required=""
                                    style="color: #5b5b5b">
                             <div class="clearfix"></div>
                         </div>
                         <div class="key">
                             <i class="fa fa-lock" aria-hidden="true"></i>
-                            <input type="password" value="Password" name="Password" required=""
+                            <input type="password" value="<%if(customer!=null) out.print(customer.getPsw()); else out.print(store.getPsw());%>" name="Password" required=""
                                    style="color: #5b5b5b">
                             <div class="clearfix"></div>
                         </div>
                         <div class="key1" style="background: #fff;margin-bottom: 2em;">
                             <!--<i class="fa fa-envelope" aria-hidden="true"></i>-->
-                            <input type="radio" value="male" name="sex" checked
+                            <input type="radio" value="male"
+                                   name="sex"<%
+                                   if(customer!=null)
+                                       if(customer.getSex()==0)out.print("checked");
+                                   else
+                                       if(store.getSex()==0)out.print("checked");%>
                                    style="margin-right: 15px;margin-left: 100px" disabled> 男
-                            <input type="radio" value="female" name="sex" style="margin-right: 15px;margin-left: 80px"
+                            <input type="radio" value="female"
+                                   name="sex" <%
+                                   if(customer!=null)
+                                       if(customer.getSex()==1)out.print("checked");
+                                   else
+                                       if(store.getSex()==1)out.print("checked");%>
+                                   style="margin-right: 15px;margin-left: 80px"
                                    disabled>
                             女
                             <div class="clearfix"></div>
                         </div>
                         <input class="btn123" type="submit" value="保存" style="float: left;margin-left: 20px">
-                        <input class="btn123" type="submit" value="退出" style="float: right;margin-right: 20px">
+                        <input class="btn123" type="submit" value="退出" onClick="back();return false"
+                               style="float: right;margin-right: 20px">
                         <div class="clearfix"></div>
                     </form>
                 </div>
@@ -316,6 +353,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         div.style.display = "block";
         var div1 = document.getElementById("panel-33529");
         div1.style.display = "none";
+    }
+
+    function back() {
+        history.back(-1);
+        return false;
     }
 
     function show_info() {

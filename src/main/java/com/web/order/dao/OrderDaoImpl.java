@@ -108,7 +108,7 @@ public class OrderDaoImpl implements OrderDao{
         //连接数据库
         try {
             con=BaseDao.getCon();
-            String sql="select * from orderr where name =?";
+            String sql="select * from orderr where customerid=(select customerid from customer where name=? and state=1)";
             ps=con.prepareStatement(sql);
             ps.setString(1,customername);
             res=ps.executeQuery();
@@ -122,12 +122,55 @@ public class OrderDaoImpl implements OrderDao{
                 order1.setCustomer(dao1.searchCustomer(res.getInt("customerid")));
                 order1.setItem(dao2.getOneItem(res.getInt("itemid")));
                 order1.setNum(res.getInt("num"));
-                order1.setStartt(res.getDate("startt").toString());
+                order1.setStartt(res.getDate("startt"));
                 //System.out.println(order1.getStartt());
                 order1.setState(res.getInt("state"));
                 // TODO: 2018/7/16 确认订单完成时间
                 if(order1.getState()>2){
-                    order1.setEndt(res.getDate("endt").toString());
+                    order1.setEndt(res.getDate("endt"));
+                }
+                order1.setTotal(res.getDouble("total"));
+                order.add(order1);
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return order;
+    }
+
+    @Override
+    public List<Order> showStoreOrder(String storename) {
+        Connection con= null;
+        PreparedStatement ps;
+        ResultSet rs=null;
+        List<Order> order=new ArrayList<>();
+        Order order1=null;
+        ResultSet res=null;
+        //连接数据库
+        try {
+            con=BaseDao.getCon();
+            String sql="select * from orderr where storeid=(select storeid from store where name=? and state=1)";
+            ps=con.prepareStatement(sql);
+            ps.setString(1,storename);
+            res=ps.executeQuery();
+            order1=new Order();
+            AdministerDao dao1=new AdministerDaoImpl();
+            ItemDao dao2=new ItemDaoImpl();
+            while(res.next()){
+                order1.setOrderid(res.getInt("orderid"));
+                //System.out.println(order1.getOrderid());
+                order1.setOrdernumber(res.getString("ordernumber"));
+                order1.setCustomer(dao1.searchCustomer(res.getInt("customerid")));
+                order1.setItem(dao2.getOneItem(res.getInt("itemid")));
+                order1.setNum(res.getInt("num"));
+                order1.setStartt(res.getDate("startt"));
+                //System.out.println(order1.getStartt());
+                order1.setState(res.getInt("state"));
+                // TODO: 2018/7/16 确认订单完成时间
+                if(order1.getState()>2){
+                    order1.setEndt(res.getDate("endt"));
                 }
                 order1.setTotal(res.getDouble("total"));
                 order.add(order1);
@@ -187,5 +230,49 @@ public class OrderDaoImpl implements OrderDao{
                 e.printStackTrace();
                 return false;
         }
+    }
+
+    /**
+     *
+     * @param orderid 订单编号
+     * @return
+     */
+    @Override
+    public Order getOneOrder(Integer orderid) {
+        Connection con;
+        PreparedStatement ps;
+        ResultSet rs;
+        Order order=null;
+        try {
+            con=BaseDao.getCon();
+
+            String sql="select * from orderr where orderid=?";
+            ps=con.prepareStatement(sql);
+            ps.setInt(1,orderid);
+
+            rs=ps.executeQuery();
+            if(rs.next()){
+                order=new Order();
+
+                AdministerDao dao1=new AdministerDaoImpl();
+                ItemDao dao2=new ItemDaoImpl();
+                order.setOrderid(rs.getInt("orderid"));
+                order.setOrdernumber(rs.getString("ordernumber"));
+                order.setCustomer(dao1.searchCustomer(rs.getInt("customerid")));
+                order.setItem(dao2.getOneItem(rs.getInt("itemid")));
+                order.setNum(rs.getInt("num"));
+                order.setTotal(rs.getDouble("total"));
+                order.setStartt(rs.getDate("startt"));
+                order.setEndt(rs.getDate("endt"));
+                order.setState(rs.getInt("state"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+            return null;
+        }
+        return order;
     }
 }

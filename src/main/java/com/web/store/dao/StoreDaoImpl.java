@@ -102,7 +102,7 @@ public class StoreDaoImpl implements StoreDao {
         ResultSet rs = null;
         ResultSet res = null;
         List<Item> items = new ArrayList<Item>();
-        Item item = new Item();
+        Item item = null;
         int storeid = 0;
         try {
             con = getCon();//1:获取数据库连接
@@ -114,9 +114,12 @@ public class StoreDaoImpl implements StoreDao {
                 storeid = rs.getInt("storeid");
                 //System.out.print(storeid);
             }
-            sql = "select * from item where storeid='" + storeid + "' and (state=1 OR state=0)";
-            rs = stmt.executeQuery(sql);
+            sql = "select * from item where storeid=? and state<>2";
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1,storeid);
+            rs = ps.executeQuery();
             while (rs.next()) {
+                item=new Item();
                 item.setItemid(rs.getInt("itemid"));
                 item.setName(rs.getString("name"));
                 System.out.println(item.getName());
@@ -139,11 +142,11 @@ public class StoreDaoImpl implements StoreDao {
     }
 
     public List<String> img(int itemid) {
-        List<String> imgs = new ArrayList<String>();
+        List<String> imgs = new ArrayList<>();
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
-        String Img = "";
+        String Img = null;
         try {
             con = getCon();//1:获取数据库连接
             //2:书写sql语句
@@ -152,8 +155,9 @@ public class StoreDaoImpl implements StoreDao {
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Img = rs.getString("imagepath");
+                if(Img!=null)
+                    imgs.add(Img);
             }
-            imgs.add(Img);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -170,7 +174,7 @@ public class StoreDaoImpl implements StoreDao {
         try {
             con = getCon();
             stmt = con.createStatement();
-            String sql = "select * from store where name='" + name + "'";
+            String sql = "select * from store where name='" + name + "' and state<>2";
             res = stmt.executeQuery(sql);
             if (res.next()) {
                 store.setStoreid(res.getInt("storeid"));

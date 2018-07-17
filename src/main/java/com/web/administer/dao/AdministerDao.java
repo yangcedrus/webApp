@@ -3,6 +3,7 @@ package com.web.administer.dao;
 import com.web.administer.entity.Administer;
 import com.web.customer.entity.Customer;
 import com.web.item.entity.Item;
+import com.web.store.entity.Store;
 
 import java.util.List;
 
@@ -43,6 +44,13 @@ public interface AdministerDao {
      * @return 买家信息
      */
     public Customer searchCustomer(String customername);
+
+    /**
+     * 查找卖家用户信息
+     * @param storename
+     * @return
+     */
+    public Store searchStore(String storename);
 
     /**
      * 删除买家用户

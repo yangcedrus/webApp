@@ -28,13 +28,13 @@ public class ManageItemServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         List<Item> items=new ArrayList<Item>();
         //获取login.jsp页面提交的账号的密码
-        String name = req.getParameter("name");
+        String name = req.getParameter("info");
         //引入数据交互层
         StoreDao dao = new StoreDaoImpl();
         items = dao.store_item(name);
         if (items != null) {
             req.getSession().setAttribute("store", items);
-            req.getSession().setAttribute("store_name",name);
+            req.getSession().setAttribute("info",name);
             //req.getSession().setAttribute("type","store");
         } else {
             req.getSession().setAttribute("store", "null");

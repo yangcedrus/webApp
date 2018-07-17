@@ -1,4 +1,5 @@
-<%@ page import="com.web.item.entity.Item" %><%--
+<%@ page import="com.web.item.entity.Item" %>
+<%@ page import="java.util.List" %><%--
 Created by IntelliJ IDEA.
 User: 22278
 Date: 2018/7/13
@@ -42,35 +43,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     </script>
     <!-- start-smoth-scrolling -->
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
-    <!--- start-rate---->
-    <script src="js/jstarbox.js"></script>
-    <link rel="stylesheet" href="css/jstarbox.css" type="text/css" media="screen" charset="utf-8"/>
-    <script type="text/javascript">
-        jQuery(function () {
-            jQuery('.starbox').each(function () {
-                var starbox = jQuery(this);
-                starbox.starbox({
-                    average: starbox.attr('data-start-value'),
-                    changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
-                    ghosting: starbox.hasClass('ghosting'),
-                    autoUpdateAverage: starbox.hasClass('autoupdate'),
-                    buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
-                    stars: starbox.attr('data-star-count') || 5
-                }).bind('starbox-value-changed', function (event, value) {
-                    if (starbox.hasClass('random')) {
-                        var val = Math.random();
-                        starbox.next().text(' ' + val);
-                        return val;
-                    }
-                })
-            });
-        });
-    </script>
-    <!---//End-rate---->
-
 </head>
 <body>
 <%--<%--%>
@@ -88,8 +60,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="head-t">
             <ul class="card">
-                <li><a href="login.jsp"><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.jsp"><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
+                <%
+                    String username = (String) request.getSession().getAttribute("info");
+                    if (username == null) {
+                        out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录</a></li>");
+                    } else {
+                        if (username.equals("登录失败"))
+                            out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败,重新登录</a></li>");
+                        else {
+                            // TODO: 2018/7/15 注销功能待实现
+                            out.print("<li><a href=\"###\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好," + username + "</a></li>");
+                            pageContext.setAttribute("username", username);
+                        }
+                    }
+                    if (username == null) {
+                        out.print("<li><a href=\"register.jsp\"><i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>注册</a></li>");
+                    } else {
+                        out.print("<li><a href=\"###\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>卖家个人</a></li>");
+                    }
+                %>
             </ul>
         </div>
 
@@ -134,19 +123,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <img src="${item.imagePath.get(0)}" data-src="images/si-1.jpg" alt="" class="img-responsive"/>
                     </div>
 
-                    <script src="js/jquery.zoomtoo.js"></script>
-                    <script>
-                        $(function () {
-                            $("#picture-frame").zoomToo({
-                                magnify: 1
-                            });
-                        });
-                    </script>
-
+                    <%
+                        List<String> path=item1.getImagePath();
+                        if(path!=null&&path.size()>0){
+                            out.print("<a class=\"left-arrow\"></a>");
+                            for(int i=1;i<path.size();i++){
+                                pageContext.setAttribute("num",i);
+                    %>
+                    <img class="img-small" src=<%out.print(item1.getImagePath().get(i-1));%> id=${num} onclick="getbig(this)"/>
+                    <%
+                            }
+                            out.print("<img class=\"img-small\" src="+item1.getImagePath().get(item1.getImagePath().size()-1)+" id=\"5\" onclick=\"getbig(this)\" style=\"display: none\"/>");
+                            out.print("<a class=\"right-arrow\"></a>");
+                        }
+                    %>
 
                 </div>
                 <div class="add add-3">
-
                     <button class="btn btn-danger my-cart-btn my-cart-b fileinput-button" style="margin-top: 15px">
                         <span>修改图片</span>
                         <input type="file">
@@ -301,7 +294,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         var price=document.getElementById("item_price").value;
         var stock=document.getElementById("item_num").value;
         var details=document.getElementById("item_info").innerHTML;
-        window.location.href="modi_item?itemid=${item.itemid}&name="+name+"&price="+price+"&stock="+stock+"&desc="+details;
+        window.location.href="modi_item?info=${username}&itemid=${item.itemid}&name="+name+"&price="+price+"&stock="+stock+"&desc="+details;
     }
 </script>
 

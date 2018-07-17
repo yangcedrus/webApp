@@ -11,5 +11,7 @@ public interface OrderDao {
      */
     public boolean addOrder(String customername, int itemid, int num);
     public List<Order> showOrder(String customername);
+    public List<Order> showStoreOrder(String storename);
     public boolean changeState(int orderid,int state);
+    public Order getOneOrder(Integer orderid);
 }

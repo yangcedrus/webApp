@@ -78,23 +78,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="head-t">
             <ul class="card">
                 <%
-                    String name = request.getParameter("name");   //获取url中的参数值
-                    if(name!=null){
-                %>
-                <li><i class="fa fa-user" aria-hidden="true"></i>您好,<span id="storename"><%=name%></span></li>
-                <%--<li><a href="register.jsp" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>--%>
-                <%--<li><a href="customer_me.jsp" ><i class="fa fa-file-text-o" aria-hidden="true"></i>买家个人</a></li>--%>
-                <li><a href="login.jsp" ><i class="fa fa-user" aria-hidden="true"></i>登录</a></li>
-                <li><a href="register.jsp" ><i class="fa fa-arrow-right" aria-hidden="true"></i>注册</a></li>
-                <li><a href="customer_me.jsp" ><i class="fa fa-file-text-o" aria-hidden="true"></i>买家个人</a></li>
-                <li><a href="store_me.jsp" ><i class="fa fa-ship" aria-hidden="true"></i>卖家个人</a></li>
-                <%
-                }
-                else{
-                    out.print("<script type=\"text/javascript\">alert('请登录后查看！')</script");
-                %>
-                <li><a href="login.jsp"><i class="fa fa-user" aria-hidden="true"></i>商家入口(登录)</a></li>
-                <%
+                    String username=(String)request.getSession().getAttribute("info");
+                    if(username==null){
+                        out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录</a></li>");
+                    }else{
+                        if(username.equals("登录失败"))
+                            out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败,重新登录</a></li>");
+                        else {
+                            // TODO: 2018/7/15 注销功能待实现
+                            out.print("<li><a href=\"###\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好," + username + "</a></li>");
+                            pageContext.setAttribute("username",username);
+                        }
+                    }
+                    if(username==null){
+                        out.print("<li><a href=\"register.jsp\"><i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i>注册</a></li>");
+                    }else {
+                        out.print("<li><a href=\"###\"><i class=\"fa fa-file-text-o\" aria-hidden=\"true\"></i>卖家个人</a></li>");
                     }
                 %>
             </ul>
@@ -149,7 +148,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mid-1">
                         <div class="add">
                             <h2 class="t-button">
-                                <a href="set_my_info.jsp"><button class="label label-warning" onclick="modi_info()">设置个人信息</button></a>
+                                <a href="get_my_info?info=${username}"><button class="label label-warning">设置个人信息</button></a>
                             </h2>
                         </div>
                     </div>
@@ -164,7 +163,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mid-1">
                         <div class="add">
                             <h2 class="t-button">
-                                <button class="label label-warning" onclick="item_list()">我的店铺</button>
+                                <a href="store_item?info=${username}"><button class="label label-warning">我的店铺</button></a>
                             </h2>
                         </div>
                     </div>
@@ -179,7 +178,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mid-1">
                         <div class="add">
                             <h2 class="t-button">
-                                <a href="my_orders.jsp"><button class="label label-warning">我的订单</button></a>
+                                <a href="store_orders.jsp?info=${username}"><button class="label label-warning">我的订单</button></a>
                             </h2>
                             </span>
                         </div>
@@ -195,7 +194,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="mid-1">
                         <div class="add">
                             <h2 class="t-button">
-                                <button class="label label-warning" onclick="item_manage()">商品管理</button>
+                                <a href="item_manage?info=${username}"><button class="label label-warning">商品管理</button></a>
                             </h2>
                             </span>
                         </div>
@@ -253,63 +252,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //for bootstrap working -->
 <script type='text/javascript' src="js/jquery.mycart.js"></script>
 <script type="text/javascript">
-    $(function () {
 
-        var goToCartIcon = function($addTocartBtn){
-            var $cartIcon = $(".my-cart-icon");
-            var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
-            $addTocartBtn.prepend($image);
-            var position = $cartIcon.position();
-            $image.animate({
-                top: position.top,
-                left: position.left
-            }, 500 , "linear", function() {
-                $image.remove();
-            });
-        }
-
-        $('.my-cart-btn').myCart({
-            classCartIcon: 'my-cart-icon',
-            classCartBadge: 'my-cart-badge',
-            affixCartIcon: true,
-            checkoutCart: function(products) {
-                $.each(products, function(){
-                    console.log(this);
-                });
-            },
-            clickOnAddToCart: function($addTocart){
-                goToCartIcon($addTocart);
-            },
-            getDiscountPrice: function(products) {
-                var total = 0;
-                $.each(products, function(){
-                    total += this.quantity * this.price;
-                });
-                return total * 1;
-            }
-        });
-
-    });
-    function item_list() {
-        var s=document.getElementById("storename");
-        var name=s.innerHTML;
-        window.location.href="store_item?name="+name;
-    }
-    function modi_info() {
-        var s=document.getElementById("storename");
-        var name=s.innerHTML;
-        window.location.href="show_item_info?name="+name;
-    }
-    function my_order() {
-        var s=document.getElementById("storename");
-        var name=s.innerHTML;
-        window.location.href="store_item?name="+name;
-    }
-    function item_manage() {
-        var s=document.getElementById("storename");
-        var name=s.innerHTML;
-        window.location.href="item_manage?name="+name;
-    }
 </script>
 
 </body>
