@@ -29,11 +29,16 @@ public class AddresscheckServlet extends HttpServlet {
             res=dao.ModiAddress(id,address);
         }
         else {
-            id=Integer.parseInt(req.getParameter("id1"));
+            String idstr=req.getParameter("id1");
+            if(idstr!=null&&!idstr.equals(""))
+                id=Integer.parseInt(idstr);
             res=dao.SaveAddrss(id,address);
         }
         AdministerDao dao1=new AdministerDaoImpl();
-        int customerid=Integer.parseInt(req.getParameter("id1"));
+        String str=req.getParameter("id1");
+        int customerid=0;
+        if(str!=null&&!str.equals(""))
+            customerid=Integer.parseInt(str);
         String name="";
         if(res){
             req.getSession().setAttribute("address_check", "true");

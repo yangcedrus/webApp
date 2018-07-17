@@ -320,7 +320,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     style="width: 110px"></select>
                             <select id="city" runat="server" style=" width:95px;"></select>
                             <p >具体地址：</p>
-
                             <textarea id="details" rows="6" cols="75" style="width: available"></textarea>
                             <br>
                             <input type="button" class="btn123" value="添加" id="add" onclick="save(this)">
