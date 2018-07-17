@@ -12,14 +12,14 @@ public class Cart {
     private Integer cartid;    //购物车ID
     private Integer customerid;    //用户ID
     private Double total; //购物车总价
-    private List<String> cartitem;  //c_i表
+    private List<c_i> cartitem;  //c_i表
 
 
-    public List<String> getCartitem() {
+    public List<c_i> getCartitem() {
         return cartitem;
     }
 
-    public void setCartitem(List<String> cartitem) {
+    public void setCartitem(List<c_i> cartitem) {
         this.cartitem = cartitem;
     }
 

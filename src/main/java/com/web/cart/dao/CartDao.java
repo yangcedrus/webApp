@@ -17,28 +17,26 @@ public interface CartDao {
      * @param storeid 商店id
      * @return 返回添加结果
      */
-    public int addItemToCart(Integer itemid,Integer cartid,Integer num,Integer storeid);
+    public int addItemsToCart(Integer itemid,Integer cartid,Integer num,Integer storeid);
 
     /**
-     * 从购物车中删除Item
-     * @param item
+     *
+     * @param itemid
+     * @param cartid
+     * @param num
      * @return
      */
 
-    public List<Cart> deleteItemFromCart(String item);
+    public int deleteItemsFromCart(Integer itemid, Integer cartid, Integer num);
+
 
     /**
-     * 清空购物车
-     * @param item
+     * @param itemid
+     * @param cartid
+     * @param num
      * @return
      */
-    public List<Cart> clearCart(String item);
+    public int checkOut(Integer itemid, Integer cartid, Integer num);
 
-    /**
-     * 结算购物车
-     * @param item
-     * @return
-     */
-    public List<Cart> checkOut(String item);
 
 }

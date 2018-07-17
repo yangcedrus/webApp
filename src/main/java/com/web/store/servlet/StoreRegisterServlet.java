@@ -35,7 +35,7 @@ public class StoreRegisterServlet extends HttpServlet {
             req.getSession().setAttribute("info","请确认两次输入密码是否一致");
             req.getRequestDispatcher("/register.jsp").forward(req, resp);
         }
-        //组装买家实体
+        //组装卖家实体
         Store store=new Store();
         store.setName(name);
         store.setPsw(psw);
