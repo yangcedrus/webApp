@@ -1,5 +1,8 @@
 package com.web.customer.servlet;
 
+import com.web.address.dao.AddressDao;
+import com.web.address.dao.AddressDaoImpl;
+import com.web.address.entity.Address;
 import com.web.administer.dao.AdministerDao;
 import com.web.administer.dao.AdministerDaoImpl;
 import com.web.customer.entity.Customer;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * 获取个人信息
@@ -24,9 +28,11 @@ public class GetInfoServlet extends HttpServlet {
         AdministerDao dao=new AdministerDaoImpl();
         Customer customer=dao.searchCustomer(name);
         Store store=dao.searchStore(name);
-
         if(customer!=null){
+            AddressDao addressDao=new AddressDaoImpl();
+            List<Address> addresslist=addressDao.GetAddress(customer.getCustomerid());
             req.getSession().setAttribute("customer_info",customer);
+            req.getSession().setAttribute("address",addresslist);
         }else{
             if (store!=null)
                 req.getSession().setAttribute("store_info",store);

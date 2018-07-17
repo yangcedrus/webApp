@@ -1,5 +1,7 @@
 <%@ page import="com.web.customer.entity.Customer" %>
-<%@ page import="com.web.store.entity.Store" %><%--
+<%@ page import="com.web.store.entity.Store" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.web.address.entity.Address" %><%--
   Created by IntelliJ IDEA.
   User: 22278
   Date: 2018/7/13
@@ -173,11 +175,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <ul class="nav nav-tabs" style="margin: 0 auto">
     <li class="active">
-        <a href="#panel-33529" data-toggle="tab" onclick="show_info()">信息管理</a>
+        <a href="" data-toggle="tab" onclick="show_info()">信息管理</a>
     </li>
+    <%
+        if(request.getSession().getAttribute("customer_info")!=null){
+    %>
     <li>
-        <a href="#panel-307971" data-toggle="tab" onclick="show_address()">地址管理</a>
+        <a href="" data-toggle="tab" onclick="show_address()" >地址管理</a>
     </li>
+    <%
+        }
+    %>
 </ul>
 
 <%
@@ -187,11 +195,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         pageContext.setAttribute("user", customer);
     }else{
         if(store!=null){
-            pageContext.setAttribute("user", customer);
+            pageContext.setAttribute("user", store);
         }
     }
 %>
-
 <div class="login">
     <div class="tab-pane active" id="panel-33529">
         <div class="main-agileits">
@@ -218,24 +225,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="clearfix"></div>
                         </div>
                         <div class="key1" style="background: #fff;margin-bottom: 2em;">
-                            <!--<i class="fa fa-envelope" aria-hidden="true"></i>-->
-                            <input type="radio" value="male"
-                                   name="sex"<%
-                                   if(customer!=null)
-                                       if(customer.getSex()==0)out.print("checked");
-                                   else
-                                       if(store.getSex()==0)out.print("checked");%>
-                                   style="margin-right: 15px;margin-left: 100px" disabled> 男
-                            <input type="radio" value="female"
-                                   name="sex" <%
-                                   if(customer!=null)
-                                       if(customer.getSex()==1)out.print("checked");
-                                   else
-                                       if(store.getSex()==1)out.print("checked");%>
-                                   style="margin-right: 15px;margin-left: 80px"
-                                   disabled>
-                            女
-                            <div class="clearfix"></div>
+                            <%--<input type="radio" value="male" name="sex"--%>
+                                   <%--<%--%>
+                                   <%--if(customer!=null)--%>
+                                       <%--if(customer.getSex()==0)--%>
+                                           <%--out.print("checked");--%>
+                                   <%--else--%>
+                                       <%--if(store.getSex()==0)--%>
+                                           <%--out.print("checked");--%>
+                                   <%--%>--%>
+                                   <%--style="margin-right: 15px;margin-left: 100px" disabled> 男--%>
+                            <%--<input type="radio" value="female" name="sex"--%>
+                                   <%--<%--%>
+                                   <%--if(customer!=null){--%>
+                                       <%--if(customer.getSex()==1){--%>
+                                           <%--out.print("checked");}--%>
+                                   <%--else{--%>
+                                       <%--if(store.getSex()==1){--%>
+                                           <%--out.print("checked");--%>
+                                       <%--}--%>
+                                   <%--}%>--%>
+                                   <%--style="margin-right: 15px;margin-left: 80px" disabled>--%>
+                            <%--女--%>
+                            <%--<div class="clearfix"></div>--%>
                         </div>
                         <input class="btn123" type="submit" value="保存" style="float: left;margin-left: 20px">
                         <input class="btn123" type="submit" value="退出" onClick="back();return false"
@@ -246,7 +258,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
     </div>
-
+<%
+    if(request.getSession().getAttribute("customer_info")!=null){
+        List<Address> address=(List)request.getSession().getAttribute("address");
+%>
     <div class="tab-pane" id="panel-307971" style="display: none">
         <div class="main-agileits1">
             <div class="tab-content">
@@ -257,42 +272,58 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="row clearfix">
                         <div class="col-md-12 column">
                             <div class="panel panel-warning">
-                                <div class="panel-heading">
-                                    湖北省武汉市洪山区文秀街xxx号xxx公寓
+                                <%
+                                    if(address!=null&&address.size()>0){
+                                        for(int i=0;i<address.size();i++){
+                                            pageContext.setAttribute("address",address.get(i));
+                                            pageContext.setAttribute("num",i);
+                                %>
+                                <div class="panel-heading" name="${address.addressid}" >
+                                    ${address.address}
                                     <input class="btn123" type="button" value="修改"
                                            style="float: right;margin-left: 10px"
-                                           onclick="show_modify()">
-                                    <input class="btn123" type="button" value="删除" style="float: right">
+                                           onclick="show_modify(this)">
+                                    <input id="${address.customerid}" class="btn123" type="button" value="删除" style="float: right" onclick="dele(this)">
                                 </div>
+                                <%
+                                        }
+                                    }else{
+                                %>
                                 <div class="panel-heading">
-                                    湖南省长沙市xxxxxxxx
-                                    <input class="btn123" type="button" value="修改"
-                                           style="float: right;margin-left: 10px"
-                                           onclick="show_modify()">
-                                    <input class="btn123" type="button" value="删除" style="float: right">
+                                    没有添加过地址！
                                 </div>
-                                <div class="panel-heading">
-                                    北京市xxxxx
-                                    <input class="btn123" type="button" value="修改"
-                                           style="float: right;margin-left: 10px"
-                                           onclick="show_modify()">
-                                    <input class="btn123" type="button" value="删除" style="float: right">
-                                </div>
+                                <%
+                                    }
+                                %>
+                                <%--<div class="panel-heading">--%>
+                                    <%--湖南省长沙市xxxxxxxx--%>
+                                    <%--<input class="btn123" type="button" value="修改"--%>
+                                           <%--style="float: right;margin-left: 10px"--%>
+                                           <%--onclick="show_modify()">--%>
+                                    <%--<input class="btn123" type="button" value="删除" style="float: right">--%>
+                                <%--</div>--%>
+                                <%--<div class="panel-heading">--%>
+                                    <%--北京市xxxxx--%>
+                                    <%--<input class="btn123" type="button" value="修改"--%>
+                                           <%--style="float: right;margin-left: 10px"--%>
+                                           <%--onclick="show_modify()">--%>
+                                    <%--<input class="btn123" type="button" value="删除" style="float: right">--%>
+                                <%--</div>--%>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="address">
-                    <div class="row clearfix">
-                        <div class="col-md-12 column" style="margin-left: 20px">
+                    <div class="row clearfix" >
+                        <div class="col-md-12 column" style="margin-left: 20px" id="${address.customerid}">
                             <select id="province" runat="server" onchange="selectprovince(this);"
                                     style="width: 110px"></select>
                             <select id="city" runat="server" style=" width:95px;"></select>
-                            <p>具体地址：</p>
+                            <p >具体地址：</p>
 
-                            <textarea rows="6" cols="75" style="width: available"></textarea>
+                            <textarea id="details" rows="6" cols="75" style="width: available"></textarea>
                             <br>
-                            <input type="button" class="btn123" value="添加" id="add">
+                            <input type="button" class="btn123" value="添加" id="add" onclick="save(this)">
                             <br>
                         </div>
                     </div>
@@ -300,6 +331,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
     </div>
+    <%
+        }
+    %>
 </div>
 
 <!--footer-->
@@ -331,6 +365,64 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //footer-->
 <!-- smooth scrolling //回到顶部操作-->
 <script type="text/javascript">
+    function dele(s) {
+        var div=s.parentNode;
+        var customerid=s.id;
+        var addressid=div.getAttribute("name");
+        window.location.href="dele_address?id1="+addressid+"&id2="+customerid;
+    }
+    function show_modify(t) {
+        var div1=t.parentNode;
+        var addressid=div1.getAttribute("name");
+
+        var info =div1.innerText;
+        var s=[3];
+        s=info.split("-");
+        var p=s[0];
+        var p1=document.getElementById("province");
+        p1.value=p;
+        selectprovince(p1);
+        var c=s[1];
+        var c1=document.getElementById("city");
+        c1.value=c;
+        var d=s[2];
+        document.getElementById("details").innerHTML=d;
+    var div = document.getElementById("add");
+    var div2=div.parentNode.parentNode;
+    div2.setAttribute("id",addressid);
+    div.value = "修改";
+}
+function save(obj) {
+    var type=obj.value;
+    var addressid=obj.parentNode.parentNode.id;
+    var customerid=obj.parentNode.id;
+    var p=document.getElementById("province").value;
+    var c=document.getElementById("city").value;
+    var s=$("#details").val();
+    //alert(s);
+    var address=p+"-"+c+"-"+s;
+    window.location.href="address_check?id1="+customerid+"&id2="+addressid+"&address="+address+"&type="+type;
+
+
+}
+function show_address() {
+    var div = document.getElementById("panel-307971");
+    div.style.display = "block";
+    var div1 = document.getElementById("panel-33529");
+    div1.style.display = "none";
+}
+
+function back() {
+    history.back(-1);
+    return false;
+}
+
+function show_info() {
+    var div = document.getElementById("panel-307971");
+    var div1 = document.getElementById("panel-33529");
+    div.style.display = "none";
+    div1.style.display = "block";
+}
     $(document).ready(function () {
         /*
             var defaults = {
@@ -343,29 +435,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         $().UItoTop({easingType: 'easeOutQuart'});
     });
 
-    function show_modify() {
-        var div = document.getElementById("add");
-        div.value = "修改";
-    }
 
-    function show_address() {
-        var div = document.getElementById("panel-307971");
-        div.style.display = "block";
-        var div1 = document.getElementById("panel-33529");
-        div1.style.display = "none";
-    }
-
-    function back() {
-        history.back(-1);
-        return false;
-    }
-
-    function show_info() {
-        var div = document.getElementById("panel-307971");
-        var div1 = document.getElementById("panel-33529");
-        div.style.display = "none";
-        div1.style.display = "block";
-    }
 </script>
 <script type="text/javascript">
     var list1 = new Array;
