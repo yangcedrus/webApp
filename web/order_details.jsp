@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.web.order.entity.Order" %>
+<%@ page import="com.sun.org.apache.xpath.internal.operations.Or" %><%--
   Created by IntelliJ IDEA.
   User: 22278
   Date: 2018/7/13
@@ -86,7 +87,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 
-<!--user-->
+<%
+    Order order=(Order) request.getSession().getAttribute("order");
+    pageContext.setAttribute("order",order);
+%>
 
 <div class="login">
     <div class="main-agileits">
@@ -95,37 +99,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <form action="javascript:history.back(-1)" method="get">
                 <div class="key">
                     <i class="fa fa-user" aria-hidden="true"></i>
-                    <input type="text" value="订单号" name="OrderNum" readonly>
+                    <input type="text" value="订单号:${order.ordernumber}" name="OrderNum" readonly>
                     <div class="clearfix"></div>
                 </div>
                 <div class="key">
                     <i class="fa fa-phone" aria-hidden="true"></i>
-                    <input type="text" value="商品名称" name="ItemName" readonly>
+                    <input type="text" value="商品名称:${order.item.name}" name="ItemName" readonly>
                     <div class="clearfix"></div>
                 </div>
                 <div class="key">
                     <i class="fa fa-lock" aria-hidden="true"></i>
-                    <input type="text" value="顾客用户名" name="CustomerName" readonly>
+                    <input type="text" value="顾客用户名:${order.customer.name}" name="CustomerName" readonly>
                     <div class="clearfix"></div>
                 </div>
                 <div class="key">
                     <i class="fa fa-lock" aria-hidden="true"></i>
-                    <input type="text" value="商品数量" name="ItemNum" readonly>
+                    <input type="text" value="商品数量:${order.num}" name="ItemNum" readonly>
                     <div class="clearfix"></div>
                 </div>
                 <div class="key">
                     <i class="fa fa-lock" aria-hidden="true"></i>
-                    <input type="text" value="订单创建时间" name="StartT" readonly>
+                    <input type="text" value="订单创建时间:${order.startt}" name="StartT" readonly>
                     <div class="clearfix"></div>
                 </div>
                 <div class="key">
                     <i class="fa fa-lock" aria-hidden="true"></i>
-                    <input type="text" value="订单结束时间" name="EndT" readonly>
+                    <input type="text" value="订单结束时间:${order.endt}" name="EndT" readonly>
                     <div class="clearfix"></div>
                 </div>
                 <div class="key">
                     <i class="fa fa-lock" aria-hidden="true"></i>
-                    <input type="text" value="订单状态" name="State" readonly>
+                    <input type="text" value="订单状态:${order.state}" name="State" readonly>
                     <div class="clearfix"></div>
                 </div>
                 <input type="submit" value="确认">

@@ -27,7 +27,7 @@ public class StoreOrdersServlet extends HttpServlet {
         List<Order> orders = dao.showStoreOrder(username);
 
         req.getSession().setAttribute("info", username);
-        req.getSession().setAttribute("customer_list_orders", orders);
+        req.getSession().setAttribute("store_list_orders", orders);
         req.getRequestDispatcher("store_orders.jsp").forward(req, resp);
     }
 }

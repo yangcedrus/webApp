@@ -20,26 +20,29 @@ import java.util.*;
  */
 public class OrderDaoImpl implements OrderDao{
     @Override
-    public boolean addOrder(String customername, int itemid, int num) {
+    public boolean addOrder(String customername, int itemid) {
         Connection con= null;
         PreparedStatement ps=null;
+        boolean flag=false;
         int rs=0;
         ResultSet rs1;
         double total=0;
         double price=0;
+        int num=0;
         AdministerDao dao=new AdministerDaoImpl();
         Customer customer=dao.searchCustomer(customername);
         try {
             Date sqlDate=new Date(System.currentTimeMillis());
             con= BaseDao.getCon();
 
-            String sql="select price from item where itemid=? and state=1";
+            String sql="select price,num from item,cartitem where item.itemid=? and item.state=1 and item.itemid=cartitem.itemid";
             ps=con.prepareStatement(sql);
             ps.setInt(1,itemid);
 
             rs1=ps.executeQuery();
             if(rs1.next()){
                 price=rs1.getDouble("price");
+                num=rs1.getInt("num");
                 total=num*price;
             }
 
@@ -53,7 +56,7 @@ public class OrderDaoImpl implements OrderDao{
             //最后得到20位订单编号。
             String ordernum=strDate+random;
 
-            sql="insert into orderr(ordernumber,customerid,itemid,num,startt,state,total) values(?,?,?,?,?,'1',?)";
+            sql="insert into orderr(ordernumber,customerid,itemid,num,startt,state,total) values(?,?,?,?,?,1,?)";
             ps=con.prepareStatement(sql);
             ps.setString(1,ordernum);
             ps.setInt(2,customer.getCustomerid());
@@ -64,10 +67,25 @@ public class OrderDaoImpl implements OrderDao{
 
             rs=ps.executeUpdate();
             if(rs>0){
-                return true;
+                flag=true;
+            }
+
+            Integer cartid=0;
+            sql="select cartid from cart where customerid=(select customerid from customer where name=?)";
+            ps=con.prepareStatement(sql);
+            ps.setString(1,customername);
+            rs1=ps.executeQuery();
+            if(rs1.next()){
+                cartid=rs1.getInt("cartid");
             }else{
                 return false;
             }
+
+            sql="delete from cartitem where cartid=? and itemid=?";
+            ps=con.prepareStatement(sql);
+            ps.setInt(1,cartid);
+            ps.setInt(2,itemid);
+            ps.executeUpdate();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             return false;
@@ -75,6 +93,7 @@ public class OrderDaoImpl implements OrderDao{
             e.printStackTrace();
             return false;
         }
+        return flag;
     }
 
     /**
@@ -151,7 +170,7 @@ public class OrderDaoImpl implements OrderDao{
         //连接数据库
         try {
             con=BaseDao.getCon();
-            String sql="select * from orderr where storeid=(select storeid from store where name=? and state=1)";
+            String sql="select * from orderr where itemid in (select itemid from item where storeid=(select storeid from store where  name=? and state=1))";
             ps=con.prepareStatement(sql);
             ps.setString(1,storename);
             res=ps.executeQuery();

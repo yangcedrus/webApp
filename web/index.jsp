@@ -117,9 +117,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     } else {
                         if (username.equals("登录失败"))
                             out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败,重新登录</a></li>");
-                        else
+                        else {
                             // TODO: 2018/7/15 注销功能待实现
-                            out.print("<li><a href=\"###\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好," + username + "</a></li>");
+                            out.print("<li><a href=\"javascript:if(confirm('确实要注销吗?'))location='login.jsp'\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好," + username + "</a></li>");
+                            pageContext.setAttribute("username", username);
+                        }
                     }
                     String type = (String) request.getSession().getAttribute("login_type");
                     if (type != null) {
@@ -202,25 +204,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             %>
             <div class="col-md-3 pro-1">
                 <div class="col-m">
-                    <a href="one_item_details?<%if(username!=null){out.print("info="+username+"&");}%>itemid=${item.itemid}" target="_blank" class="offer-img">
+                    <a href="one_item_details?<%if(username!=null){out.print("info="+username+"&");}%>itemid=${item.itemid}<%if(username!=null){out.print("&type="+type);}%>"
+                       target="_blank" class="offer-img">
                         <%
-                            if(items.get(i).getImagePath()!=null){
-                                out.print("<img src=\""+items.get(i).getImagePath().get(0)+"\" class=\"img-responsive\" alt=\"\">");
-                            }else {
+                            if (items.get(i).getImagePath() != null) {
+                                out.print("<img src=\"" + items.get(i).getImagePath().get(0) + "\" class=\"img-responsive\" alt=\"\">");
+                            } else {
                                 out.print("<img src=\"images/of17.png\" class=\"img-responsive\" alt=\"\">");
                             }
                         %>
                     </a>
                     <div class="mid-1">
                         <div class="women">
-                            <h6><a href="item_details.jsp?<%if(username!=null){out.print("info="+username+"&");}%>itemid=${item.itemid}" target="_blank">${item.name}</a></h6>
+                            <h6>
+                                <a href="item_details.jsp?<%if(username!=null){out.print("info="+username+"&");}%>itemid=${item.itemid}<%if(username!=null){out.print("&type="+type);}%>"
+                                   target="_blank">${item.name}</a></h6>
                         </div>
                         <div class="mid-2">
                             <p><em class="item_price">￥${item.price}</em></p>
                             <div class="clearfix"></div>
                         </div>
                         <div class="add add-2">
-                            <button class="btn btn-danger my-cart-btn my-cart-b">添加到购物车</button>
+                            <button class="btn btn-danger my-cart-btn my-cart-b" onclick="addToCart(${item.itemid})">
+                                添加到购物车
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -276,6 +283,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         */
         $().UItoTop({easingType: 'easeOutQuart'});
     });
+
+    function addToCart(x) {
+        var name =<%if(username==null)out.print("null");else out.print("\""+username+"\"");%>;
+        if (name == null || name.length === 0) {
+            alert("请先登录!");
+            return false;
+        } else {
+            var type =<%if(type==null)out.print("null");else out.print("\""+type+"\"");%>;
+            if (type != null || type.length !== 0) {
+                if (type !== "customer") {
+                    alert("您不是买家");
+                    return false;
+                }
+            } else {
+                alert("请先登录!")
+                return false;
+            }
+            alert("添加成功");
+        }
+        var type =<%if(type==null)out.print("null");else out.print("\""+type+"\"");%>;
+        if (type != null || type.length !== 0) {
+            if (type !== "customer") {
+                alert("您不是买家");
+                return false;
+            }
+        } else {
+            alert("请先登录!")
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "item_add_to_cart?info=${username}&itemid=" + x + "&num=1"
+        })
+    }
 </script>
 <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 <!-- //smooth scrolling -->

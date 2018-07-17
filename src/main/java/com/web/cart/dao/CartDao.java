@@ -2,6 +2,7 @@ package com.web.cart.dao;
 
 
 import com.web.cart.entity.Cart;
+import com.web.item.entity.Item;
 
 import java.util.List;
 
@@ -12,22 +13,20 @@ public interface CartDao {
     /**
      * 添加商品到购物车
      * @param itemid 商品id
-     * @param cartid 购物车id
+     * @param name 买家名
      * @param num 商品数量
-     * @param storeid 商店id
      * @return 返回添加结果
      */
-    public int addItemsToCart(Integer itemid,Integer cartid,Integer num,Integer storeid);
+    public int addItemsToCart(Integer itemid,String name,Integer num);
 
     /**
      *
      * @param itemid
-     * @param cartid
-     * @param num
+     * @param name
      * @return
      */
 
-    public int deleteItemsFromCart(Integer itemid, Integer cartid, Integer num);
+    public int deleteItemsFromCart(Integer itemid, String name);
 
 
     /**
@@ -38,5 +37,19 @@ public interface CartDao {
      */
     public int checkOut(Integer itemid, Integer cartid, Integer num);
 
+    /**
+     * 显示购物车中所有物品
+     * @param customername
+     * @return
+     */
+    public Cart showMyCart(String customername);
 
+    /**
+     * 更新商品数量
+     * @param name
+     * @param itemid
+     * @param num
+     * @return
+     */
+    public int updateNum(String name,Integer itemid,Integer num);
 }

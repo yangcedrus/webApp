@@ -141,6 +141,14 @@ $(function () {
             $obj.removeClass('reSty');
         }
         totalMoney();
+        var row=$("ul[class='order_lists']");
+        var itemid=row.attr("id");
+        var li= row.find("[class='list_chk']");
+        var name=li.attr("id");
+        $.ajax({
+            type:"POST",
+            url:"item_num_update?info="+name+"&itemid="+itemid+"&num="+$count
+        })
     });
 
     $reduce.click(function () {
@@ -152,6 +160,15 @@ $(function () {
         if($inputVal.val()>1){
             $inputVal.val($count);
             $priceTotalObj.html('￥'+$priceTotal);
+            //数量大于1才能运行
+            var row=$("ul[class='order_lists']");
+            var itemid=row.attr("id");
+            var li= row.find("[class='list_chk']");
+            var name=li.attr("id");
+            $.ajax({
+                type:"POST",
+                url:"item_num_update?info="+name+"&itemid="+itemid+"&num="+$count
+            })
         }
         if($inputVal.val()==1 && !$(this).hasClass('reSty')){
             $(this).addClass('reSty');
@@ -173,6 +190,14 @@ $(function () {
         $(this).attr('value',$count);
         $priceTotalObj.html('￥'+$priceTotal);
         totalMoney();
+        var row=$("ul[class='order_lists']");
+        var itemid=row.attr("id");
+        var li= row.find("[class='list_chk']");
+        var name=li.attr("id");
+        $.ajax({
+            type:"POST",
+            url:"item_num_update?info="+name+"&itemid="+itemid+"&num="+$count
+        })
     })
 
     //======================================移除商品========================================

@@ -67,7 +67,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败,重新登录</a></li>");
                         else
                             // TODO: 2018/7/15 注销功能待实现
-                            out.print("<li><a href=\"###\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好," + username + "</a></li>");
+                            out.print("<li><a href=\"javascript:if(confirm('确实要注销吗?'))location='login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好," + username + "</a></li>");
                     }
                     String type = (String) request.getSession().getAttribute("login_type");
                     if (type != null) {
@@ -171,7 +171,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span id="msg"></span>
                     </div>
                     <div class="add add-3">
-                        <button class="btn btn-danger my-cart-btn my-cart-b">
+                        <button class="btn btn-danger my-cart-btn my-cart-b" onclick="addToCart(${item.itemid})">
                             添加到购物车
                         </button>
                     </div>
@@ -300,6 +300,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             document.getElementById("msg").innerText = "";
         }
         document.getElementById("itemnum").value = num;
+    }
+    function addToCart(x) {
+        var num=$("input[id='itemnum']").value;
+        var name=<%if(username==null)out.print("null");else out.print("\""+username+"\"");%>;
+        if(name==null||name.length===0){
+            alert("请先登录!");
+            return false;
+        }else{
+            var type =<%if(type==null)out.print("null");else out.print("\""+type+"\"");%>;
+            if (type != null || type.length !== 0) {
+                if (type !== "customer") {
+                    alert("您不是买家");
+                    return false;
+                }
+            } else {
+                alert("请先登录!")
+                return false;
+            }
+            alert("添加成功");
+        }
+        $.ajax({
+            type:"POST",
+            url:"item_add_to_cart?info=${username}&itemid="+x+"&num="+num
+        })
     }
 </script>
 <style>

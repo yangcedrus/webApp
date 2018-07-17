@@ -28,13 +28,13 @@ public class GetInfoServlet extends HttpServlet {
         AdministerDao dao=new AdministerDaoImpl();
         Customer customer=dao.searchCustomer(name);
         Store store=dao.searchStore(name);
-        if(customer!=null){
+        if(customer!=null&&customer.getCustomerid()!=null){
             AddressDao addressDao=new AddressDaoImpl();
             List<Address> addresslist=addressDao.GetAddress(customer.getCustomerid());
             req.getSession().setAttribute("customer_info",customer);
             req.getSession().setAttribute("address",addresslist);
         }else{
-            if (store!=null)
+            if (store!=null&&store.getStoreid()!=null)
                 req.getSession().setAttribute("store_info",store);
         }
         req.getRequestDispatcher("set_my_info.jsp").forward(req,resp);
