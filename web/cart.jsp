@@ -173,7 +173,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="list_text"><a href="javascript:;">${item.name}</a></div>
                 </li>
                 <li class="list_info">
-                    <p>王五的店</p>
+                    <p>王五的店铺</p>
                 </li>
                 <li class="list_price">
                     <p class="price">￥${item.price}</p>

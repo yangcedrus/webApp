@@ -65,9 +65,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     } else {
                         if (username.equals("登录失败"))
                             out.print("<li><a href=\"login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>登录失败,重新登录</a></li>");
-                        else
+                        else{
                             // TODO: 2018/7/15 注销功能待实现
                             out.print("<li><a href=\"javascript:if(confirm('确实要注销吗?'))location='login.jsp\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i>您好," + username + "</a></li>");
+                            pageContext.setAttribute("username",username);
+                        }
                     }
                     String type = (String) request.getSession().getAttribute("login_type");
                     if (type != null) {
@@ -302,7 +304,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         document.getElementById("itemnum").value = num;
     }
     function addToCart(x) {
-        var num=$("input[id='itemnum']").value;
+        var num1=$("input[id='itemnum']");
+        var num=num1.attr("value");
         var name=<%if(username==null)out.print("null");else out.print("\""+username+"\"");%>;
         if(name==null||name.length===0){
             alert("请先登录!");

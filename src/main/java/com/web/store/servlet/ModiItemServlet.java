@@ -47,6 +47,15 @@ public class ModiItemServlet extends HttpServlet{
         } else {
             req.getSession().setAttribute("modi", "false");
         }
+        StoreDao dao1 = new StoreDaoImpl();
+        List<Item> itemList ;
+        itemList = dao1.store_item(name);
+        if (itemList != null) {
+            req.getSession().setAttribute("list", itemList);
+            req.getSession().setAttribute("store_name",name);
+        } else {
+            req.getSession().setAttribute("list", "没有商品");
+        }
         req.getRequestDispatcher("/store_item_management.jsp").forward(req,resp);
 
     }
